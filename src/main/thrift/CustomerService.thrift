@@ -6,6 +6,7 @@
 namespace java com.talool.api.thrift
 
 include "Core.thrift"
+include "Activity.thrift"
 
 const string CTOKEN_NAME = 'ctok'
 
@@ -65,6 +66,10 @@ service CustomerService_t {
    void acceptGift(1:string giftId) throws (1:Core.ServiceException_t error);
    
    void rejectGift(1:string giftId) throws (1:Core.ServiceException_t error);
+   
+   # activities
+   list<Activity.Activity_t> getActivities(1:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
+   
    
    
 

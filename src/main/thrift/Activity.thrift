@@ -26,7 +26,7 @@ TALOOL_REACH,
 AD
 }
 
-enum LinkType { Merchant, Deal, DealOffer, Gift, Customer, External } 
+enum LinkType { MERCHANT, DEAL, DEAL_OFFER, GIFT, CUSTOMER, DEAL_ACQUIRE, MERCHANT_LOCATION, EXTERNAL } 
 
 struct ActivityLink_t {
    1: required LinkType linkType;
@@ -34,7 +34,7 @@ struct ActivityLink_t {
 }
 
 struct Activity_t {
-  1: required Timestamp activityDate;
+  1: required Core.Timestamp activityDate;
   2: optional string title;
   3: optional string subtitle;
   4: optional string icon;
