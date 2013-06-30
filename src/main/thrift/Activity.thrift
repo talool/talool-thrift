@@ -41,6 +41,7 @@ struct Activity_t {
   4: optional string icon;
   5: optional ActivityLink_t activityLink;
   6: optional ActivityEvent_t activityEvent;
+  7: optional bool closedState;
 }
 
 
