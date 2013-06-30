@@ -61,7 +61,7 @@ service CustomerService_t {
    
    string giftToEmail(1:string dealAcquireId,2:string email,3:string receipientName) throws (1:Core.ServiceException_t error);
    
-   list<Core.Gift_t> getGifts() throws (1:Core.ServiceException_t error);
+   Core.Gift_t getGift(1:string giftId) throws (1:Core.ServiceException_t error);
    
    Core.DealAcquire_t acceptGift(1:string giftId) throws (1:Core.ServiceException_t error);
    

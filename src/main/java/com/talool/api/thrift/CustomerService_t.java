@@ -74,7 +74,7 @@ public class CustomerService_t {
 
     public String giftToEmail(String dealAcquireId, String email, String receipientName) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
-    public List<com.talool.api.thrift.Gift_t> getGifts() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+    public com.talool.api.thrift.Gift_t getGift(String giftId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
     public com.talool.api.thrift.DealAcquire_t acceptGift(String giftId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
@@ -126,7 +126,7 @@ public class CustomerService_t {
 
     public void giftToEmail(String dealAcquireId, String email, String receipientName, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.giftToEmail_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void getGifts(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getGifts_call> resultHandler) throws org.apache.thrift.TException;
+    public void getGift(String giftId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getGift_call> resultHandler) throws org.apache.thrift.TException;
 
     public void acceptGift(String giftId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.acceptGift_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -671,29 +671,30 @@ public class CustomerService_t {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "giftToEmail failed: unknown result");
     }
 
-    public List<com.talool.api.thrift.Gift_t> getGifts() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    public com.talool.api.thrift.Gift_t getGift(String giftId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
     {
-      send_getGifts();
-      return recv_getGifts();
+      send_getGift(giftId);
+      return recv_getGift();
     }
 
-    public void send_getGifts() throws org.apache.thrift.TException
+    public void send_getGift(String giftId) throws org.apache.thrift.TException
     {
-      getGifts_args args = new getGifts_args();
-      sendBase("getGifts", args);
+      getGift_args args = new getGift_args();
+      args.setGiftId(giftId);
+      sendBase("getGift", args);
     }
 
-    public List<com.talool.api.thrift.Gift_t> recv_getGifts() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    public com.talool.api.thrift.Gift_t recv_getGift() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
     {
-      getGifts_result result = new getGifts_result();
-      receiveBase(result, "getGifts");
+      getGift_result result = new getGift_result();
+      receiveBase(result, "getGift");
       if (result.isSetSuccess()) {
         return result.success;
       }
       if (result.error != null) {
         throw result.error;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getGifts failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getGift failed: unknown result");
     }
 
     public com.talool.api.thrift.DealAcquire_t acceptGift(String giftId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
@@ -1459,32 +1460,35 @@ public class CustomerService_t {
       }
     }
 
-    public void getGifts(org.apache.thrift.async.AsyncMethodCallback<getGifts_call> resultHandler) throws org.apache.thrift.TException {
+    public void getGift(String giftId, org.apache.thrift.async.AsyncMethodCallback<getGift_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getGifts_call method_call = new getGifts_call(resultHandler, this, ___protocolFactory, ___transport);
+      getGift_call method_call = new getGift_call(giftId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getGifts_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public getGifts_call(org.apache.thrift.async.AsyncMethodCallback<getGifts_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getGift_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String giftId;
+      public getGift_call(String giftId, org.apache.thrift.async.AsyncMethodCallback<getGift_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.giftId = giftId;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getGifts", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        getGifts_args args = new getGifts_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getGift", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getGift_args args = new getGift_args();
+        args.setGiftId(giftId);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public List<com.talool.api.thrift.Gift_t> getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+      public com.talool.api.thrift.Gift_t getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_getGifts();
+        return (new Client(prot)).recv_getGift();
       }
     }
 
@@ -1617,7 +1621,7 @@ public class CustomerService_t {
       processMap.put("getCategories", new getCategories());
       processMap.put("giftToFacebook", new giftToFacebook());
       processMap.put("giftToEmail", new giftToEmail());
-      processMap.put("getGifts", new getGifts());
+      processMap.put("getGift", new getGift());
       processMap.put("acceptGift", new acceptGift());
       processMap.put("rejectGift", new rejectGift());
       processMap.put("getActivities", new getActivities());
@@ -2105,23 +2109,23 @@ public class CustomerService_t {
       }
     }
 
-    public static class getGifts<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getGifts_args> {
-      public getGifts() {
-        super("getGifts");
+    public static class getGift<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getGift_args> {
+      public getGift() {
+        super("getGift");
       }
 
-      public getGifts_args getEmptyArgsInstance() {
-        return new getGifts_args();
+      public getGift_args getEmptyArgsInstance() {
+        return new getGift_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public getGifts_result getResult(I iface, getGifts_args args) throws org.apache.thrift.TException {
-        getGifts_result result = new getGifts_result();
+      public getGift_result getResult(I iface, getGift_args args) throws org.apache.thrift.TException {
+        getGift_result result = new getGift_result();
         try {
-          result.success = iface.getGifts();
+          result.success = iface.getGift(args.giftId);
         } catch (com.talool.api.thrift.ServiceException_t error) {
           result.error = error;
         }
@@ -19356,20 +19360,22 @@ public class CustomerService_t {
 
   }
 
-  public static class getGifts_args implements org.apache.thrift.TBase<getGifts_args, getGifts_args._Fields>, java.io.Serializable, Cloneable   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getGifts_args");
+  public static class getGift_args implements org.apache.thrift.TBase<getGift_args, getGift_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getGift_args");
 
+    private static final org.apache.thrift.protocol.TField GIFT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("giftId", org.apache.thrift.protocol.TType.STRING, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new getGifts_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new getGifts_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getGift_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getGift_argsTupleSchemeFactory());
     }
 
+    public String giftId; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      GIFT_ID((short)1, "giftId");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -19384,6 +19390,8 @@ public class CustomerService_t {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // GIFT_ID
+            return GIFT_ID;
           default:
             return null;
         }
@@ -19422,36 +19430,86 @@ public class CustomerService_t {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.GIFT_ID, new org.apache.thrift.meta_data.FieldMetaData("giftId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getGifts_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getGift_args.class, metaDataMap);
     }
 
-    public getGifts_args() {
+    public getGift_args() {
+    }
+
+    public getGift_args(
+      String giftId)
+    {
+      this();
+      this.giftId = giftId;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public getGifts_args(getGifts_args other) {
+    public getGift_args(getGift_args other) {
+      if (other.isSetGiftId()) {
+        this.giftId = other.giftId;
+      }
     }
 
-    public getGifts_args deepCopy() {
-      return new getGifts_args(this);
+    public getGift_args deepCopy() {
+      return new getGift_args(this);
     }
 
     public void clear() {
+      this.giftId = null;
+    }
+
+    public String getGiftId() {
+      return this.giftId;
+    }
+
+    public getGift_args setGiftId(String giftId) {
+      this.giftId = giftId;
+      return this;
+    }
+
+    public void unsetGiftId() {
+      this.giftId = null;
+    }
+
+    /** Returns true if field giftId is set (has been assigned a value) and false otherwise */
+    public boolean isSetGiftId() {
+      return this.giftId != null;
+    }
+
+    public void setGiftIdIsSet(boolean value) {
+      if (!value) {
+        this.giftId = null;
+      }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case GIFT_ID:
+        if (value == null) {
+          unsetGiftId();
+        } else {
+          setGiftId((String)value);
+        }
+        break;
+
       }
     }
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case GIFT_ID:
+        return getGiftId();
+
       }
       throw new IllegalStateException();
     }
@@ -19463,6 +19521,8 @@ public class CustomerService_t {
       }
 
       switch (field) {
+      case GIFT_ID:
+        return isSetGiftId();
       }
       throw new IllegalStateException();
     }
@@ -19471,14 +19531,23 @@ public class CustomerService_t {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof getGifts_args)
-        return this.equals((getGifts_args)that);
+      if (that instanceof getGift_args)
+        return this.equals((getGift_args)that);
       return false;
     }
 
-    public boolean equals(getGifts_args that) {
+    public boolean equals(getGift_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_giftId = true && this.isSetGiftId();
+      boolean that_present_giftId = true && that.isSetGiftId();
+      if (this_present_giftId || that_present_giftId) {
+        if (!(this_present_giftId && that_present_giftId))
+          return false;
+        if (!this.giftId.equals(that.giftId))
+          return false;
+      }
 
       return true;
     }
@@ -19488,14 +19557,24 @@ public class CustomerService_t {
       return 0;
     }
 
-    public int compareTo(getGifts_args other) {
+    public int compareTo(getGift_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
-      getGifts_args typedOther = (getGifts_args)other;
+      getGift_args typedOther = (getGift_args)other;
 
+      lastComparison = Boolean.valueOf(isSetGiftId()).compareTo(typedOther.isSetGiftId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetGiftId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.giftId, typedOther.giftId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -19513,9 +19592,16 @@ public class CustomerService_t {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("getGifts_args(");
+      StringBuilder sb = new StringBuilder("getGift_args(");
       boolean first = true;
 
+      sb.append("giftId:");
+      if (this.giftId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.giftId);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -19541,15 +19627,15 @@ public class CustomerService_t {
       }
     }
 
-    private static class getGifts_argsStandardSchemeFactory implements SchemeFactory {
-      public getGifts_argsStandardScheme getScheme() {
-        return new getGifts_argsStandardScheme();
+    private static class getGift_argsStandardSchemeFactory implements SchemeFactory {
+      public getGift_argsStandardScheme getScheme() {
+        return new getGift_argsStandardScheme();
       }
     }
 
-    private static class getGifts_argsStandardScheme extends StandardScheme<getGifts_args> {
+    private static class getGift_argsStandardScheme extends StandardScheme<getGift_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getGifts_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getGift_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -19559,6 +19645,14 @@ public class CustomerService_t {
             break;
           }
           switch (schemeField.id) {
+            case 1: // GIFT_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.giftId = iprot.readString();
+                struct.setGiftIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -19570,50 +19664,68 @@ public class CustomerService_t {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getGifts_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getGift_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.giftId != null) {
+          oprot.writeFieldBegin(GIFT_ID_FIELD_DESC);
+          oprot.writeString(struct.giftId);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
 
     }
 
-    private static class getGifts_argsTupleSchemeFactory implements SchemeFactory {
-      public getGifts_argsTupleScheme getScheme() {
-        return new getGifts_argsTupleScheme();
+    private static class getGift_argsTupleSchemeFactory implements SchemeFactory {
+      public getGift_argsTupleScheme getScheme() {
+        return new getGift_argsTupleScheme();
       }
     }
 
-    private static class getGifts_argsTupleScheme extends TupleScheme<getGifts_args> {
+    private static class getGift_argsTupleScheme extends TupleScheme<getGift_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getGifts_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getGift_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetGiftId()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetGiftId()) {
+          oprot.writeString(struct.giftId);
+        }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getGifts_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getGift_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.giftId = iprot.readString();
+          struct.setGiftIdIsSet(true);
+        }
       }
     }
 
   }
 
-  public static class getGifts_result implements org.apache.thrift.TBase<getGifts_result, getGifts_result._Fields>, java.io.Serializable, Cloneable   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getGifts_result");
+  public static class getGift_result implements org.apache.thrift.TBase<getGift_result, getGift_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getGift_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.LIST, (short)0);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new getGifts_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new getGifts_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getGift_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getGift_resultTupleSchemeFactory());
     }
 
-    public List<com.talool.api.thrift.Gift_t> success; // required
+    public com.talool.api.thrift.Gift_t success; // required
     public com.talool.api.thrift.ServiceException_t error; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -19682,19 +19794,18 @@ public class CustomerService_t {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.Gift_t.class))));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.Gift_t.class)));
       tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getGifts_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getGift_result.class, metaDataMap);
     }
 
-    public getGifts_result() {
+    public getGift_result() {
     }
 
-    public getGifts_result(
-      List<com.talool.api.thrift.Gift_t> success,
+    public getGift_result(
+      com.talool.api.thrift.Gift_t success,
       com.talool.api.thrift.ServiceException_t error)
     {
       this();
@@ -19705,21 +19816,17 @@ public class CustomerService_t {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public getGifts_result(getGifts_result other) {
+    public getGift_result(getGift_result other) {
       if (other.isSetSuccess()) {
-        List<com.talool.api.thrift.Gift_t> __this__success = new ArrayList<com.talool.api.thrift.Gift_t>();
-        for (com.talool.api.thrift.Gift_t other_element : other.success) {
-          __this__success.add(new com.talool.api.thrift.Gift_t(other_element));
-        }
-        this.success = __this__success;
+        this.success = new com.talool.api.thrift.Gift_t(other.success);
       }
       if (other.isSetError()) {
         this.error = new com.talool.api.thrift.ServiceException_t(other.error);
       }
     }
 
-    public getGifts_result deepCopy() {
-      return new getGifts_result(this);
+    public getGift_result deepCopy() {
+      return new getGift_result(this);
     }
 
     public void clear() {
@@ -19727,26 +19834,11 @@ public class CustomerService_t {
       this.error = null;
     }
 
-    public int getSuccessSize() {
-      return (this.success == null) ? 0 : this.success.size();
-    }
-
-    public java.util.Iterator<com.talool.api.thrift.Gift_t> getSuccessIterator() {
-      return (this.success == null) ? null : this.success.iterator();
-    }
-
-    public void addToSuccess(com.talool.api.thrift.Gift_t elem) {
-      if (this.success == null) {
-        this.success = new ArrayList<com.talool.api.thrift.Gift_t>();
-      }
-      this.success.add(elem);
-    }
-
-    public List<com.talool.api.thrift.Gift_t> getSuccess() {
+    public com.talool.api.thrift.Gift_t getSuccess() {
       return this.success;
     }
 
-    public getGifts_result setSuccess(List<com.talool.api.thrift.Gift_t> success) {
+    public getGift_result setSuccess(com.talool.api.thrift.Gift_t success) {
       this.success = success;
       return this;
     }
@@ -19770,7 +19862,7 @@ public class CustomerService_t {
       return this.error;
     }
 
-    public getGifts_result setError(com.talool.api.thrift.ServiceException_t error) {
+    public getGift_result setError(com.talool.api.thrift.ServiceException_t error) {
       this.error = error;
       return this;
     }
@@ -19796,7 +19888,7 @@ public class CustomerService_t {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((List<com.talool.api.thrift.Gift_t>)value);
+          setSuccess((com.talool.api.thrift.Gift_t)value);
         }
         break;
 
@@ -19842,12 +19934,12 @@ public class CustomerService_t {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof getGifts_result)
-        return this.equals((getGifts_result)that);
+      if (that instanceof getGift_result)
+        return this.equals((getGift_result)that);
       return false;
     }
 
-    public boolean equals(getGifts_result that) {
+    public boolean equals(getGift_result that) {
       if (that == null)
         return false;
 
@@ -19877,13 +19969,13 @@ public class CustomerService_t {
       return 0;
     }
 
-    public int compareTo(getGifts_result other) {
+    public int compareTo(getGift_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
-      getGifts_result typedOther = (getGifts_result)other;
+      getGift_result typedOther = (getGift_result)other;
 
       lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
       if (lastComparison != 0) {
@@ -19922,7 +20014,7 @@ public class CustomerService_t {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("getGifts_result(");
+      StringBuilder sb = new StringBuilder("getGift_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -19947,6 +20039,9 @@ public class CustomerService_t {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -19965,15 +20060,15 @@ public class CustomerService_t {
       }
     }
 
-    private static class getGifts_resultStandardSchemeFactory implements SchemeFactory {
-      public getGifts_resultStandardScheme getScheme() {
-        return new getGifts_resultStandardScheme();
+    private static class getGift_resultStandardSchemeFactory implements SchemeFactory {
+      public getGift_resultStandardScheme getScheme() {
+        return new getGift_resultStandardScheme();
       }
     }
 
-    private static class getGifts_resultStandardScheme extends StandardScheme<getGifts_result> {
+    private static class getGift_resultStandardScheme extends StandardScheme<getGift_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getGifts_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getGift_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -19984,19 +20079,9 @@ public class CustomerService_t {
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-                {
-                  org.apache.thrift.protocol.TList _list64 = iprot.readListBegin();
-                  struct.success = new ArrayList<com.talool.api.thrift.Gift_t>(_list64.size);
-                  for (int _i65 = 0; _i65 < _list64.size; ++_i65)
-                  {
-                    com.talool.api.thrift.Gift_t _elem66; // required
-                    _elem66 = new com.talool.api.thrift.Gift_t();
-                    _elem66.read(iprot);
-                    struct.success.add(_elem66);
-                  }
-                  iprot.readListEnd();
-                }
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.talool.api.thrift.Gift_t();
+                struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -20022,20 +20107,13 @@ public class CustomerService_t {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getGifts_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getGift_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
         if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (com.talool.api.thrift.Gift_t _iter67 : struct.success)
-            {
-              _iter67.write(oprot);
-            }
-            oprot.writeListEnd();
-          }
+          struct.success.write(oprot);
           oprot.writeFieldEnd();
         }
         if (struct.error != null) {
@@ -20049,16 +20127,16 @@ public class CustomerService_t {
 
     }
 
-    private static class getGifts_resultTupleSchemeFactory implements SchemeFactory {
-      public getGifts_resultTupleScheme getScheme() {
-        return new getGifts_resultTupleScheme();
+    private static class getGift_resultTupleSchemeFactory implements SchemeFactory {
+      public getGift_resultTupleScheme getScheme() {
+        return new getGift_resultTupleScheme();
       }
     }
 
-    private static class getGifts_resultTupleScheme extends TupleScheme<getGifts_result> {
+    private static class getGift_resultTupleScheme extends TupleScheme<getGift_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getGifts_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getGift_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -20069,13 +20147,7 @@ public class CustomerService_t {
         }
         oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
-          {
-            oprot.writeI32(struct.success.size());
-            for (com.talool.api.thrift.Gift_t _iter68 : struct.success)
-            {
-              _iter68.write(oprot);
-            }
-          }
+          struct.success.write(oprot);
         }
         if (struct.isSetError()) {
           struct.error.write(oprot);
@@ -20083,21 +20155,12 @@ public class CustomerService_t {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getGifts_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getGift_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          {
-            org.apache.thrift.protocol.TList _list69 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<com.talool.api.thrift.Gift_t>(_list69.size);
-            for (int _i70 = 0; _i70 < _list69.size; ++_i70)
-            {
-              com.talool.api.thrift.Gift_t _elem71; // required
-              _elem71 = new com.talool.api.thrift.Gift_t();
-              _elem71.read(iprot);
-              struct.success.add(_elem71);
-            }
-          }
+          struct.success = new com.talool.api.thrift.Gift_t();
+          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {
@@ -22374,14 +22437,14 @@ public class CustomerService_t {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list72 = iprot.readListBegin();
-                  struct.success = new ArrayList<com.talool.api.thrift.Activity_t>(_list72.size);
-                  for (int _i73 = 0; _i73 < _list72.size; ++_i73)
+                  org.apache.thrift.protocol.TList _list64 = iprot.readListBegin();
+                  struct.success = new ArrayList<com.talool.api.thrift.Activity_t>(_list64.size);
+                  for (int _i65 = 0; _i65 < _list64.size; ++_i65)
                   {
-                    com.talool.api.thrift.Activity_t _elem74; // required
-                    _elem74 = new com.talool.api.thrift.Activity_t();
-                    _elem74.read(iprot);
-                    struct.success.add(_elem74);
+                    com.talool.api.thrift.Activity_t _elem66; // required
+                    _elem66 = new com.talool.api.thrift.Activity_t();
+                    _elem66.read(iprot);
+                    struct.success.add(_elem66);
                   }
                   iprot.readListEnd();
                 }
@@ -22418,9 +22481,9 @@ public class CustomerService_t {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (com.talool.api.thrift.Activity_t _iter75 : struct.success)
+            for (com.talool.api.thrift.Activity_t _iter67 : struct.success)
             {
-              _iter75.write(oprot);
+              _iter67.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -22459,9 +22522,9 @@ public class CustomerService_t {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (com.talool.api.thrift.Activity_t _iter76 : struct.success)
+            for (com.talool.api.thrift.Activity_t _iter68 : struct.success)
             {
-              _iter76.write(oprot);
+              _iter68.write(oprot);
             }
           }
         }
@@ -22476,14 +22539,14 @@ public class CustomerService_t {
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list77 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<com.talool.api.thrift.Activity_t>(_list77.size);
-            for (int _i78 = 0; _i78 < _list77.size; ++_i78)
+            org.apache.thrift.protocol.TList _list69 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<com.talool.api.thrift.Activity_t>(_list69.size);
+            for (int _i70 = 0; _i70 < _list69.size; ++_i70)
             {
-              com.talool.api.thrift.Activity_t _elem79; // required
-              _elem79 = new com.talool.api.thrift.Activity_t();
-              _elem79.read(iprot);
-              struct.success.add(_elem79);
+              com.talool.api.thrift.Activity_t _elem71; // required
+              _elem71 = new com.talool.api.thrift.Activity_t();
+              _elem71.read(iprot);
+              struct.success.add(_elem71);
             }
           }
           struct.setSuccessIsSet(true);
