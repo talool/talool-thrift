@@ -13,20 +13,21 @@ import org.apache.thrift.TEnum;
 
 public enum ActivityEvent_t implements org.apache.thrift.TEnum {
   UNKNOWN(0),
-  PURCHASE(1),
-  REDEEM(2),
-  REJECT_GIFT(3),
-  FACEBOOK_RECV_GIFT(4),
-  FACEBOOK_SEND_GIFT(5),
-  EMAIL_RECV_GIFT(6),
-  EMAIL_SEND_GIFT(7),
-  FRIEND_GIFT_ACCEPT(8),
-  FRIEND_GIFT_REJECT(9),
-  FRIEND_GIFT_REDEEM(10),
-  FRIEND_PURCHASE_DEAL_OFFER(11),
-  MERCHANT_REACH(12),
-  TALOOL_REACH(13),
-  AD(14);
+  WELCOME(1),
+  PURCHASE(2),
+  REDEEM(3),
+  REJECT_GIFT(4),
+  FACEBOOK_RECV_GIFT(5),
+  FACEBOOK_SEND_GIFT(6),
+  EMAIL_RECV_GIFT(7),
+  EMAIL_SEND_GIFT(8),
+  FRIEND_GIFT_ACCEPT(9),
+  FRIEND_GIFT_REJECT(10),
+  FRIEND_GIFT_REDEEM(11),
+  FRIEND_PURCHASE_DEAL_OFFER(12),
+  MERCHANT_REACH(13),
+  TALOOL_REACH(14),
+  AD(15);
 
   private final int value;
 
@@ -50,32 +51,34 @@ public enum ActivityEvent_t implements org.apache.thrift.TEnum {
       case 0:
         return UNKNOWN;
       case 1:
-        return PURCHASE;
+        return WELCOME;
       case 2:
-        return REDEEM;
+        return PURCHASE;
       case 3:
-        return REJECT_GIFT;
+        return REDEEM;
       case 4:
-        return FACEBOOK_RECV_GIFT;
+        return REJECT_GIFT;
       case 5:
-        return FACEBOOK_SEND_GIFT;
+        return FACEBOOK_RECV_GIFT;
       case 6:
-        return EMAIL_RECV_GIFT;
+        return FACEBOOK_SEND_GIFT;
       case 7:
-        return EMAIL_SEND_GIFT;
+        return EMAIL_RECV_GIFT;
       case 8:
-        return FRIEND_GIFT_ACCEPT;
+        return EMAIL_SEND_GIFT;
       case 9:
-        return FRIEND_GIFT_REJECT;
+        return FRIEND_GIFT_ACCEPT;
       case 10:
-        return FRIEND_GIFT_REDEEM;
+        return FRIEND_GIFT_REJECT;
       case 11:
-        return FRIEND_PURCHASE_DEAL_OFFER;
+        return FRIEND_GIFT_REDEEM;
       case 12:
-        return MERCHANT_REACH;
+        return FRIEND_PURCHASE_DEAL_OFFER;
       case 13:
-        return TALOOL_REACH;
+        return MERCHANT_REACH;
       case 14:
+        return TALOOL_REACH;
+      case 15:
         return AD;
       default:
         return null;

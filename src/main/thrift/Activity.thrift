@@ -9,7 +9,8 @@ namespace java com.talool.api.thrift
 include "Core.thrift"
 
 enum ActivityEvent_t {
-UNKNOWN, 
+UNKNOWN,
+WELCOME, 
 PURCHASE,
 REDEEM,
 REJECT_GIFT,
