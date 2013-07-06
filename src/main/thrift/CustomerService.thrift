@@ -70,6 +70,8 @@ service CustomerService_t {
    # activities
    list<Activity.Activity_t> getActivities(1:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
    
+   void activityAction(1:string activityId) throws (1:Core.ServiceException_t error);
+   
    
    
 

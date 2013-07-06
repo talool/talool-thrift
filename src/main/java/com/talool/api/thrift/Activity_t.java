@@ -33,13 +33,14 @@ import org.slf4j.LoggerFactory;
 public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_t._Fields>, java.io.Serializable, Cloneable {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Activity_t");
 
-  private static final org.apache.thrift.protocol.TField ACTIVITY_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("activityDate", org.apache.thrift.protocol.TType.I64, (short)1);
-  private static final org.apache.thrift.protocol.TField TITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("title", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField SUBTITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("subtitle", org.apache.thrift.protocol.TType.STRING, (short)3);
-  private static final org.apache.thrift.protocol.TField ICON_FIELD_DESC = new org.apache.thrift.protocol.TField("icon", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField ACTIVITY_LINK_FIELD_DESC = new org.apache.thrift.protocol.TField("activityLink", org.apache.thrift.protocol.TType.STRUCT, (short)5);
-  private static final org.apache.thrift.protocol.TField ACTIVITY_EVENT_FIELD_DESC = new org.apache.thrift.protocol.TField("activityEvent", org.apache.thrift.protocol.TType.I32, (short)6);
-  private static final org.apache.thrift.protocol.TField CLOSED_STATE_FIELD_DESC = new org.apache.thrift.protocol.TField("closedState", org.apache.thrift.protocol.TType.BOOL, (short)7);
+  private static final org.apache.thrift.protocol.TField ACTIVITY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("activityId", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField ACTIVITY_DATE_FIELD_DESC = new org.apache.thrift.protocol.TField("activityDate", org.apache.thrift.protocol.TType.I64, (short)2);
+  private static final org.apache.thrift.protocol.TField TITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("title", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField SUBTITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("subtitle", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField ICON_FIELD_DESC = new org.apache.thrift.protocol.TField("icon", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField ACTIVITY_LINK_FIELD_DESC = new org.apache.thrift.protocol.TField("activityLink", org.apache.thrift.protocol.TType.STRUCT, (short)6);
+  private static final org.apache.thrift.protocol.TField ACTIVITY_EVENT_FIELD_DESC = new org.apache.thrift.protocol.TField("activityEvent", org.apache.thrift.protocol.TType.I32, (short)7);
+  private static final org.apache.thrift.protocol.TField ACTION_TAKEN_FIELD_DESC = new org.apache.thrift.protocol.TField("actionTaken", org.apache.thrift.protocol.TType.BOOL, (short)8);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -47,6 +48,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     schemes.put(TupleScheme.class, new Activity_tTupleSchemeFactory());
   }
 
+  public String activityId; // optional
   public long activityDate; // required
   public String title; // optional
   public String subtitle; // optional
@@ -57,21 +59,22 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
    * @see ActivityEvent_t
    */
   public ActivityEvent_t activityEvent; // optional
-  public boolean closedState; // optional
+  public boolean actionTaken; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    ACTIVITY_DATE((short)1, "activityDate"),
-    TITLE((short)2, "title"),
-    SUBTITLE((short)3, "subtitle"),
-    ICON((short)4, "icon"),
-    ACTIVITY_LINK((short)5, "activityLink"),
+    ACTIVITY_ID((short)1, "activityId"),
+    ACTIVITY_DATE((short)2, "activityDate"),
+    TITLE((short)3, "title"),
+    SUBTITLE((short)4, "subtitle"),
+    ICON((short)5, "icon"),
+    ACTIVITY_LINK((short)6, "activityLink"),
     /**
      * 
      * @see ActivityEvent_t
      */
-    ACTIVITY_EVENT((short)6, "activityEvent"),
-    CLOSED_STATE((short)7, "closedState");
+    ACTIVITY_EVENT((short)7, "activityEvent"),
+    ACTION_TAKEN((short)8, "actionTaken");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -86,20 +89,22 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // ACTIVITY_DATE
+        case 1: // ACTIVITY_ID
+          return ACTIVITY_ID;
+        case 2: // ACTIVITY_DATE
           return ACTIVITY_DATE;
-        case 2: // TITLE
+        case 3: // TITLE
           return TITLE;
-        case 3: // SUBTITLE
+        case 4: // SUBTITLE
           return SUBTITLE;
-        case 4: // ICON
+        case 5: // ICON
           return ICON;
-        case 5: // ACTIVITY_LINK
+        case 6: // ACTIVITY_LINK
           return ACTIVITY_LINK;
-        case 6: // ACTIVITY_EVENT
+        case 7: // ACTIVITY_EVENT
           return ACTIVITY_EVENT;
-        case 7: // CLOSED_STATE
-          return CLOSED_STATE;
+        case 8: // ACTION_TAKEN
+          return ACTION_TAKEN;
         default:
           return null;
       }
@@ -141,12 +146,14 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
 
   // isset id assignments
   private static final int __ACTIVITYDATE_ISSET_ID = 0;
-  private static final int __CLOSEDSTATE_ISSET_ID = 1;
+  private static final int __ACTIONTAKEN_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.TITLE,_Fields.SUBTITLE,_Fields.ICON,_Fields.ACTIVITY_LINK,_Fields.ACTIVITY_EVENT,_Fields.CLOSED_STATE};
+  private _Fields optionals[] = {_Fields.ACTIVITY_ID,_Fields.TITLE,_Fields.SUBTITLE,_Fields.ICON,_Fields.ACTIVITY_LINK,_Fields.ACTIVITY_EVENT,_Fields.ACTION_TAKEN};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+    tmpMap.put(_Fields.ACTIVITY_ID, new org.apache.thrift.meta_data.FieldMetaData("activityId", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ACTIVITY_DATE, new org.apache.thrift.meta_data.FieldMetaData("activityDate", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "Timestamp")));
     tmpMap.put(_Fields.TITLE, new org.apache.thrift.meta_data.FieldMetaData("title", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
@@ -159,13 +166,15 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ActivityLink_t.class)));
     tmpMap.put(_Fields.ACTIVITY_EVENT, new org.apache.thrift.meta_data.FieldMetaData("activityEvent", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, ActivityEvent_t.class)));
-    tmpMap.put(_Fields.CLOSED_STATE, new org.apache.thrift.meta_data.FieldMetaData("closedState", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.ACTION_TAKEN, new org.apache.thrift.meta_data.FieldMetaData("actionTaken", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Activity_t.class, metaDataMap);
   }
 
   public Activity_t() {
+    this.actionTaken = false;
+
   }
 
   public Activity_t(
@@ -181,6 +190,9 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
    */
   public Activity_t(Activity_t other) {
     __isset_bitfield = other.__isset_bitfield;
+    if (other.isSetActivityId()) {
+      this.activityId = other.activityId;
+    }
     this.activityDate = other.activityDate;
     if (other.isSetTitle()) {
       this.title = other.title;
@@ -197,7 +209,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     if (other.isSetActivityEvent()) {
       this.activityEvent = other.activityEvent;
     }
-    this.closedState = other.closedState;
+    this.actionTaken = other.actionTaken;
   }
 
   public Activity_t deepCopy() {
@@ -205,6 +217,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
   }
 
   public void clear() {
+    this.activityId = null;
     setActivityDateIsSet(false);
     this.activityDate = 0;
     this.title = null;
@@ -212,8 +225,32 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     this.icon = null;
     this.activityLink = null;
     this.activityEvent = null;
-    setClosedStateIsSet(false);
-    this.closedState = false;
+    this.actionTaken = false;
+
+  }
+
+  public String getActivityId() {
+    return this.activityId;
+  }
+
+  public Activity_t setActivityId(String activityId) {
+    this.activityId = activityId;
+    return this;
+  }
+
+  public void unsetActivityId() {
+    this.activityId = null;
+  }
+
+  /** Returns true if field activityId is set (has been assigned a value) and false otherwise */
+  public boolean isSetActivityId() {
+    return this.activityId != null;
+  }
+
+  public void setActivityIdIsSet(boolean value) {
+    if (!value) {
+      this.activityId = null;
+    }
   }
 
   public long getActivityDate() {
@@ -367,31 +404,39 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     }
   }
 
-  public boolean isClosedState() {
-    return this.closedState;
+  public boolean isActionTaken() {
+    return this.actionTaken;
   }
 
-  public Activity_t setClosedState(boolean closedState) {
-    this.closedState = closedState;
-    setClosedStateIsSet(true);
+  public Activity_t setActionTaken(boolean actionTaken) {
+    this.actionTaken = actionTaken;
+    setActionTakenIsSet(true);
     return this;
   }
 
-  public void unsetClosedState() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __CLOSEDSTATE_ISSET_ID);
+  public void unsetActionTaken() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ACTIONTAKEN_ISSET_ID);
   }
 
-  /** Returns true if field closedState is set (has been assigned a value) and false otherwise */
-  public boolean isSetClosedState() {
-    return EncodingUtils.testBit(__isset_bitfield, __CLOSEDSTATE_ISSET_ID);
+  /** Returns true if field actionTaken is set (has been assigned a value) and false otherwise */
+  public boolean isSetActionTaken() {
+    return EncodingUtils.testBit(__isset_bitfield, __ACTIONTAKEN_ISSET_ID);
   }
 
-  public void setClosedStateIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __CLOSEDSTATE_ISSET_ID, value);
+  public void setActionTakenIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ACTIONTAKEN_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
+    case ACTIVITY_ID:
+      if (value == null) {
+        unsetActivityId();
+      } else {
+        setActivityId((String)value);
+      }
+      break;
+
     case ACTIVITY_DATE:
       if (value == null) {
         unsetActivityDate();
@@ -440,11 +485,11 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       }
       break;
 
-    case CLOSED_STATE:
+    case ACTION_TAKEN:
       if (value == null) {
-        unsetClosedState();
+        unsetActionTaken();
       } else {
-        setClosedState((Boolean)value);
+        setActionTaken((Boolean)value);
       }
       break;
 
@@ -453,6 +498,9 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
+    case ACTIVITY_ID:
+      return getActivityId();
+
     case ACTIVITY_DATE:
       return Long.valueOf(getActivityDate());
 
@@ -471,8 +519,8 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     case ACTIVITY_EVENT:
       return getActivityEvent();
 
-    case CLOSED_STATE:
-      return Boolean.valueOf(isClosedState());
+    case ACTION_TAKEN:
+      return Boolean.valueOf(isActionTaken());
 
     }
     throw new IllegalStateException();
@@ -485,6 +533,8 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     }
 
     switch (field) {
+    case ACTIVITY_ID:
+      return isSetActivityId();
     case ACTIVITY_DATE:
       return isSetActivityDate();
     case TITLE:
@@ -497,8 +547,8 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       return isSetActivityLink();
     case ACTIVITY_EVENT:
       return isSetActivityEvent();
-    case CLOSED_STATE:
-      return isSetClosedState();
+    case ACTION_TAKEN:
+      return isSetActionTaken();
     }
     throw new IllegalStateException();
   }
@@ -515,6 +565,15 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
   public boolean equals(Activity_t that) {
     if (that == null)
       return false;
+
+    boolean this_present_activityId = true && this.isSetActivityId();
+    boolean that_present_activityId = true && that.isSetActivityId();
+    if (this_present_activityId || that_present_activityId) {
+      if (!(this_present_activityId && that_present_activityId))
+        return false;
+      if (!this.activityId.equals(that.activityId))
+        return false;
+    }
 
     boolean this_present_activityDate = true;
     boolean that_present_activityDate = true;
@@ -570,12 +629,12 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
         return false;
     }
 
-    boolean this_present_closedState = true && this.isSetClosedState();
-    boolean that_present_closedState = true && that.isSetClosedState();
-    if (this_present_closedState || that_present_closedState) {
-      if (!(this_present_closedState && that_present_closedState))
+    boolean this_present_actionTaken = true && this.isSetActionTaken();
+    boolean that_present_actionTaken = true && that.isSetActionTaken();
+    if (this_present_actionTaken || that_present_actionTaken) {
+      if (!(this_present_actionTaken && that_present_actionTaken))
         return false;
-      if (this.closedState != that.closedState)
+      if (this.actionTaken != that.actionTaken)
         return false;
     }
 
@@ -595,6 +654,16 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     int lastComparison = 0;
     Activity_t typedOther = (Activity_t)other;
 
+    lastComparison = Boolean.valueOf(isSetActivityId()).compareTo(typedOther.isSetActivityId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetActivityId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.activityId, typedOther.activityId);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetActivityDate()).compareTo(typedOther.isSetActivityDate());
     if (lastComparison != 0) {
       return lastComparison;
@@ -655,12 +724,12 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetClosedState()).compareTo(typedOther.isSetClosedState());
+    lastComparison = Boolean.valueOf(isSetActionTaken()).compareTo(typedOther.isSetActionTaken());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetClosedState()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.closedState, typedOther.closedState);
+    if (isSetActionTaken()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.actionTaken, typedOther.actionTaken);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -685,6 +754,16 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
     StringBuilder sb = new StringBuilder("Activity_t(");
     boolean first = true;
 
+    if (isSetActivityId()) {
+      sb.append("activityId:");
+      if (this.activityId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.activityId);
+      }
+      first = false;
+    }
+    if (!first) sb.append(", ");
     sb.append("activityDate:");
     sb.append(this.activityDate);
     first = false;
@@ -738,10 +817,10 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       }
       first = false;
     }
-    if (isSetClosedState()) {
+    if (isSetActionTaken()) {
       if (!first) sb.append(", ");
-      sb.append("closedState:");
-      sb.append(this.closedState);
+      sb.append("actionTaken:");
+      sb.append(this.actionTaken);
       first = false;
     }
     sb.append(")");
@@ -793,7 +872,15 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
           break;
         }
         switch (schemeField.id) {
-          case 1: // ACTIVITY_DATE
+          case 1: // ACTIVITY_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.activityId = iprot.readString();
+              struct.setActivityIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 2: // ACTIVITY_DATE
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.activityDate = iprot.readI64();
               struct.setActivityDateIsSet(true);
@@ -801,7 +888,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // TITLE
+          case 3: // TITLE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.title = iprot.readString();
               struct.setTitleIsSet(true);
@@ -809,7 +896,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // SUBTITLE
+          case 4: // SUBTITLE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.subtitle = iprot.readString();
               struct.setSubtitleIsSet(true);
@@ -817,7 +904,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // ICON
+          case 5: // ICON
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.icon = iprot.readString();
               struct.setIconIsSet(true);
@@ -825,7 +912,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // ACTIVITY_LINK
+          case 6: // ACTIVITY_LINK
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
               struct.activityLink = new ActivityLink_t();
               struct.activityLink.read(iprot);
@@ -834,7 +921,7 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // ACTIVITY_EVENT
+          case 7: // ACTIVITY_EVENT
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.activityEvent = ActivityEvent_t.findByValue(iprot.readI32());
               struct.setActivityEventIsSet(true);
@@ -842,10 +929,10 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 7: // CLOSED_STATE
+          case 8: // ACTION_TAKEN
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
-              struct.closedState = iprot.readBool();
-              struct.setClosedStateIsSet(true);
+              struct.actionTaken = iprot.readBool();
+              struct.setActionTakenIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -868,6 +955,13 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
+      if (struct.activityId != null) {
+        if (struct.isSetActivityId()) {
+          oprot.writeFieldBegin(ACTIVITY_ID_FIELD_DESC);
+          oprot.writeString(struct.activityId);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldBegin(ACTIVITY_DATE_FIELD_DESC);
       oprot.writeI64(struct.activityDate);
       oprot.writeFieldEnd();
@@ -906,9 +1000,9 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
           oprot.writeFieldEnd();
         }
       }
-      if (struct.isSetClosedState()) {
-        oprot.writeFieldBegin(CLOSED_STATE_FIELD_DESC);
-        oprot.writeBool(struct.closedState);
+      if (struct.isSetActionTaken()) {
+        oprot.writeFieldBegin(ACTION_TAKEN_FIELD_DESC);
+        oprot.writeBool(struct.actionTaken);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -930,25 +1024,31 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.activityDate);
       BitSet optionals = new BitSet();
-      if (struct.isSetTitle()) {
+      if (struct.isSetActivityId()) {
         optionals.set(0);
       }
-      if (struct.isSetSubtitle()) {
+      if (struct.isSetTitle()) {
         optionals.set(1);
       }
-      if (struct.isSetIcon()) {
+      if (struct.isSetSubtitle()) {
         optionals.set(2);
       }
-      if (struct.isSetActivityLink()) {
+      if (struct.isSetIcon()) {
         optionals.set(3);
       }
-      if (struct.isSetActivityEvent()) {
+      if (struct.isSetActivityLink()) {
         optionals.set(4);
       }
-      if (struct.isSetClosedState()) {
+      if (struct.isSetActivityEvent()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetActionTaken()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
+      if (struct.isSetActivityId()) {
+        oprot.writeString(struct.activityId);
+      }
       if (struct.isSetTitle()) {
         oprot.writeString(struct.title);
       }
@@ -964,8 +1064,8 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       if (struct.isSetActivityEvent()) {
         oprot.writeI32(struct.activityEvent.getValue());
       }
-      if (struct.isSetClosedState()) {
-        oprot.writeBool(struct.closedState);
+      if (struct.isSetActionTaken()) {
+        oprot.writeBool(struct.actionTaken);
       }
     }
 
@@ -974,31 +1074,35 @@ public class Activity_t implements org.apache.thrift.TBase<Activity_t, Activity_
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.activityDate = iprot.readI64();
       struct.setActivityDateIsSet(true);
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
+        struct.activityId = iprot.readString();
+        struct.setActivityIdIsSet(true);
+      }
+      if (incoming.get(1)) {
         struct.title = iprot.readString();
         struct.setTitleIsSet(true);
       }
-      if (incoming.get(1)) {
+      if (incoming.get(2)) {
         struct.subtitle = iprot.readString();
         struct.setSubtitleIsSet(true);
       }
-      if (incoming.get(2)) {
+      if (incoming.get(3)) {
         struct.icon = iprot.readString();
         struct.setIconIsSet(true);
       }
-      if (incoming.get(3)) {
+      if (incoming.get(4)) {
         struct.activityLink = new ActivityLink_t();
         struct.activityLink.read(iprot);
         struct.setActivityLinkIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(5)) {
         struct.activityEvent = ActivityEvent_t.findByValue(iprot.readI32());
         struct.setActivityEventIsSet(true);
       }
-      if (incoming.get(5)) {
-        struct.closedState = iprot.readBool();
-        struct.setClosedStateIsSet(true);
+      if (incoming.get(6)) {
+        struct.actionTaken = iprot.readBool();
+        struct.setActionTakenIsSet(true);
       }
     }
   }

@@ -35,13 +35,14 @@ struct ActivityLink_t {
 }
 
 struct Activity_t {
-  1: required Core.Timestamp activityDate;
-  2: optional string title;
-  3: optional string subtitle;
-  4: optional string icon;
-  5: optional ActivityLink_t activityLink;
-  6: optional ActivityEvent_t activityEvent;
-  7: optional bool closedState;
+  1: optional string activityId;
+  2: required Core.Timestamp activityDate;
+  3: optional string title;
+  4: optional string subtitle;
+  5: optional string icon;
+  6: optional ActivityLink_t activityLink;
+  7: optional ActivityEvent_t activityEvent;
+  8: optional bool actionTaken = false;
 }
 
 
