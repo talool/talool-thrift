@@ -37,6 +37,8 @@ service CustomerService_t {
    
    list<Core.DealOffer_t> getDealOffers() throws (1:Core.ServiceException_t error);
    
+   void activateCode(1:string dealOfferid, 2:string code) throws (1:Core.ServiceException_t error);
+   
    Core.DealOffer_t getDealOffer(1:string dealOfferId) throws (1:Core.ServiceException_t error);
    
    list<Core.Deal_t> getDealsByDealOfferId(1:string dealOfferId,2:Core.SearchOptions_t searchOptions) 

@@ -54,6 +54,8 @@ public class CustomerService_t {
 
     public List<com.talool.api.thrift.DealOffer_t> getDealOffers() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
+    public void activateCode(String dealOfferid, String code) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+
     public com.talool.api.thrift.DealOffer_t getDealOffer(String dealOfferId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
     public List<com.talool.api.thrift.Deal_t> getDealsByDealOfferId(String dealOfferId, com.talool.api.thrift.SearchOptions_t searchOptions) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
@@ -107,6 +109,8 @@ public class CustomerService_t {
     public void redeem(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.redeem_call> resultHandler) throws org.apache.thrift.TException;
 
     public void getDealOffers(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getDealOffers_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void activateCode(String dealOfferid, String code, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.activateCode_call> resultHandler) throws org.apache.thrift.TException;
 
     public void getDealOffer(String dealOfferId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getDealOffer_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -416,6 +420,30 @@ public class CustomerService_t {
         throw result.error;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getDealOffers failed: unknown result");
+    }
+
+    public void activateCode(String dealOfferid, String code) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      send_activateCode(dealOfferid, code);
+      recv_activateCode();
+    }
+
+    public void send_activateCode(String dealOfferid, String code) throws org.apache.thrift.TException
+    {
+      activateCode_args args = new activateCode_args();
+      args.setDealOfferid(dealOfferid);
+      args.setCode(code);
+      sendBase("activateCode", args);
+    }
+
+    public void recv_activateCode() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      activateCode_result result = new activateCode_result();
+      receiveBase(result, "activateCode");
+      if (result.error != null) {
+        throw result.error;
+      }
+      return;
     }
 
     public com.talool.api.thrift.DealOffer_t getDealOffer(String dealOfferId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
@@ -1149,6 +1177,41 @@ public class CustomerService_t {
       }
     }
 
+    public void activateCode(String dealOfferid, String code, org.apache.thrift.async.AsyncMethodCallback<activateCode_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      activateCode_call method_call = new activateCode_call(dealOfferid, code, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class activateCode_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String dealOfferid;
+      private String code;
+      public activateCode_call(String dealOfferid, String code, org.apache.thrift.async.AsyncMethodCallback<activateCode_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.dealOfferid = dealOfferid;
+        this.code = code;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("activateCode", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        activateCode_args args = new activateCode_args();
+        args.setDealOfferid(dealOfferid);
+        args.setCode(code);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_activateCode();
+      }
+    }
+
     public void getDealOffer(String dealOfferId, org.apache.thrift.async.AsyncMethodCallback<getDealOffer_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       getDealOffer_call method_call = new getDealOffer_call(dealOfferId, resultHandler, this, ___protocolFactory, ___transport);
@@ -1670,6 +1733,7 @@ public class CustomerService_t {
       processMap.put("getDealAcquires", new getDealAcquires());
       processMap.put("redeem", new redeem());
       processMap.put("getDealOffers", new getDealOffers());
+      processMap.put("activateCode", new activateCode());
       processMap.put("getDealOffer", new getDealOffer());
       processMap.put("getDealsByDealOfferId", new getDealsByDealOfferId());
       processMap.put("purchaseDealOffer", new purchaseDealOffer());
@@ -1922,6 +1986,30 @@ public class CustomerService_t {
         getDealOffers_result result = new getDealOffers_result();
         try {
           result.success = iface.getDealOffers();
+        } catch (com.talool.api.thrift.ServiceException_t error) {
+          result.error = error;
+        }
+        return result;
+      }
+    }
+
+    public static class activateCode<I extends Iface> extends org.apache.thrift.ProcessFunction<I, activateCode_args> {
+      public activateCode() {
+        super("activateCode");
+      }
+
+      public activateCode_args getEmptyArgsInstance() {
+        return new activateCode_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public activateCode_result getResult(I iface, activateCode_args args) throws org.apache.thrift.TException {
+        activateCode_result result = new activateCode_result();
+        try {
+          iface.activateCode(args.dealOfferid, args.code);
         } catch (com.talool.api.thrift.ServiceException_t error) {
           result.error = error;
         }
@@ -10824,6 +10912,814 @@ public class CustomerService_t {
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {
+          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class activateCode_args implements org.apache.thrift.TBase<activateCode_args, activateCode_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("activateCode_args");
+
+    private static final org.apache.thrift.protocol.TField DEAL_OFFERID_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferid", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("code", org.apache.thrift.protocol.TType.STRING, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new activateCode_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new activateCode_argsTupleSchemeFactory());
+    }
+
+    public String dealOfferid; // required
+    public String code; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      DEAL_OFFERID((short)1, "dealOfferid"),
+      CODE((short)2, "code");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // DEAL_OFFERID
+            return DEAL_OFFERID;
+          case 2: // CODE
+            return CODE;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.DEAL_OFFERID, new org.apache.thrift.meta_data.FieldMetaData("dealOfferid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.CODE, new org.apache.thrift.meta_data.FieldMetaData("code", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(activateCode_args.class, metaDataMap);
+    }
+
+    public activateCode_args() {
+    }
+
+    public activateCode_args(
+      String dealOfferid,
+      String code)
+    {
+      this();
+      this.dealOfferid = dealOfferid;
+      this.code = code;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public activateCode_args(activateCode_args other) {
+      if (other.isSetDealOfferid()) {
+        this.dealOfferid = other.dealOfferid;
+      }
+      if (other.isSetCode()) {
+        this.code = other.code;
+      }
+    }
+
+    public activateCode_args deepCopy() {
+      return new activateCode_args(this);
+    }
+
+    public void clear() {
+      this.dealOfferid = null;
+      this.code = null;
+    }
+
+    public String getDealOfferid() {
+      return this.dealOfferid;
+    }
+
+    public activateCode_args setDealOfferid(String dealOfferid) {
+      this.dealOfferid = dealOfferid;
+      return this;
+    }
+
+    public void unsetDealOfferid() {
+      this.dealOfferid = null;
+    }
+
+    /** Returns true if field dealOfferid is set (has been assigned a value) and false otherwise */
+    public boolean isSetDealOfferid() {
+      return this.dealOfferid != null;
+    }
+
+    public void setDealOfferidIsSet(boolean value) {
+      if (!value) {
+        this.dealOfferid = null;
+      }
+    }
+
+    public String getCode() {
+      return this.code;
+    }
+
+    public activateCode_args setCode(String code) {
+      this.code = code;
+      return this;
+    }
+
+    public void unsetCode() {
+      this.code = null;
+    }
+
+    /** Returns true if field code is set (has been assigned a value) and false otherwise */
+    public boolean isSetCode() {
+      return this.code != null;
+    }
+
+    public void setCodeIsSet(boolean value) {
+      if (!value) {
+        this.code = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case DEAL_OFFERID:
+        if (value == null) {
+          unsetDealOfferid();
+        } else {
+          setDealOfferid((String)value);
+        }
+        break;
+
+      case CODE:
+        if (value == null) {
+          unsetCode();
+        } else {
+          setCode((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case DEAL_OFFERID:
+        return getDealOfferid();
+
+      case CODE:
+        return getCode();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case DEAL_OFFERID:
+        return isSetDealOfferid();
+      case CODE:
+        return isSetCode();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof activateCode_args)
+        return this.equals((activateCode_args)that);
+      return false;
+    }
+
+    public boolean equals(activateCode_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_dealOfferid = true && this.isSetDealOfferid();
+      boolean that_present_dealOfferid = true && that.isSetDealOfferid();
+      if (this_present_dealOfferid || that_present_dealOfferid) {
+        if (!(this_present_dealOfferid && that_present_dealOfferid))
+          return false;
+        if (!this.dealOfferid.equals(that.dealOfferid))
+          return false;
+      }
+
+      boolean this_present_code = true && this.isSetCode();
+      boolean that_present_code = true && that.isSetCode();
+      if (this_present_code || that_present_code) {
+        if (!(this_present_code && that_present_code))
+          return false;
+        if (!this.code.equals(that.code))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(activateCode_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      activateCode_args typedOther = (activateCode_args)other;
+
+      lastComparison = Boolean.valueOf(isSetDealOfferid()).compareTo(typedOther.isSetDealOfferid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetDealOfferid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealOfferid, typedOther.dealOfferid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetCode()).compareTo(typedOther.isSetCode());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCode()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.code, typedOther.code);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("activateCode_args(");
+      boolean first = true;
+
+      sb.append("dealOfferid:");
+      if (this.dealOfferid == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.dealOfferid);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("code:");
+      if (this.code == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.code);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class activateCode_argsStandardSchemeFactory implements SchemeFactory {
+      public activateCode_argsStandardScheme getScheme() {
+        return new activateCode_argsStandardScheme();
+      }
+    }
+
+    private static class activateCode_argsStandardScheme extends StandardScheme<activateCode_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, activateCode_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // DEAL_OFFERID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.dealOfferid = iprot.readString();
+                struct.setDealOfferidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // CODE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.code = iprot.readString();
+                struct.setCodeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, activateCode_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.dealOfferid != null) {
+          oprot.writeFieldBegin(DEAL_OFFERID_FIELD_DESC);
+          oprot.writeString(struct.dealOfferid);
+          oprot.writeFieldEnd();
+        }
+        if (struct.code != null) {
+          oprot.writeFieldBegin(CODE_FIELD_DESC);
+          oprot.writeString(struct.code);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class activateCode_argsTupleSchemeFactory implements SchemeFactory {
+      public activateCode_argsTupleScheme getScheme() {
+        return new activateCode_argsTupleScheme();
+      }
+    }
+
+    private static class activateCode_argsTupleScheme extends TupleScheme<activateCode_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, activateCode_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetDealOfferid()) {
+          optionals.set(0);
+        }
+        if (struct.isSetCode()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetDealOfferid()) {
+          oprot.writeString(struct.dealOfferid);
+        }
+        if (struct.isSetCode()) {
+          oprot.writeString(struct.code);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, activateCode_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.dealOfferid = iprot.readString();
+          struct.setDealOfferidIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.code = iprot.readString();
+          struct.setCodeIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class activateCode_result implements org.apache.thrift.TBase<activateCode_result, activateCode_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("activateCode_result");
+
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new activateCode_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new activateCode_resultTupleSchemeFactory());
+    }
+
+    public com.talool.api.thrift.ServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(activateCode_result.class, metaDataMap);
+    }
+
+    public activateCode_result() {
+    }
+
+    public activateCode_result(
+      com.talool.api.thrift.ServiceException_t error)
+    {
+      this();
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public activateCode_result(activateCode_result other) {
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+      }
+    }
+
+    public activateCode_result deepCopy() {
+      return new activateCode_result(this);
+    }
+
+    public void clear() {
+      this.error = null;
+    }
+
+    public com.talool.api.thrift.ServiceException_t getError() {
+      return this.error;
+    }
+
+    public activateCode_result setError(com.talool.api.thrift.ServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.ServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof activateCode_result)
+        return this.equals((activateCode_result)that);
+      return false;
+    }
+
+    public boolean equals(activateCode_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(activateCode_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      activateCode_result typedOther = (activateCode_result)other;
+
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("activateCode_result(");
+      boolean first = true;
+
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class activateCode_resultStandardSchemeFactory implements SchemeFactory {
+      public activateCode_resultStandardScheme getScheme() {
+        return new activateCode_resultStandardScheme();
+      }
+    }
+
+    private static class activateCode_resultStandardScheme extends StandardScheme<activateCode_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, activateCode_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, activateCode_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class activateCode_resultTupleSchemeFactory implements SchemeFactory {
+      public activateCode_resultTupleScheme getScheme() {
+        return new activateCode_resultTupleScheme();
+      }
+    }
+
+    private static class activateCode_resultTupleScheme extends TupleScheme<activateCode_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, activateCode_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetError()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, activateCode_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
           struct.error = new com.talool.api.thrift.ServiceException_t();
           struct.error.read(iprot);
           struct.setErrorIsSet(true);
