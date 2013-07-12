@@ -130,7 +130,6 @@ struct DealAcquire_t {
   1: optional string dealAcquireId;
   2: required Deal_t deal;
   3: optional AcquireStatus_t status; 
-  4: optional Customer_t sharedByCustomer;
   5: optional Timestamp redeemed;
   6: optional Timestamp created;
   7: optional Timestamp updated;
