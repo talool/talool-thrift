@@ -29,6 +29,8 @@ service CustomerService_t {
    
    list<Core.Merchant_t> getMerchantAcquires(1:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
    
+   list<Core.Merchant_t> getMerchantAcquiresWithLocation(1:Core.SearchOptions_t searchOptions,2:Core.Location_t location) throws (1:Core.ServiceException_t error);
+    
    list<Core.Merchant_t> getMerchantAcquiresByCategory(1:i32 categoryId,2:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
       
    list<Core.DealAcquire_t> getDealAcquires(1:string merchantId,2:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
