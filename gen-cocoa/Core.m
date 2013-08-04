@@ -4313,7 +4313,7 @@
   return self;
 }
 
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated
+- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode
 {
   self = [super init];
   __dealAcquireId = [dealAcquireId retain_stub];
@@ -4328,6 +4328,8 @@
   __created_isset = YES;
   __updated = updated;
   __updated_isset = YES;
+  __redemptionCode = [redemptionCode retain_stub];
+  __redemptionCode_isset = YES;
   return self;
 }
 
@@ -4364,6 +4366,11 @@
     __updated = [decoder decodeInt64ForKey: @"updated"];
     __updated_isset = YES;
   }
+  if ([decoder containsValueForKey: @"redemptionCode"])
+  {
+    __redemptionCode = [[decoder decodeObjectForKey: @"redemptionCode"] retain_stub];
+    __redemptionCode_isset = YES;
+  }
   return self;
 }
 
@@ -4393,12 +4400,17 @@
   {
     [encoder encodeInt64: __updated forKey: @"updated"];
   }
+  if (__redemptionCode_isset)
+  {
+    [encoder encodeObject: __redemptionCode forKey: @"redemptionCode"];
+  }
 }
 
 - (void) dealloc
 {
   [__dealAcquireId release_stub];
   [__deal release_stub];
+  [__redemptionCode release_stub];
   [super dealloc_stub];
 }
 
@@ -4512,6 +4524,27 @@
   __updated_isset = NO;
 }
 
+- (NSString *) redemptionCode {
+  return [[__redemptionCode retain_stub] autorelease_stub];
+}
+
+- (void) setRedemptionCode: (NSString *) redemptionCode {
+  [redemptionCode retain_stub];
+  [__redemptionCode release_stub];
+  __redemptionCode = redemptionCode;
+  __redemptionCode_isset = YES;
+}
+
+- (BOOL) redemptionCodeIsSet {
+  return __redemptionCode_isset;
+}
+
+- (void) unsetRedemptionCode {
+  [__redemptionCode release_stub];
+  __redemptionCode = nil;
+  __redemptionCode_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -4577,6 +4610,14 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 8:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setRedemptionCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -4622,6 +4663,13 @@
     [outProtocol writeI64: __updated];
     [outProtocol writeFieldEnd];
   }
+  if (__redemptionCode_isset) {
+    if (__redemptionCode != nil) {
+      [outProtocol writeFieldBeginWithName: @"redemptionCode" type: TType_STRING fieldID: 8];
+      [outProtocol writeString: __redemptionCode];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -4640,6 +4688,8 @@
   [ms appendFormat: @"%qi", __created];
   [ms appendString: @",updated:"];
   [ms appendFormat: @"%qi", __updated];
+  [ms appendString: @",redemptionCode:"];
+  [ms appendFormat: @"\"%@\"", __redemptionCode];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

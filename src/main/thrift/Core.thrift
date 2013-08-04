@@ -133,6 +133,7 @@ struct DealAcquire_t {
   5: optional Timestamp redeemed;
   6: optional Timestamp created;
   7: optional Timestamp updated;
+  8: optional string redemptionCode;
 }
 
 struct Gift_t {

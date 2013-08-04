@@ -878,6 +878,7 @@ typedef int64_t Timestamp;
   Timestamp __redeemed;
   Timestamp __created;
   Timestamp __updated;
+  NSString * __redemptionCode;
 
   BOOL __dealAcquireId_isset;
   BOOL __deal_isset;
@@ -885,6 +886,7 @@ typedef int64_t Timestamp;
   BOOL __redeemed_isset;
   BOOL __created_isset;
   BOOL __updated_isset;
+  BOOL __redemptionCode_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -894,10 +896,11 @@ typedef int64_t Timestamp;
 @property (nonatomic, getter=redeemed, setter=setRedeemed:) Timestamp redeemed;
 @property (nonatomic, getter=created, setter=setCreated:) Timestamp created;
 @property (nonatomic, getter=updated, setter=setUpdated:) Timestamp updated;
+@property (nonatomic, retain, getter=redemptionCode, setter=setRedemptionCode:) NSString * redemptionCode;
 #endif
 
 - (id) init;
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated;
+- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -937,6 +940,12 @@ typedef int64_t Timestamp;
 - (void) setUpdated: (Timestamp) updated;
 #endif
 - (BOOL) updatedIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) redemptionCode;
+- (void) setRedemptionCode: (NSString *) redemptionCode;
+#endif
+- (BOOL) redemptionCodeIsSet;
 
 @end
 
