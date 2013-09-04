@@ -1,17 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>com.talool</groupId>
 		<artifactId>talool-base</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 	</parent>
-  <groupId>com.talool</groupId>
-  <artifactId>talool-thrift</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>Talool Thrift</name>
-  <description>Thrift Stubs</description>
-  <dependencies>
-  <dependency>
+	<groupId>com.talool</groupId>
+	<artifactId>talool-thrift</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<name>Talool Thrift</name>
+	<description>Thrift Stubs</description>
+	<scm>
+		<connection>scm:git:git@github.com:talool/talool-thrift.git</connection>
+		<url>scm:git:git@github.com:talool/talool-thrift.git</url>
+		<developerConnection>scm:git:git@github.com:talool/talool-thrift.git</developerConnection>
+	</scm>
+	<dependencies>
+		<dependency>
 			<groupId>org.apache.thrift</groupId>
 			<artifactId>libthrift</artifactId>
 		</dependency>
@@ -32,16 +38,16 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
