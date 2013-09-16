@@ -88,6 +88,10 @@ public class CustomerService_t {
 
     public void activityAction(String activityId) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
+    public void sendResetPasswordEmail(String email) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+
+    public void resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -145,6 +149,10 @@ public class CustomerService_t {
     public void getActivities(com.talool.api.thrift.SearchOptions_t searchOptions, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getActivities_call> resultHandler) throws org.apache.thrift.TException;
 
     public void activityAction(String activityId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.activityAction_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void sendResetPasswordEmail(String email, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.sendResetPasswordEmail_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void resetPassword(String customerId, String resetPasswordCode, String newPassword, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.resetPassword_call> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -852,6 +860,54 @@ public class CustomerService_t {
     {
       activityAction_result result = new activityAction_result();
       receiveBase(result, "activityAction");
+      if (result.error != null) {
+        throw result.error;
+      }
+      return;
+    }
+
+    public void sendResetPasswordEmail(String email) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      send_sendResetPasswordEmail(email);
+      recv_sendResetPasswordEmail();
+    }
+
+    public void send_sendResetPasswordEmail(String email) throws org.apache.thrift.TException
+    {
+      sendResetPasswordEmail_args args = new sendResetPasswordEmail_args();
+      args.setEmail(email);
+      sendBase("sendResetPasswordEmail", args);
+    }
+
+    public void recv_sendResetPasswordEmail() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      sendResetPasswordEmail_result result = new sendResetPasswordEmail_result();
+      receiveBase(result, "sendResetPasswordEmail");
+      if (result.error != null) {
+        throw result.error;
+      }
+      return;
+    }
+
+    public void resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      send_resetPassword(customerId, resetPasswordCode, newPassword);
+      recv_resetPassword();
+    }
+
+    public void send_resetPassword(String customerId, String resetPasswordCode, String newPassword) throws org.apache.thrift.TException
+    {
+      resetPassword_args args = new resetPassword_args();
+      args.setCustomerId(customerId);
+      args.setResetPasswordCode(resetPasswordCode);
+      args.setNewPassword(newPassword);
+      sendBase("resetPassword", args);
+    }
+
+    public void recv_resetPassword() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      resetPassword_result result = new resetPassword_result();
+      receiveBase(result, "resetPassword");
       if (result.error != null) {
         throw result.error;
       }
@@ -1776,6 +1832,76 @@ public class CustomerService_t {
       }
     }
 
+    public void sendResetPasswordEmail(String email, org.apache.thrift.async.AsyncMethodCallback<sendResetPasswordEmail_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      sendResetPasswordEmail_call method_call = new sendResetPasswordEmail_call(email, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class sendResetPasswordEmail_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String email;
+      public sendResetPasswordEmail_call(String email, org.apache.thrift.async.AsyncMethodCallback<sendResetPasswordEmail_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.email = email;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("sendResetPasswordEmail", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        sendResetPasswordEmail_args args = new sendResetPasswordEmail_args();
+        args.setEmail(email);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_sendResetPasswordEmail();
+      }
+    }
+
+    public void resetPassword(String customerId, String resetPasswordCode, String newPassword, org.apache.thrift.async.AsyncMethodCallback<resetPassword_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      resetPassword_call method_call = new resetPassword_call(customerId, resetPasswordCode, newPassword, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class resetPassword_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String customerId;
+      private String resetPasswordCode;
+      private String newPassword;
+      public resetPassword_call(String customerId, String resetPasswordCode, String newPassword, org.apache.thrift.async.AsyncMethodCallback<resetPassword_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.customerId = customerId;
+        this.resetPasswordCode = resetPasswordCode;
+        this.newPassword = newPassword;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("resetPassword", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        resetPassword_args args = new resetPassword_args();
+        args.setCustomerId(customerId);
+        args.setResetPasswordCode(resetPasswordCode);
+        args.setNewPassword(newPassword);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_resetPassword();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -1816,6 +1942,8 @@ public class CustomerService_t {
       processMap.put("rejectGift", new rejectGift());
       processMap.put("getActivities", new getActivities());
       processMap.put("activityAction", new activityAction());
+      processMap.put("sendResetPasswordEmail", new sendResetPasswordEmail());
+      processMap.put("resetPassword", new resetPassword());
       return processMap;
     }
 
@@ -2461,6 +2589,54 @@ public class CustomerService_t {
         activityAction_result result = new activityAction_result();
         try {
           iface.activityAction(args.activityId);
+        } catch (com.talool.api.thrift.ServiceException_t error) {
+          result.error = error;
+        }
+        return result;
+      }
+    }
+
+    public static class sendResetPasswordEmail<I extends Iface> extends org.apache.thrift.ProcessFunction<I, sendResetPasswordEmail_args> {
+      public sendResetPasswordEmail() {
+        super("sendResetPasswordEmail");
+      }
+
+      public sendResetPasswordEmail_args getEmptyArgsInstance() {
+        return new sendResetPasswordEmail_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public sendResetPasswordEmail_result getResult(I iface, sendResetPasswordEmail_args args) throws org.apache.thrift.TException {
+        sendResetPasswordEmail_result result = new sendResetPasswordEmail_result();
+        try {
+          iface.sendResetPasswordEmail(args.email);
+        } catch (com.talool.api.thrift.ServiceException_t error) {
+          result.error = error;
+        }
+        return result;
+      }
+    }
+
+    public static class resetPassword<I extends Iface> extends org.apache.thrift.ProcessFunction<I, resetPassword_args> {
+      public resetPassword() {
+        super("resetPassword");
+      }
+
+      public resetPassword_args getEmptyArgsInstance() {
+        return new resetPassword_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public resetPassword_result getResult(I iface, resetPassword_args args) throws org.apache.thrift.TException {
+        resetPassword_result result = new resetPassword_result();
+        try {
+          iface.resetPassword(args.customerId, args.resetPasswordCode, args.newPassword);
         } catch (com.talool.api.thrift.ServiceException_t error) {
           result.error = error;
         }
@@ -25300,6 +25476,1622 @@ public class CustomerService_t {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, activityAction_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class sendResetPasswordEmail_args implements org.apache.thrift.TBase<sendResetPasswordEmail_args, sendResetPasswordEmail_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendResetPasswordEmail_args");
+
+    private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new sendResetPasswordEmail_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new sendResetPasswordEmail_argsTupleSchemeFactory());
+    }
+
+    public String email; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      EMAIL((short)1, "email");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // EMAIL
+            return EMAIL;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendResetPasswordEmail_args.class, metaDataMap);
+    }
+
+    public sendResetPasswordEmail_args() {
+    }
+
+    public sendResetPasswordEmail_args(
+      String email)
+    {
+      this();
+      this.email = email;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendResetPasswordEmail_args(sendResetPasswordEmail_args other) {
+      if (other.isSetEmail()) {
+        this.email = other.email;
+      }
+    }
+
+    public sendResetPasswordEmail_args deepCopy() {
+      return new sendResetPasswordEmail_args(this);
+    }
+
+    public void clear() {
+      this.email = null;
+    }
+
+    public String getEmail() {
+      return this.email;
+    }
+
+    public sendResetPasswordEmail_args setEmail(String email) {
+      this.email = email;
+      return this;
+    }
+
+    public void unsetEmail() {
+      this.email = null;
+    }
+
+    /** Returns true if field email is set (has been assigned a value) and false otherwise */
+    public boolean isSetEmail() {
+      return this.email != null;
+    }
+
+    public void setEmailIsSet(boolean value) {
+      if (!value) {
+        this.email = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case EMAIL:
+        if (value == null) {
+          unsetEmail();
+        } else {
+          setEmail((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case EMAIL:
+        return getEmail();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case EMAIL:
+        return isSetEmail();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof sendResetPasswordEmail_args)
+        return this.equals((sendResetPasswordEmail_args)that);
+      return false;
+    }
+
+    public boolean equals(sendResetPasswordEmail_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_email = true && this.isSetEmail();
+      boolean that_present_email = true && that.isSetEmail();
+      if (this_present_email || that_present_email) {
+        if (!(this_present_email && that_present_email))
+          return false;
+        if (!this.email.equals(that.email))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(sendResetPasswordEmail_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      sendResetPasswordEmail_args typedOther = (sendResetPasswordEmail_args)other;
+
+      lastComparison = Boolean.valueOf(isSetEmail()).compareTo(typedOther.isSetEmail());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetEmail()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.email, typedOther.email);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("sendResetPasswordEmail_args(");
+      boolean first = true;
+
+      sb.append("email:");
+      if (this.email == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.email);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class sendResetPasswordEmail_argsStandardSchemeFactory implements SchemeFactory {
+      public sendResetPasswordEmail_argsStandardScheme getScheme() {
+        return new sendResetPasswordEmail_argsStandardScheme();
+      }
+    }
+
+    private static class sendResetPasswordEmail_argsStandardScheme extends StandardScheme<sendResetPasswordEmail_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendResetPasswordEmail_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // EMAIL
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.email = iprot.readString();
+                struct.setEmailIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendResetPasswordEmail_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.email != null) {
+          oprot.writeFieldBegin(EMAIL_FIELD_DESC);
+          oprot.writeString(struct.email);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendResetPasswordEmail_argsTupleSchemeFactory implements SchemeFactory {
+      public sendResetPasswordEmail_argsTupleScheme getScheme() {
+        return new sendResetPasswordEmail_argsTupleScheme();
+      }
+    }
+
+    private static class sendResetPasswordEmail_argsTupleScheme extends TupleScheme<sendResetPasswordEmail_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendResetPasswordEmail_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetEmail()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetEmail()) {
+          oprot.writeString(struct.email);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendResetPasswordEmail_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.email = iprot.readString();
+          struct.setEmailIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class sendResetPasswordEmail_result implements org.apache.thrift.TBase<sendResetPasswordEmail_result, sendResetPasswordEmail_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("sendResetPasswordEmail_result");
+
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new sendResetPasswordEmail_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new sendResetPasswordEmail_resultTupleSchemeFactory());
+    }
+
+    public com.talool.api.thrift.ServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(sendResetPasswordEmail_result.class, metaDataMap);
+    }
+
+    public sendResetPasswordEmail_result() {
+    }
+
+    public sendResetPasswordEmail_result(
+      com.talool.api.thrift.ServiceException_t error)
+    {
+      this();
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public sendResetPasswordEmail_result(sendResetPasswordEmail_result other) {
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+      }
+    }
+
+    public sendResetPasswordEmail_result deepCopy() {
+      return new sendResetPasswordEmail_result(this);
+    }
+
+    public void clear() {
+      this.error = null;
+    }
+
+    public com.talool.api.thrift.ServiceException_t getError() {
+      return this.error;
+    }
+
+    public sendResetPasswordEmail_result setError(com.talool.api.thrift.ServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.ServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof sendResetPasswordEmail_result)
+        return this.equals((sendResetPasswordEmail_result)that);
+      return false;
+    }
+
+    public boolean equals(sendResetPasswordEmail_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(sendResetPasswordEmail_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      sendResetPasswordEmail_result typedOther = (sendResetPasswordEmail_result)other;
+
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("sendResetPasswordEmail_result(");
+      boolean first = true;
+
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class sendResetPasswordEmail_resultStandardSchemeFactory implements SchemeFactory {
+      public sendResetPasswordEmail_resultStandardScheme getScheme() {
+        return new sendResetPasswordEmail_resultStandardScheme();
+      }
+    }
+
+    private static class sendResetPasswordEmail_resultStandardScheme extends StandardScheme<sendResetPasswordEmail_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, sendResetPasswordEmail_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, sendResetPasswordEmail_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class sendResetPasswordEmail_resultTupleSchemeFactory implements SchemeFactory {
+      public sendResetPasswordEmail_resultTupleScheme getScheme() {
+        return new sendResetPasswordEmail_resultTupleScheme();
+      }
+    }
+
+    private static class sendResetPasswordEmail_resultTupleScheme extends TupleScheme<sendResetPasswordEmail_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, sendResetPasswordEmail_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetError()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, sendResetPasswordEmail_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class resetPassword_args implements org.apache.thrift.TBase<resetPassword_args, resetPassword_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("resetPassword_args");
+
+    private static final org.apache.thrift.protocol.TField CUSTOMER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("customerId", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField RESET_PASSWORD_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("resetPasswordCode", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField NEW_PASSWORD_FIELD_DESC = new org.apache.thrift.protocol.TField("newPassword", org.apache.thrift.protocol.TType.STRING, (short)3);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new resetPassword_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new resetPassword_argsTupleSchemeFactory());
+    }
+
+    public String customerId; // required
+    public String resetPasswordCode; // required
+    public String newPassword; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      CUSTOMER_ID((short)1, "customerId"),
+      RESET_PASSWORD_CODE((short)2, "resetPasswordCode"),
+      NEW_PASSWORD((short)3, "newPassword");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // CUSTOMER_ID
+            return CUSTOMER_ID;
+          case 2: // RESET_PASSWORD_CODE
+            return RESET_PASSWORD_CODE;
+          case 3: // NEW_PASSWORD
+            return NEW_PASSWORD;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.CUSTOMER_ID, new org.apache.thrift.meta_data.FieldMetaData("customerId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.RESET_PASSWORD_CODE, new org.apache.thrift.meta_data.FieldMetaData("resetPasswordCode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.NEW_PASSWORD, new org.apache.thrift.meta_data.FieldMetaData("newPassword", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(resetPassword_args.class, metaDataMap);
+    }
+
+    public resetPassword_args() {
+    }
+
+    public resetPassword_args(
+      String customerId,
+      String resetPasswordCode,
+      String newPassword)
+    {
+      this();
+      this.customerId = customerId;
+      this.resetPasswordCode = resetPasswordCode;
+      this.newPassword = newPassword;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public resetPassword_args(resetPassword_args other) {
+      if (other.isSetCustomerId()) {
+        this.customerId = other.customerId;
+      }
+      if (other.isSetResetPasswordCode()) {
+        this.resetPasswordCode = other.resetPasswordCode;
+      }
+      if (other.isSetNewPassword()) {
+        this.newPassword = other.newPassword;
+      }
+    }
+
+    public resetPassword_args deepCopy() {
+      return new resetPassword_args(this);
+    }
+
+    public void clear() {
+      this.customerId = null;
+      this.resetPasswordCode = null;
+      this.newPassword = null;
+    }
+
+    public String getCustomerId() {
+      return this.customerId;
+    }
+
+    public resetPassword_args setCustomerId(String customerId) {
+      this.customerId = customerId;
+      return this;
+    }
+
+    public void unsetCustomerId() {
+      this.customerId = null;
+    }
+
+    /** Returns true if field customerId is set (has been assigned a value) and false otherwise */
+    public boolean isSetCustomerId() {
+      return this.customerId != null;
+    }
+
+    public void setCustomerIdIsSet(boolean value) {
+      if (!value) {
+        this.customerId = null;
+      }
+    }
+
+    public String getResetPasswordCode() {
+      return this.resetPasswordCode;
+    }
+
+    public resetPassword_args setResetPasswordCode(String resetPasswordCode) {
+      this.resetPasswordCode = resetPasswordCode;
+      return this;
+    }
+
+    public void unsetResetPasswordCode() {
+      this.resetPasswordCode = null;
+    }
+
+    /** Returns true if field resetPasswordCode is set (has been assigned a value) and false otherwise */
+    public boolean isSetResetPasswordCode() {
+      return this.resetPasswordCode != null;
+    }
+
+    public void setResetPasswordCodeIsSet(boolean value) {
+      if (!value) {
+        this.resetPasswordCode = null;
+      }
+    }
+
+    public String getNewPassword() {
+      return this.newPassword;
+    }
+
+    public resetPassword_args setNewPassword(String newPassword) {
+      this.newPassword = newPassword;
+      return this;
+    }
+
+    public void unsetNewPassword() {
+      this.newPassword = null;
+    }
+
+    /** Returns true if field newPassword is set (has been assigned a value) and false otherwise */
+    public boolean isSetNewPassword() {
+      return this.newPassword != null;
+    }
+
+    public void setNewPasswordIsSet(boolean value) {
+      if (!value) {
+        this.newPassword = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case CUSTOMER_ID:
+        if (value == null) {
+          unsetCustomerId();
+        } else {
+          setCustomerId((String)value);
+        }
+        break;
+
+      case RESET_PASSWORD_CODE:
+        if (value == null) {
+          unsetResetPasswordCode();
+        } else {
+          setResetPasswordCode((String)value);
+        }
+        break;
+
+      case NEW_PASSWORD:
+        if (value == null) {
+          unsetNewPassword();
+        } else {
+          setNewPassword((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case CUSTOMER_ID:
+        return getCustomerId();
+
+      case RESET_PASSWORD_CODE:
+        return getResetPasswordCode();
+
+      case NEW_PASSWORD:
+        return getNewPassword();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case CUSTOMER_ID:
+        return isSetCustomerId();
+      case RESET_PASSWORD_CODE:
+        return isSetResetPasswordCode();
+      case NEW_PASSWORD:
+        return isSetNewPassword();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof resetPassword_args)
+        return this.equals((resetPassword_args)that);
+      return false;
+    }
+
+    public boolean equals(resetPassword_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_customerId = true && this.isSetCustomerId();
+      boolean that_present_customerId = true && that.isSetCustomerId();
+      if (this_present_customerId || that_present_customerId) {
+        if (!(this_present_customerId && that_present_customerId))
+          return false;
+        if (!this.customerId.equals(that.customerId))
+          return false;
+      }
+
+      boolean this_present_resetPasswordCode = true && this.isSetResetPasswordCode();
+      boolean that_present_resetPasswordCode = true && that.isSetResetPasswordCode();
+      if (this_present_resetPasswordCode || that_present_resetPasswordCode) {
+        if (!(this_present_resetPasswordCode && that_present_resetPasswordCode))
+          return false;
+        if (!this.resetPasswordCode.equals(that.resetPasswordCode))
+          return false;
+      }
+
+      boolean this_present_newPassword = true && this.isSetNewPassword();
+      boolean that_present_newPassword = true && that.isSetNewPassword();
+      if (this_present_newPassword || that_present_newPassword) {
+        if (!(this_present_newPassword && that_present_newPassword))
+          return false;
+        if (!this.newPassword.equals(that.newPassword))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(resetPassword_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      resetPassword_args typedOther = (resetPassword_args)other;
+
+      lastComparison = Boolean.valueOf(isSetCustomerId()).compareTo(typedOther.isSetCustomerId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCustomerId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.customerId, typedOther.customerId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetResetPasswordCode()).compareTo(typedOther.isSetResetPasswordCode());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetResetPasswordCode()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.resetPasswordCode, typedOther.resetPasswordCode);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetNewPassword()).compareTo(typedOther.isSetNewPassword());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetNewPassword()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.newPassword, typedOther.newPassword);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("resetPassword_args(");
+      boolean first = true;
+
+      sb.append("customerId:");
+      if (this.customerId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.customerId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("resetPasswordCode:");
+      if (this.resetPasswordCode == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.resetPasswordCode);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("newPassword:");
+      if (this.newPassword == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.newPassword);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class resetPassword_argsStandardSchemeFactory implements SchemeFactory {
+      public resetPassword_argsStandardScheme getScheme() {
+        return new resetPassword_argsStandardScheme();
+      }
+    }
+
+    private static class resetPassword_argsStandardScheme extends StandardScheme<resetPassword_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, resetPassword_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // CUSTOMER_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.customerId = iprot.readString();
+                struct.setCustomerIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // RESET_PASSWORD_CODE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.resetPasswordCode = iprot.readString();
+                struct.setResetPasswordCodeIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // NEW_PASSWORD
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.newPassword = iprot.readString();
+                struct.setNewPasswordIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, resetPassword_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.customerId != null) {
+          oprot.writeFieldBegin(CUSTOMER_ID_FIELD_DESC);
+          oprot.writeString(struct.customerId);
+          oprot.writeFieldEnd();
+        }
+        if (struct.resetPasswordCode != null) {
+          oprot.writeFieldBegin(RESET_PASSWORD_CODE_FIELD_DESC);
+          oprot.writeString(struct.resetPasswordCode);
+          oprot.writeFieldEnd();
+        }
+        if (struct.newPassword != null) {
+          oprot.writeFieldBegin(NEW_PASSWORD_FIELD_DESC);
+          oprot.writeString(struct.newPassword);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class resetPassword_argsTupleSchemeFactory implements SchemeFactory {
+      public resetPassword_argsTupleScheme getScheme() {
+        return new resetPassword_argsTupleScheme();
+      }
+    }
+
+    private static class resetPassword_argsTupleScheme extends TupleScheme<resetPassword_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, resetPassword_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetCustomerId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetResetPasswordCode()) {
+          optionals.set(1);
+        }
+        if (struct.isSetNewPassword()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetCustomerId()) {
+          oprot.writeString(struct.customerId);
+        }
+        if (struct.isSetResetPasswordCode()) {
+          oprot.writeString(struct.resetPasswordCode);
+        }
+        if (struct.isSetNewPassword()) {
+          oprot.writeString(struct.newPassword);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, resetPassword_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(3);
+        if (incoming.get(0)) {
+          struct.customerId = iprot.readString();
+          struct.setCustomerIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.resetPasswordCode = iprot.readString();
+          struct.setResetPasswordCodeIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.newPassword = iprot.readString();
+          struct.setNewPasswordIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class resetPassword_result implements org.apache.thrift.TBase<resetPassword_result, resetPassword_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("resetPassword_result");
+
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new resetPassword_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new resetPassword_resultTupleSchemeFactory());
+    }
+
+    public com.talool.api.thrift.ServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(resetPassword_result.class, metaDataMap);
+    }
+
+    public resetPassword_result() {
+    }
+
+    public resetPassword_result(
+      com.talool.api.thrift.ServiceException_t error)
+    {
+      this();
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public resetPassword_result(resetPassword_result other) {
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+      }
+    }
+
+    public resetPassword_result deepCopy() {
+      return new resetPassword_result(this);
+    }
+
+    public void clear() {
+      this.error = null;
+    }
+
+    public com.talool.api.thrift.ServiceException_t getError() {
+      return this.error;
+    }
+
+    public resetPassword_result setError(com.talool.api.thrift.ServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.ServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof resetPassword_result)
+        return this.equals((resetPassword_result)that);
+      return false;
+    }
+
+    public boolean equals(resetPassword_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(resetPassword_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      resetPassword_result typedOther = (resetPassword_result)other;
+
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("resetPassword_result(");
+      boolean first = true;
+
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class resetPassword_resultStandardSchemeFactory implements SchemeFactory {
+      public resetPassword_resultStandardScheme getScheme() {
+        return new resetPassword_resultStandardScheme();
+      }
+    }
+
+    private static class resetPassword_resultStandardScheme extends StandardScheme<resetPassword_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, resetPassword_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, resetPassword_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class resetPassword_resultTupleSchemeFactory implements SchemeFactory {
+      public resetPassword_resultTupleScheme getScheme() {
+        return new resetPassword_resultTupleScheme();
+      }
+    }
+
+    private static class resetPassword_resultTupleScheme extends TupleScheme<resetPassword_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, resetPassword_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetError()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, resetPassword_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

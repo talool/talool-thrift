@@ -9984,6 +9984,702 @@ static NSString * CTOKEN_NAME = @"ctok";
 
 @end
 
+@interface sendResetPasswordEmail_args : NSObject <NSCoding> {
+  NSString * __email;
+
+  BOOL __email_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=email, setter=setEmail:) NSString * email;
+#endif
+
+- (id) init;
+- (id) initWithEmail: (NSString *) email;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (NSString *) email;
+- (void) setEmail: (NSString *) email;
+#endif
+- (BOOL) emailIsSet;
+
+@end
+
+@implementation sendResetPasswordEmail_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithEmail: (NSString *) email
+{
+  self = [super init];
+  __email = [email retain_stub];
+  __email_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"email"])
+  {
+    __email = [[decoder decodeObjectForKey: @"email"] retain_stub];
+    __email_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__email_isset)
+  {
+    [encoder encodeObject: __email forKey: @"email"];
+  }
+}
+
+- (void) dealloc
+{
+  [__email release_stub];
+  [super dealloc_stub];
+}
+
+- (NSString *) email {
+  return [[__email retain_stub] autorelease_stub];
+}
+
+- (void) setEmail: (NSString *) email {
+  [email retain_stub];
+  [__email release_stub];
+  __email = email;
+  __email_isset = YES;
+}
+
+- (BOOL) emailIsSet {
+  return __email_isset;
+}
+
+- (void) unsetEmail {
+  [__email release_stub];
+  __email = nil;
+  __email_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setEmail: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"sendResetPasswordEmail_args"];
+  if (__email_isset) {
+    if (__email != nil) {
+      [outProtocol writeFieldBeginWithName: @"email" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __email];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"sendResetPasswordEmail_args("];
+  [ms appendString: @"email:"];
+  [ms appendFormat: @"\"%@\"", __email];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface SendResetPasswordEmail_result : NSObject <NSCoding> {
+  ServiceException_t * __error;
+
+  BOOL __error_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=error, setter=setError:) ServiceException_t * error;
+#endif
+
+- (id) init;
+- (id) initWithError: (ServiceException_t *) error;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (ServiceException_t *) error;
+- (void) setError: (ServiceException_t *) error;
+#endif
+- (BOOL) errorIsSet;
+
+@end
+
+@implementation SendResetPasswordEmail_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithError: (ServiceException_t *) error
+{
+  self = [super init];
+  __error = [error retain_stub];
+  __error_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"error"])
+  {
+    __error = [[decoder decodeObjectForKey: @"error"] retain_stub];
+    __error_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__error_isset)
+  {
+    [encoder encodeObject: __error forKey: @"error"];
+  }
+}
+
+- (void) dealloc
+{
+  [__error release_stub];
+  [super dealloc_stub];
+}
+
+- (ServiceException_t *) error {
+  return [[__error retain_stub] autorelease_stub];
+}
+
+- (void) setError: (ServiceException_t *) error {
+  [error retain_stub];
+  [__error release_stub];
+  __error = error;
+  __error_isset = YES;
+}
+
+- (BOOL) errorIsSet {
+  return __error_isset;
+}
+
+- (void) unsetError {
+  [__error release_stub];
+  __error = nil;
+  __error_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          ServiceException_t *fieldValue = [[ServiceException_t alloc] init];
+          [fieldValue read: inProtocol];
+          [self setError: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SendResetPasswordEmail_result"];
+
+  if (__error_isset) {
+    if (__error != nil) {
+      [outProtocol writeFieldBeginWithName: @"error" type: TType_STRUCT fieldID: 1];
+      [__error write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SendResetPasswordEmail_result("];
+  [ms appendString: @"error:"];
+  [ms appendFormat: @"%@", __error];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface resetPassword_args : NSObject <NSCoding> {
+  NSString * __customerId;
+  NSString * __resetPasswordCode;
+  NSString * __newPassword;
+
+  BOOL __customerId_isset;
+  BOOL __resetPasswordCode_isset;
+  BOOL __newPassword_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=customerId, setter=setCustomerId:) NSString * customerId;
+@property (nonatomic, retain, getter=resetPasswordCode, setter=setResetPasswordCode:) NSString * resetPasswordCode;
+@property (nonatomic, retain, getter=newPassword, setter=setNewPassword:) NSString * newPassword;
+#endif
+
+- (id) init;
+- (id) initWithCustomerId: (NSString *) customerId resetPasswordCode: (NSString *) resetPasswordCode newPassword: (NSString *) newPassword;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (NSString *) customerId;
+- (void) setCustomerId: (NSString *) customerId;
+#endif
+- (BOOL) customerIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) resetPasswordCode;
+- (void) setResetPasswordCode: (NSString *) resetPasswordCode;
+#endif
+- (BOOL) resetPasswordCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) newPassword;
+- (void) setNewPassword: (NSString *) newPassword;
+#endif
+- (BOOL) newPasswordIsSet;
+
+@end
+
+@implementation resetPassword_args
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithCustomerId: (NSString *) customerId resetPasswordCode: (NSString *) resetPasswordCode newPassword: (NSString *) newPassword
+{
+  self = [super init];
+  __customerId = [customerId retain_stub];
+  __customerId_isset = YES;
+  __resetPasswordCode = [resetPasswordCode retain_stub];
+  __resetPasswordCode_isset = YES;
+  __newPassword = [newPassword retain_stub];
+  __newPassword_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"customerId"])
+  {
+    __customerId = [[decoder decodeObjectForKey: @"customerId"] retain_stub];
+    __customerId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"resetPasswordCode"])
+  {
+    __resetPasswordCode = [[decoder decodeObjectForKey: @"resetPasswordCode"] retain_stub];
+    __resetPasswordCode_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"newPassword"])
+  {
+    __newPassword = [[decoder decodeObjectForKey: @"newPassword"] retain_stub];
+    __newPassword_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__customerId_isset)
+  {
+    [encoder encodeObject: __customerId forKey: @"customerId"];
+  }
+  if (__resetPasswordCode_isset)
+  {
+    [encoder encodeObject: __resetPasswordCode forKey: @"resetPasswordCode"];
+  }
+  if (__newPassword_isset)
+  {
+    [encoder encodeObject: __newPassword forKey: @"newPassword"];
+  }
+}
+
+- (void) dealloc
+{
+  [__customerId release_stub];
+  [__resetPasswordCode release_stub];
+  [__newPassword release_stub];
+  [super dealloc_stub];
+}
+
+- (NSString *) customerId {
+  return [[__customerId retain_stub] autorelease_stub];
+}
+
+- (void) setCustomerId: (NSString *) customerId {
+  [customerId retain_stub];
+  [__customerId release_stub];
+  __customerId = customerId;
+  __customerId_isset = YES;
+}
+
+- (BOOL) customerIdIsSet {
+  return __customerId_isset;
+}
+
+- (void) unsetCustomerId {
+  [__customerId release_stub];
+  __customerId = nil;
+  __customerId_isset = NO;
+}
+
+- (NSString *) resetPasswordCode {
+  return [[__resetPasswordCode retain_stub] autorelease_stub];
+}
+
+- (void) setResetPasswordCode: (NSString *) resetPasswordCode {
+  [resetPasswordCode retain_stub];
+  [__resetPasswordCode release_stub];
+  __resetPasswordCode = resetPasswordCode;
+  __resetPasswordCode_isset = YES;
+}
+
+- (BOOL) resetPasswordCodeIsSet {
+  return __resetPasswordCode_isset;
+}
+
+- (void) unsetResetPasswordCode {
+  [__resetPasswordCode release_stub];
+  __resetPasswordCode = nil;
+  __resetPasswordCode_isset = NO;
+}
+
+- (NSString *) newPassword {
+  return [[__newPassword retain_stub] autorelease_stub];
+}
+
+- (void) setNewPassword: (NSString *) newPassword {
+  [newPassword retain_stub];
+  [__newPassword release_stub];
+  __newPassword = newPassword;
+  __newPassword_isset = YES;
+}
+
+- (BOOL) newPasswordIsSet {
+  return __newPassword_isset;
+}
+
+- (void) unsetNewPassword {
+  [__newPassword release_stub];
+  __newPassword = nil;
+  __newPassword_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setCustomerId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setResetPasswordCode: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setNewPassword: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"resetPassword_args"];
+  if (__customerId_isset) {
+    if (__customerId != nil) {
+      [outProtocol writeFieldBeginWithName: @"customerId" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __customerId];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__resetPasswordCode_isset) {
+    if (__resetPasswordCode != nil) {
+      [outProtocol writeFieldBeginWithName: @"resetPasswordCode" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __resetPasswordCode];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__newPassword_isset) {
+    if (__newPassword != nil) {
+      [outProtocol writeFieldBeginWithName: @"newPassword" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __newPassword];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"resetPassword_args("];
+  [ms appendString: @"customerId:"];
+  [ms appendFormat: @"\"%@\"", __customerId];
+  [ms appendString: @",resetPasswordCode:"];
+  [ms appendFormat: @"\"%@\"", __resetPasswordCode];
+  [ms appendString: @",newPassword:"];
+  [ms appendFormat: @"\"%@\"", __newPassword];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface ResetPassword_result : NSObject <NSCoding> {
+  ServiceException_t * __error;
+
+  BOOL __error_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=error, setter=setError:) ServiceException_t * error;
+#endif
+
+- (id) init;
+- (id) initWithError: (ServiceException_t *) error;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (ServiceException_t *) error;
+- (void) setError: (ServiceException_t *) error;
+#endif
+- (BOOL) errorIsSet;
+
+@end
+
+@implementation ResetPassword_result
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithError: (ServiceException_t *) error
+{
+  self = [super init];
+  __error = [error retain_stub];
+  __error_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"error"])
+  {
+    __error = [[decoder decodeObjectForKey: @"error"] retain_stub];
+    __error_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__error_isset)
+  {
+    [encoder encodeObject: __error forKey: @"error"];
+  }
+}
+
+- (void) dealloc
+{
+  [__error release_stub];
+  [super dealloc_stub];
+}
+
+- (ServiceException_t *) error {
+  return [[__error retain_stub] autorelease_stub];
+}
+
+- (void) setError: (ServiceException_t *) error {
+  [error retain_stub];
+  [__error release_stub];
+  __error = error;
+  __error_isset = YES;
+}
+
+- (BOOL) errorIsSet {
+  return __error_isset;
+}
+
+- (void) unsetError {
+  [__error release_stub];
+  __error = nil;
+  __error_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          ServiceException_t *fieldValue = [[ServiceException_t alloc] init];
+          [fieldValue read: inProtocol];
+          [self setError: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"ResetPassword_result"];
+
+  if (__error_isset) {
+    if (__error != nil) {
+      [outProtocol writeFieldBeginWithName: @"error" type: TType_STRUCT fieldID: 1];
+      [__error write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"ResetPassword_result("];
+  [ms appendString: @"error:"];
+  [ms appendFormat: @"%@", __error];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation CustomerService_tClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -11188,6 +11884,94 @@ static NSString * CTOKEN_NAME = @"ctok";
   [self recv_activityAction];
 }
 
+- (void) send_sendResetPasswordEmail: (NSString *) email
+{
+  [outProtocol writeMessageBeginWithName: @"sendResetPasswordEmail" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"sendResetPasswordEmail_args"];
+  if (email != nil)  {
+    [outProtocol writeFieldBeginWithName: @"email" type: TType_STRING fieldID: 1];
+    [outProtocol writeString: email];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_sendResetPasswordEmail
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  SendResetPasswordEmail_result * result = [[[SendResetPasswordEmail_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result errorIsSet]) {
+    @throw [result error];
+  }
+  return;
+}
+
+- (void) sendResetPasswordEmail: (NSString *) email
+{
+  [self send_sendResetPasswordEmail : email];
+  [self recv_sendResetPasswordEmail];
+}
+
+- (void) send_resetPassword: (NSString *) customerId resetPasswordCode: (NSString *) resetPasswordCode newPassword: (NSString *) newPassword
+{
+  [outProtocol writeMessageBeginWithName: @"resetPassword" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"resetPassword_args"];
+  if (customerId != nil)  {
+    [outProtocol writeFieldBeginWithName: @"customerId" type: TType_STRING fieldID: 1];
+    [outProtocol writeString: customerId];
+    [outProtocol writeFieldEnd];
+  }
+  if (resetPasswordCode != nil)  {
+    [outProtocol writeFieldBeginWithName: @"resetPasswordCode" type: TType_STRING fieldID: 2];
+    [outProtocol writeString: resetPasswordCode];
+    [outProtocol writeFieldEnd];
+  }
+  if (newPassword != nil)  {
+    [outProtocol writeFieldBeginWithName: @"newPassword" type: TType_STRING fieldID: 3];
+    [outProtocol writeString: newPassword];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_resetPassword
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  ResetPassword_result * result = [[[ResetPassword_result alloc] init] autorelease_stub];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result errorIsSet]) {
+    @throw [result error];
+  }
+  return;
+}
+
+- (void) resetPassword: (NSString *) customerId resetPasswordCode: (NSString *) resetPasswordCode newPassword: (NSString *) newPassword
+{
+  [self send_resetPassword : customerId resetPasswordCode: resetPasswordCode newPassword: newPassword];
+  [self recv_resetPassword];
+}
+
 @end
 
 @implementation CustomerService_tProcessor
@@ -11415,6 +12199,22 @@ static NSString * CTOKEN_NAME = @"ctok";
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"activityAction"];
+  }
+  {
+    SEL s = @selector(process_sendResetPasswordEmail_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"sendResetPasswordEmail"];
+  }
+  {
+    SEL s = @selector(process_resetPassword_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"resetPassword"];
   }
   return self;
 }
@@ -11907,6 +12707,40 @@ static NSString * CTOKEN_NAME = @"ctok";
   ActivityAction_result * result = [[ActivityAction_result alloc] init];
   [mService activityAction: [args activityId]];
   [outProtocol writeMessageBeginWithName: @"activityAction"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_sendResetPasswordEmail_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  sendResetPasswordEmail_args * args = [[sendResetPasswordEmail_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  SendResetPasswordEmail_result * result = [[SendResetPasswordEmail_result alloc] init];
+  [mService sendResetPasswordEmail: [args email]];
+  [outProtocol writeMessageBeginWithName: @"sendResetPasswordEmail"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release_stub];
+  [args release_stub];
+}
+
+- (void) process_resetPassword_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  resetPassword_args * args = [[resetPassword_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  ResetPassword_result * result = [[ResetPassword_result alloc] init];
+  [mService resetPassword: [args customerId] resetPasswordCode: [args resetPasswordCode] newPassword: [args newPassword]];
+  [outProtocol writeMessageBeginWithName: @"resetPassword"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

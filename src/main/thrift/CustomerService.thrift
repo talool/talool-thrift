@@ -76,7 +76,10 @@ service CustomerService_t {
    
    void activityAction(1:string activityId) throws (1:Core.ServiceException_t error);
    
+   void sendResetPasswordEmail(1:string email) throws (1:Core.ServiceException_t error);
    
+   void resetPassword(1:string customerId,2:string resetPasswordCode,3:string newPassword) throws (1:Core.ServiceException_t error);
    
+    
 
 }
