@@ -22,6 +22,7 @@ exception ServiceException_t {
   2: required string errorDesc
 }
 
+
 struct Category_t {
   1: required i32 categoryId;
   2: required string name;

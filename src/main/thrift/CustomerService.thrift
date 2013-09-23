@@ -5,8 +5,10 @@
 ########################################################
 namespace java com.talool.api.thrift
 
+include "Error.thrift"
 include "Core.thrift"
 include "Activity.thrift"
+include "Payment.thrift"
 
 const string CTOKEN_NAME = 'ctok'
 
@@ -76,9 +78,21 @@ service CustomerService_t {
    
    void activityAction(1:string activityId) throws (1:Core.ServiceException_t error);
    
-   void sendResetPasswordEmail(1:string email) throws (1:Core.ServiceException_t error);
+   #### begin next version protocol stuff ###
    
-   void resetPassword(1:string customerId,2:string resetPasswordCode,3:string newPassword) throws (1:Core.ServiceException_t error);
+   void sendResetPasswordEmail(1:string email) 
+   	throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
+   
+   void resetPassword(1:string customerId,2:string resetPasswordCode,3:string newPassword) 
+   	throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
+   
+   # purchases
+   
+   Payment.TransactionResult_t purchaseByCard(1:string dealOfferId, 2:Payment.PaymentDetail_t paymentDetail) 
+  	 throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
+   
+   Payment.TransactionResult_t purchaseByCode(1:string dealOfferId, 2:string paymentCode) 
+     throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
     
 
