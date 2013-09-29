@@ -26,6 +26,7 @@ public enum ErrorCode_t implements org.apache.thrift.TEnum {
   GIFTING_NOT_ALLOWED(1004),
   CUSTOMER_NOT_FOUND(1005),
   EMAIL_REQUIRED(1006),
+  EMAIL_OR_PASS_INVALID(1007),
   ACTIVIATION_CODE_NOT_FOUND(3000),
   ACTIVIATION_CODE_ALREADY_ACTIVATED(3001);
 
@@ -76,6 +77,8 @@ public enum ErrorCode_t implements org.apache.thrift.TEnum {
         return CUSTOMER_NOT_FOUND;
       case 1006:
         return EMAIL_REQUIRED;
+      case 1007:
+        return EMAIL_OR_PASS_INVALID;
       case 3000:
         return ACTIVIATION_CODE_NOT_FOUND;
       case 3001:
