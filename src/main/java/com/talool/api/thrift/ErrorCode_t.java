@@ -27,6 +27,7 @@ public enum ErrorCode_t implements org.apache.thrift.TEnum {
   CUSTOMER_NOT_FOUND(1005),
   EMAIL_REQUIRED(1006),
   EMAIL_OR_PASS_INVALID(1007),
+  GENERAL_PROCESSOR_ERROR(1500),
   ACTIVIATION_CODE_NOT_FOUND(3000),
   ACTIVIATION_CODE_ALREADY_ACTIVATED(3001);
 
@@ -79,6 +80,8 @@ public enum ErrorCode_t implements org.apache.thrift.TEnum {
         return EMAIL_REQUIRED;
       case 1007:
         return EMAIL_OR_PASS_INVALID;
+      case 1500:
+        return GENERAL_PROCESSOR_ERROR;
       case 3000:
         return ACTIVIATION_CODE_NOT_FOUND;
       case 3001:

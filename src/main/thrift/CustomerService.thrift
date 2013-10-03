@@ -83,7 +83,7 @@ service CustomerService_t {
    void sendResetPasswordEmail(1:string email) 
    	throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
-   void resetPassword(1:string customerId,2:string resetPasswordCode,3:string newPassword) 
+   CTokenAccess_t resetPassword(1:string customerId,2:string resetPasswordCode,3:string newPassword) 
    	throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
    # purchases

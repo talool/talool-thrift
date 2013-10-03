@@ -90,7 +90,7 @@ public class CustomerService_t {
 
     public void sendResetPasswordEmail(String email) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
-    public void resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
+    public CTokenAccess_t resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
     public com.talool.api.thrift.TransactionResult_t purchaseByCard(String dealOfferId, com.talool.api.thrift.PaymentDetail_t paymentDetail) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
@@ -903,10 +903,10 @@ public class CustomerService_t {
       return;
     }
 
-    public void resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
+    public CTokenAccess_t resetPassword(String customerId, String resetPasswordCode, String newPassword) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
     {
       send_resetPassword(customerId, resetPasswordCode, newPassword);
-      recv_resetPassword();
+      return recv_resetPassword();
     }
 
     public void send_resetPassword(String customerId, String resetPasswordCode, String newPassword) throws org.apache.thrift.TException
@@ -918,10 +918,13 @@ public class CustomerService_t {
       sendBase("resetPassword", args);
     }
 
-    public void recv_resetPassword() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
+    public CTokenAccess_t recv_resetPassword() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
     {
       resetPassword_result result = new resetPassword_result();
       receiveBase(result, "resetPassword");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
       if (result.serviceException != null) {
         throw result.serviceException;
       }
@@ -931,7 +934,7 @@ public class CustomerService_t {
       if (result.notFoundException != null) {
         throw result.notFoundException;
       }
-      return;
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "resetPassword failed: unknown result");
     }
 
     public com.talool.api.thrift.TransactionResult_t purchaseByCard(String dealOfferId, com.talool.api.thrift.PaymentDetail_t paymentDetail) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
@@ -1978,13 +1981,13 @@ public class CustomerService_t {
         prot.writeMessageEnd();
       }
 
-      public void getResult() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException {
+      public CTokenAccess_t getResult() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_resetPassword();
+        return (new Client(prot)).recv_resetPassword();
       }
     }
 
@@ -2798,7 +2801,7 @@ public class CustomerService_t {
       public resetPassword_result getResult(I iface, resetPassword_args args) throws org.apache.thrift.TException {
         resetPassword_result result = new resetPassword_result();
         try {
-          iface.resetPassword(args.customerId, args.resetPasswordCode, args.newPassword);
+          result.success = iface.resetPassword(args.customerId, args.resetPasswordCode, args.newPassword);
         } catch (com.talool.api.thrift.TServiceException_t serviceException) {
           result.serviceException = serviceException;
         } catch (com.talool.api.thrift.TUserException_t userException) {
@@ -27178,6 +27181,7 @@ public class CustomerService_t {
   public static class resetPassword_result implements org.apache.thrift.TBase<resetPassword_result, resetPassword_result._Fields>, java.io.Serializable, Cloneable   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("resetPassword_result");
 
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField SERVICE_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("serviceException", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField USER_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("userException", org.apache.thrift.protocol.TType.STRUCT, (short)2);
     private static final org.apache.thrift.protocol.TField NOT_FOUND_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("notFoundException", org.apache.thrift.protocol.TType.STRUCT, (short)3);
@@ -27188,12 +27192,14 @@ public class CustomerService_t {
       schemes.put(TupleScheme.class, new resetPassword_resultTupleSchemeFactory());
     }
 
+    public CTokenAccess_t success; // required
     public com.talool.api.thrift.TServiceException_t serviceException; // required
     public com.talool.api.thrift.TUserException_t userException; // required
     public com.talool.api.thrift.TNotFoundException_t notFoundException; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
       SERVICE_EXCEPTION((short)1, "serviceException"),
       USER_EXCEPTION((short)2, "userException"),
       NOT_FOUND_EXCEPTION((short)3, "notFoundException");
@@ -27211,6 +27217,8 @@ public class CustomerService_t {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
           case 1: // SERVICE_EXCEPTION
             return SERVICE_EXCEPTION;
           case 2: // USER_EXCEPTION
@@ -27260,6 +27268,8 @@ public class CustomerService_t {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CTokenAccess_t.class)));
       tmpMap.put(_Fields.SERVICE_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("serviceException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       tmpMap.put(_Fields.USER_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("userException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -27274,11 +27284,13 @@ public class CustomerService_t {
     }
 
     public resetPassword_result(
+      CTokenAccess_t success,
       com.talool.api.thrift.TServiceException_t serviceException,
       com.talool.api.thrift.TUserException_t userException,
       com.talool.api.thrift.TNotFoundException_t notFoundException)
     {
       this();
+      this.success = success;
       this.serviceException = serviceException;
       this.userException = userException;
       this.notFoundException = notFoundException;
@@ -27288,6 +27300,9 @@ public class CustomerService_t {
      * Performs a deep copy on <i>other</i>.
      */
     public resetPassword_result(resetPassword_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new CTokenAccess_t(other.success);
+      }
       if (other.isSetServiceException()) {
         this.serviceException = new com.talool.api.thrift.TServiceException_t(other.serviceException);
       }
@@ -27304,9 +27319,34 @@ public class CustomerService_t {
     }
 
     public void clear() {
+      this.success = null;
       this.serviceException = null;
       this.userException = null;
       this.notFoundException = null;
+    }
+
+    public CTokenAccess_t getSuccess() {
+      return this.success;
+    }
+
+    public resetPassword_result setSuccess(CTokenAccess_t success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
     }
 
     public com.talool.api.thrift.TServiceException_t getServiceException() {
@@ -27383,6 +27423,14 @@ public class CustomerService_t {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((CTokenAccess_t)value);
+        }
+        break;
+
       case SERVICE_EXCEPTION:
         if (value == null) {
           unsetServiceException();
@@ -27412,6 +27460,9 @@ public class CustomerService_t {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
       case SERVICE_EXCEPTION:
         return getServiceException();
 
@@ -27432,6 +27483,8 @@ public class CustomerService_t {
       }
 
       switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
       case SERVICE_EXCEPTION:
         return isSetServiceException();
       case USER_EXCEPTION:
@@ -27454,6 +27507,15 @@ public class CustomerService_t {
     public boolean equals(resetPassword_result that) {
       if (that == null)
         return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
 
       boolean this_present_serviceException = true && this.isSetServiceException();
       boolean that_present_serviceException = true && that.isSetServiceException();
@@ -27498,6 +27560,16 @@ public class CustomerService_t {
       int lastComparison = 0;
       resetPassword_result typedOther = (resetPassword_result)other;
 
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetServiceException()).compareTo(typedOther.isSetServiceException());
       if (lastComparison != 0) {
         return lastComparison;
@@ -27548,6 +27620,14 @@ public class CustomerService_t {
       StringBuilder sb = new StringBuilder("resetPassword_result(");
       boolean first = true;
 
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("serviceException:");
       if (this.serviceException == null) {
         sb.append("null");
@@ -27578,6 +27658,9 @@ public class CustomerService_t {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -27614,6 +27697,15 @@ public class CustomerService_t {
             break;
           }
           switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new CTokenAccess_t();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             case 1: // SERVICE_EXCEPTION
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.serviceException = new com.talool.api.thrift.TServiceException_t();
@@ -27656,6 +27748,11 @@ public class CustomerService_t {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.serviceException != null) {
           oprot.writeFieldBegin(SERVICE_EXCEPTION_FIELD_DESC);
           struct.serviceException.write(oprot);
@@ -27689,16 +27786,22 @@ public class CustomerService_t {
       public void write(org.apache.thrift.protocol.TProtocol prot, resetPassword_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetServiceException()) {
+        if (struct.isSetSuccess()) {
           optionals.set(0);
         }
-        if (struct.isSetUserException()) {
+        if (struct.isSetServiceException()) {
           optionals.set(1);
         }
-        if (struct.isSetNotFoundException()) {
+        if (struct.isSetUserException()) {
           optionals.set(2);
         }
-        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetNotFoundException()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
         if (struct.isSetServiceException()) {
           struct.serviceException.write(oprot);
         }
@@ -27713,18 +27816,23 @@ public class CustomerService_t {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, resetPassword_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(3);
+        BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
+          struct.success = new CTokenAccess_t();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.serviceException = new com.talool.api.thrift.TServiceException_t();
           struct.serviceException.read(iprot);
           struct.setServiceExceptionIsSet(true);
         }
-        if (incoming.get(1)) {
+        if (incoming.get(2)) {
           struct.userException = new com.talool.api.thrift.TUserException_t();
           struct.userException.read(iprot);
           struct.setUserExceptionIsSet(true);
         }
-        if (incoming.get(2)) {
+        if (incoming.get(3)) {
           struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
           struct.notFoundException.read(iprot);
           struct.setNotFoundExceptionIsSet(true);
