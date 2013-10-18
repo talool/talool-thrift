@@ -42,19 +42,11 @@ public class TServiceException_t extends TException implements org.apache.thrift
     schemes.put(TupleScheme.class, new TServiceException_tTupleSchemeFactory());
   }
 
-  /**
-   * 
-   * @see ErrorCode_t
-   */
-  public ErrorCode_t errorCode; // required
+  public int errorCode; // required
   public String message; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    /**
-     * 
-     * @see ErrorCode_t
-     */
     ERROR_CODE((short)1, "errorCode"),
     MESSAGE((short)2, "message");
 
@@ -115,12 +107,14 @@ public class TServiceException_t extends TException implements org.apache.thrift
   }
 
   // isset id assignments
+  private static final int __ERRORCODE_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
   private _Fields optionals[] = {_Fields.MESSAGE};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ERROR_CODE, new org.apache.thrift.meta_data.FieldMetaData("errorCode", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, ErrorCode_t.class)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.MESSAGE, new org.apache.thrift.meta_data.FieldMetaData("message", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -131,19 +125,19 @@ public class TServiceException_t extends TException implements org.apache.thrift
   }
 
   public TServiceException_t(
-    ErrorCode_t errorCode)
+    int errorCode)
   {
     this();
     this.errorCode = errorCode;
+    setErrorCodeIsSet(true);
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public TServiceException_t(TServiceException_t other) {
-    if (other.isSetErrorCode()) {
-      this.errorCode = other.errorCode;
-    }
+    __isset_bitfield = other.__isset_bitfield;
+    this.errorCode = other.errorCode;
     if (other.isSetMessage()) {
       this.message = other.message;
     }
@@ -154,40 +148,32 @@ public class TServiceException_t extends TException implements org.apache.thrift
   }
 
   public void clear() {
-    this.errorCode = null;
+    setErrorCodeIsSet(false);
+    this.errorCode = 0;
     this.message = null;
   }
 
-  /**
-   * 
-   * @see ErrorCode_t
-   */
-  public ErrorCode_t getErrorCode() {
+  public int getErrorCode() {
     return this.errorCode;
   }
 
-  /**
-   * 
-   * @see ErrorCode_t
-   */
-  public TServiceException_t setErrorCode(ErrorCode_t errorCode) {
+  public TServiceException_t setErrorCode(int errorCode) {
     this.errorCode = errorCode;
+    setErrorCodeIsSet(true);
     return this;
   }
 
   public void unsetErrorCode() {
-    this.errorCode = null;
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ERRORCODE_ISSET_ID);
   }
 
   /** Returns true if field errorCode is set (has been assigned a value) and false otherwise */
   public boolean isSetErrorCode() {
-    return this.errorCode != null;
+    return EncodingUtils.testBit(__isset_bitfield, __ERRORCODE_ISSET_ID);
   }
 
   public void setErrorCodeIsSet(boolean value) {
-    if (!value) {
-      this.errorCode = null;
-    }
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ERRORCODE_ISSET_ID, value);
   }
 
   public String getMessage() {
@@ -220,7 +206,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
       if (value == null) {
         unsetErrorCode();
       } else {
-        setErrorCode((ErrorCode_t)value);
+        setErrorCode((Integer)value);
       }
       break;
 
@@ -238,7 +224,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
   public Object getFieldValue(_Fields field) {
     switch (field) {
     case ERROR_CODE:
-      return getErrorCode();
+      return Integer.valueOf(getErrorCode());
 
     case MESSAGE:
       return getMessage();
@@ -275,12 +261,12 @@ public class TServiceException_t extends TException implements org.apache.thrift
     if (that == null)
       return false;
 
-    boolean this_present_errorCode = true && this.isSetErrorCode();
-    boolean that_present_errorCode = true && that.isSetErrorCode();
+    boolean this_present_errorCode = true;
+    boolean that_present_errorCode = true;
     if (this_present_errorCode || that_present_errorCode) {
       if (!(this_present_errorCode && that_present_errorCode))
         return false;
-      if (!this.errorCode.equals(that.errorCode))
+      if (this.errorCode != that.errorCode)
         return false;
     }
 
@@ -350,11 +336,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
     boolean first = true;
 
     sb.append("errorCode:");
-    if (this.errorCode == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.errorCode);
-    }
+    sb.append(this.errorCode);
     first = false;
     if (isSetMessage()) {
       if (!first) sb.append(", ");
@@ -372,9 +354,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (errorCode == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'errorCode' was not present! Struct: " + toString());
-    }
+    // alas, we cannot check 'errorCode' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -388,6 +368,8 @@ public class TServiceException_t extends TException implements org.apache.thrift
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te.getMessage());
@@ -414,7 +396,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
         switch (schemeField.id) {
           case 1: // ERROR_CODE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.errorCode = ErrorCode_t.findByValue(iprot.readI32());
+              struct.errorCode = iprot.readI32();
               struct.setErrorCodeIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -436,6 +418,9 @@ public class TServiceException_t extends TException implements org.apache.thrift
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetErrorCode()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'errorCode' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 
@@ -443,11 +428,9 @@ public class TServiceException_t extends TException implements org.apache.thrift
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.errorCode != null) {
-        oprot.writeFieldBegin(ERROR_CODE_FIELD_DESC);
-        oprot.writeI32(struct.errorCode.getValue());
-        oprot.writeFieldEnd();
-      }
+      oprot.writeFieldBegin(ERROR_CODE_FIELD_DESC);
+      oprot.writeI32(struct.errorCode);
+      oprot.writeFieldEnd();
       if (struct.message != null) {
         if (struct.isSetMessage()) {
           oprot.writeFieldBegin(MESSAGE_FIELD_DESC);
@@ -472,7 +455,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, TServiceException_t struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
-      oprot.writeI32(struct.errorCode.getValue());
+      oprot.writeI32(struct.errorCode);
       BitSet optionals = new BitSet();
       if (struct.isSetMessage()) {
         optionals.set(0);
@@ -486,7 +469,7 @@ public class TServiceException_t extends TException implements org.apache.thrift
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TServiceException_t struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      struct.errorCode = ErrorCode_t.findByValue(iprot.readI32());
+      struct.errorCode = iprot.readI32();
       struct.setErrorCodeIsSet(true);
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
