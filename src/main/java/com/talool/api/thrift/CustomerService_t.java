@@ -96,6 +96,8 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseByCode(String dealOfferId, String paymentCode) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
+    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -161,6 +163,8 @@ public class CustomerService_t {
     public void purchaseByCard(String dealOfferId, com.talool.api.thrift.PaymentDetail_t paymentDetail, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseByCard_call> resultHandler) throws org.apache.thrift.TException;
 
     public void purchaseByCode(String dealOfferId, String paymentCode, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseByCode_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void loginFacebook(String facebookId, String facebookAccessToken, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.loginFacebook_call> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -1001,6 +1005,33 @@ public class CustomerService_t {
         throw result.notFoundException;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseByCode failed: unknown result");
+    }
+
+    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      send_loginFacebook(facebookId, facebookAccessToken);
+      return recv_loginFacebook();
+    }
+
+    public void send_loginFacebook(String facebookId, String facebookAccessToken) throws org.apache.thrift.TException
+    {
+      loginFacebook_args args = new loginFacebook_args();
+      args.setFacebookId(facebookId);
+      args.setFacebookAccessToken(facebookAccessToken);
+      sendBase("loginFacebook", args);
+    }
+
+    public CTokenAccessResponse_t recv_loginFacebook() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      loginFacebook_result result = new loginFacebook_result();
+      receiveBase(result, "loginFacebook");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.error != null) {
+        throw result.error;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "loginFacebook failed: unknown result");
     }
 
   }
@@ -2061,6 +2092,41 @@ public class CustomerService_t {
       }
     }
 
+    public void loginFacebook(String facebookId, String facebookAccessToken, org.apache.thrift.async.AsyncMethodCallback<loginFacebook_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      loginFacebook_call method_call = new loginFacebook_call(facebookId, facebookAccessToken, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class loginFacebook_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String facebookId;
+      private String facebookAccessToken;
+      public loginFacebook_call(String facebookId, String facebookAccessToken, org.apache.thrift.async.AsyncMethodCallback<loginFacebook_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.facebookId = facebookId;
+        this.facebookAccessToken = facebookAccessToken;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("loginFacebook", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        loginFacebook_args args = new loginFacebook_args();
+        args.setFacebookId(facebookId);
+        args.setFacebookAccessToken(facebookAccessToken);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public CTokenAccessResponse_t getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_loginFacebook();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -2105,6 +2171,7 @@ public class CustomerService_t {
       processMap.put("resetPassword", new resetPassword());
       processMap.put("purchaseByCard", new purchaseByCard());
       processMap.put("purchaseByCode", new purchaseByCode());
+      processMap.put("loginFacebook", new loginFacebook());
       return processMap;
     }
 
@@ -2864,6 +2931,30 @@ public class CustomerService_t {
           result.userException = userException;
         } catch (com.talool.api.thrift.TNotFoundException_t notFoundException) {
           result.notFoundException = notFoundException;
+        }
+        return result;
+      }
+    }
+
+    public static class loginFacebook<I extends Iface> extends org.apache.thrift.ProcessFunction<I, loginFacebook_args> {
+      public loginFacebook() {
+        super("loginFacebook");
+      }
+
+      public loginFacebook_args getEmptyArgsInstance() {
+        return new loginFacebook_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public loginFacebook_result getResult(I iface, loginFacebook_args args) throws org.apache.thrift.TException {
+        loginFacebook_result result = new loginFacebook_result();
+        try {
+          result.success = iface.loginFacebook(args.facebookId, args.facebookAccessToken);
+        } catch (com.talool.api.thrift.ServiceException_t error) {
+          result.error = error;
         }
         return result;
       }
@@ -30075,6 +30166,919 @@ public class CustomerService_t {
           struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
           struct.notFoundException.read(iprot);
           struct.setNotFoundExceptionIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class loginFacebook_args implements org.apache.thrift.TBase<loginFacebook_args, loginFacebook_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("loginFacebook_args");
+
+    private static final org.apache.thrift.protocol.TField FACEBOOK_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("facebookId", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField FACEBOOK_ACCESS_TOKEN_FIELD_DESC = new org.apache.thrift.protocol.TField("facebookAccessToken", org.apache.thrift.protocol.TType.STRING, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new loginFacebook_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new loginFacebook_argsTupleSchemeFactory());
+    }
+
+    public String facebookId; // required
+    public String facebookAccessToken; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      FACEBOOK_ID((short)1, "facebookId"),
+      FACEBOOK_ACCESS_TOKEN((short)2, "facebookAccessToken");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // FACEBOOK_ID
+            return FACEBOOK_ID;
+          case 2: // FACEBOOK_ACCESS_TOKEN
+            return FACEBOOK_ACCESS_TOKEN;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.FACEBOOK_ID, new org.apache.thrift.meta_data.FieldMetaData("facebookId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.FACEBOOK_ACCESS_TOKEN, new org.apache.thrift.meta_data.FieldMetaData("facebookAccessToken", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(loginFacebook_args.class, metaDataMap);
+    }
+
+    public loginFacebook_args() {
+    }
+
+    public loginFacebook_args(
+      String facebookId,
+      String facebookAccessToken)
+    {
+      this();
+      this.facebookId = facebookId;
+      this.facebookAccessToken = facebookAccessToken;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public loginFacebook_args(loginFacebook_args other) {
+      if (other.isSetFacebookId()) {
+        this.facebookId = other.facebookId;
+      }
+      if (other.isSetFacebookAccessToken()) {
+        this.facebookAccessToken = other.facebookAccessToken;
+      }
+    }
+
+    public loginFacebook_args deepCopy() {
+      return new loginFacebook_args(this);
+    }
+
+    public void clear() {
+      this.facebookId = null;
+      this.facebookAccessToken = null;
+    }
+
+    public String getFacebookId() {
+      return this.facebookId;
+    }
+
+    public loginFacebook_args setFacebookId(String facebookId) {
+      this.facebookId = facebookId;
+      return this;
+    }
+
+    public void unsetFacebookId() {
+      this.facebookId = null;
+    }
+
+    /** Returns true if field facebookId is set (has been assigned a value) and false otherwise */
+    public boolean isSetFacebookId() {
+      return this.facebookId != null;
+    }
+
+    public void setFacebookIdIsSet(boolean value) {
+      if (!value) {
+        this.facebookId = null;
+      }
+    }
+
+    public String getFacebookAccessToken() {
+      return this.facebookAccessToken;
+    }
+
+    public loginFacebook_args setFacebookAccessToken(String facebookAccessToken) {
+      this.facebookAccessToken = facebookAccessToken;
+      return this;
+    }
+
+    public void unsetFacebookAccessToken() {
+      this.facebookAccessToken = null;
+    }
+
+    /** Returns true if field facebookAccessToken is set (has been assigned a value) and false otherwise */
+    public boolean isSetFacebookAccessToken() {
+      return this.facebookAccessToken != null;
+    }
+
+    public void setFacebookAccessTokenIsSet(boolean value) {
+      if (!value) {
+        this.facebookAccessToken = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case FACEBOOK_ID:
+        if (value == null) {
+          unsetFacebookId();
+        } else {
+          setFacebookId((String)value);
+        }
+        break;
+
+      case FACEBOOK_ACCESS_TOKEN:
+        if (value == null) {
+          unsetFacebookAccessToken();
+        } else {
+          setFacebookAccessToken((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case FACEBOOK_ID:
+        return getFacebookId();
+
+      case FACEBOOK_ACCESS_TOKEN:
+        return getFacebookAccessToken();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case FACEBOOK_ID:
+        return isSetFacebookId();
+      case FACEBOOK_ACCESS_TOKEN:
+        return isSetFacebookAccessToken();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof loginFacebook_args)
+        return this.equals((loginFacebook_args)that);
+      return false;
+    }
+
+    public boolean equals(loginFacebook_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_facebookId = true && this.isSetFacebookId();
+      boolean that_present_facebookId = true && that.isSetFacebookId();
+      if (this_present_facebookId || that_present_facebookId) {
+        if (!(this_present_facebookId && that_present_facebookId))
+          return false;
+        if (!this.facebookId.equals(that.facebookId))
+          return false;
+      }
+
+      boolean this_present_facebookAccessToken = true && this.isSetFacebookAccessToken();
+      boolean that_present_facebookAccessToken = true && that.isSetFacebookAccessToken();
+      if (this_present_facebookAccessToken || that_present_facebookAccessToken) {
+        if (!(this_present_facebookAccessToken && that_present_facebookAccessToken))
+          return false;
+        if (!this.facebookAccessToken.equals(that.facebookAccessToken))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(loginFacebook_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      loginFacebook_args typedOther = (loginFacebook_args)other;
+
+      lastComparison = Boolean.valueOf(isSetFacebookId()).compareTo(typedOther.isSetFacebookId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFacebookId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.facebookId, typedOther.facebookId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetFacebookAccessToken()).compareTo(typedOther.isSetFacebookAccessToken());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFacebookAccessToken()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.facebookAccessToken, typedOther.facebookAccessToken);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("loginFacebook_args(");
+      boolean first = true;
+
+      sb.append("facebookId:");
+      if (this.facebookId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.facebookId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("facebookAccessToken:");
+      if (this.facebookAccessToken == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.facebookAccessToken);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class loginFacebook_argsStandardSchemeFactory implements SchemeFactory {
+      public loginFacebook_argsStandardScheme getScheme() {
+        return new loginFacebook_argsStandardScheme();
+      }
+    }
+
+    private static class loginFacebook_argsStandardScheme extends StandardScheme<loginFacebook_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, loginFacebook_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // FACEBOOK_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.facebookId = iprot.readString();
+                struct.setFacebookIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // FACEBOOK_ACCESS_TOKEN
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.facebookAccessToken = iprot.readString();
+                struct.setFacebookAccessTokenIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, loginFacebook_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.facebookId != null) {
+          oprot.writeFieldBegin(FACEBOOK_ID_FIELD_DESC);
+          oprot.writeString(struct.facebookId);
+          oprot.writeFieldEnd();
+        }
+        if (struct.facebookAccessToken != null) {
+          oprot.writeFieldBegin(FACEBOOK_ACCESS_TOKEN_FIELD_DESC);
+          oprot.writeString(struct.facebookAccessToken);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class loginFacebook_argsTupleSchemeFactory implements SchemeFactory {
+      public loginFacebook_argsTupleScheme getScheme() {
+        return new loginFacebook_argsTupleScheme();
+      }
+    }
+
+    private static class loginFacebook_argsTupleScheme extends TupleScheme<loginFacebook_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, loginFacebook_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetFacebookId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetFacebookAccessToken()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetFacebookId()) {
+          oprot.writeString(struct.facebookId);
+        }
+        if (struct.isSetFacebookAccessToken()) {
+          oprot.writeString(struct.facebookAccessToken);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, loginFacebook_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.facebookId = iprot.readString();
+          struct.setFacebookIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.facebookAccessToken = iprot.readString();
+          struct.setFacebookAccessTokenIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class loginFacebook_result implements org.apache.thrift.TBase<loginFacebook_result, loginFacebook_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("loginFacebook_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new loginFacebook_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new loginFacebook_resultTupleSchemeFactory());
+    }
+
+    public CTokenAccessResponse_t success; // required
+    public com.talool.api.thrift.ServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CTokenAccessResponse_t.class)));
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(loginFacebook_result.class, metaDataMap);
+    }
+
+    public loginFacebook_result() {
+    }
+
+    public loginFacebook_result(
+      CTokenAccessResponse_t success,
+      com.talool.api.thrift.ServiceException_t error)
+    {
+      this();
+      this.success = success;
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public loginFacebook_result(loginFacebook_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new CTokenAccessResponse_t(other.success);
+      }
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+      }
+    }
+
+    public loginFacebook_result deepCopy() {
+      return new loginFacebook_result(this);
+    }
+
+    public void clear() {
+      this.success = null;
+      this.error = null;
+    }
+
+    public CTokenAccessResponse_t getSuccess() {
+      return this.success;
+    }
+
+    public loginFacebook_result setSuccess(CTokenAccessResponse_t success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.talool.api.thrift.ServiceException_t getError() {
+      return this.error;
+    }
+
+    public loginFacebook_result setError(com.talool.api.thrift.ServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((CTokenAccessResponse_t)value);
+        }
+        break;
+
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.ServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof loginFacebook_result)
+        return this.equals((loginFacebook_result)that);
+      return false;
+    }
+
+    public boolean equals(loginFacebook_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(loginFacebook_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      loginFacebook_result typedOther = (loginFacebook_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("loginFacebook_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class loginFacebook_resultStandardSchemeFactory implements SchemeFactory {
+      public loginFacebook_resultStandardScheme getScheme() {
+        return new loginFacebook_resultStandardScheme();
+      }
+    }
+
+    private static class loginFacebook_resultStandardScheme extends StandardScheme<loginFacebook_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, loginFacebook_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new CTokenAccessResponse_t();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, loginFacebook_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class loginFacebook_resultTupleSchemeFactory implements SchemeFactory {
+      public loginFacebook_resultTupleScheme getScheme() {
+        return new loginFacebook_resultTupleScheme();
+      }
+    }
+
+    private static class loginFacebook_resultTupleScheme extends TupleScheme<loginFacebook_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, loginFacebook_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetError()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, loginFacebook_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new CTokenAccessResponse_t();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
         }
       }
     }
