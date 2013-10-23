@@ -12365,7 +12365,7 @@ static NSString * CTOKEN_NAME = @"ctok";
 
 @interface LoginFacebook_result : NSObject <NSCoding> {
   CTokenAccessResponse_t * __success;
-  ServiceException_t * __error;
+  TServiceException_t * __error;
 
   BOOL __success_isset;
   BOOL __error_isset;
@@ -12373,11 +12373,11 @@ static NSString * CTOKEN_NAME = @"ctok";
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, retain, getter=success, setter=setSuccess:) CTokenAccessResponse_t * success;
-@property (nonatomic, retain, getter=error, setter=setError:) ServiceException_t * error;
+@property (nonatomic, retain, getter=error, setter=setError:) TServiceException_t * error;
 #endif
 
 - (id) init;
-- (id) initWithSuccess: (CTokenAccessResponse_t *) success error: (ServiceException_t *) error;
+- (id) initWithSuccess: (CTokenAccessResponse_t *) success error: (TServiceException_t *) error;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -12389,8 +12389,8 @@ static NSString * CTOKEN_NAME = @"ctok";
 - (BOOL) successIsSet;
 
 #if !__has_feature(objc_arc)
-- (ServiceException_t *) error;
-- (void) setError: (ServiceException_t *) error;
+- (TServiceException_t *) error;
+- (void) setError: (TServiceException_t *) error;
 #endif
 - (BOOL) errorIsSet;
 
@@ -12406,7 +12406,7 @@ static NSString * CTOKEN_NAME = @"ctok";
   return self;
 }
 
-- (id) initWithSuccess: (CTokenAccessResponse_t *) success error: (ServiceException_t *) error
+- (id) initWithSuccess: (CTokenAccessResponse_t *) success error: (TServiceException_t *) error
 {
   self = [super init];
   __success = [success retain_stub];
@@ -12472,11 +12472,11 @@ static NSString * CTOKEN_NAME = @"ctok";
   __success_isset = NO;
 }
 
-- (ServiceException_t *) error {
+- (TServiceException_t *) error {
   return [[__error retain_stub] autorelease_stub];
 }
 
-- (void) setError: (ServiceException_t *) error {
+- (void) setError: (TServiceException_t *) error {
   [error retain_stub];
   [__error release_stub];
   __error = error;
@@ -12520,7 +12520,7 @@ static NSString * CTOKEN_NAME = @"ctok";
         break;
       case 1:
         if (fieldType == TType_STRUCT) {
-          ServiceException_t *fieldValue = [[ServiceException_t alloc] init];
+          TServiceException_t *fieldValue = [[TServiceException_t alloc] init];
           [fieldValue read: inProtocol];
           [self setError: fieldValue];
           [fieldValue release_stub];

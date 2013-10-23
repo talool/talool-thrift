@@ -98,7 +98,7 @@ service CustomerService_t {
    Payment.TransactionResult_t purchaseByCode(1:string dealOfferId, 2:string paymentCode) 
      throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
-   CTokenAccessResponse_t loginFacebook(1:string facebookId,2:string facebookAccessToken) throws (1:Core.ServiceException_t error);
+   CTokenAccessResponse_t loginFacebook(1:string facebookId,2:string facebookAccessToken) throws (1:Error.TServiceException_t error);
     
 
 }

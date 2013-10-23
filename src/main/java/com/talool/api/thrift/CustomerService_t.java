@@ -96,7 +96,7 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseByCode(String dealOfferId, String paymentCode) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
-    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
   }
 
@@ -1007,7 +1007,7 @@ public class CustomerService_t {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseByCode failed: unknown result");
     }
 
-    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
     {
       send_loginFacebook(facebookId, facebookAccessToken);
       return recv_loginFacebook();
@@ -1021,7 +1021,7 @@ public class CustomerService_t {
       sendBase("loginFacebook", args);
     }
 
-    public CTokenAccessResponse_t recv_loginFacebook() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    public CTokenAccessResponse_t recv_loginFacebook() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
     {
       loginFacebook_result result = new loginFacebook_result();
       receiveBase(result, "loginFacebook");
@@ -2117,7 +2117,7 @@ public class CustomerService_t {
         prot.writeMessageEnd();
       }
 
-      public CTokenAccessResponse_t getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+      public CTokenAccessResponse_t getResult() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -2953,7 +2953,7 @@ public class CustomerService_t {
         loginFacebook_result result = new loginFacebook_result();
         try {
           result.success = iface.loginFacebook(args.facebookId, args.facebookAccessToken);
-        } catch (com.talool.api.thrift.ServiceException_t error) {
+        } catch (com.talool.api.thrift.TServiceException_t error) {
           result.error = error;
         }
         return result;
@@ -30638,7 +30638,7 @@ public class CustomerService_t {
     }
 
     public CTokenAccessResponse_t success; // required
-    public com.talool.api.thrift.ServiceException_t error; // required
+    public com.talool.api.thrift.TServiceException_t error; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -30718,7 +30718,7 @@ public class CustomerService_t {
 
     public loginFacebook_result(
       CTokenAccessResponse_t success,
-      com.talool.api.thrift.ServiceException_t error)
+      com.talool.api.thrift.TServiceException_t error)
     {
       this();
       this.success = success;
@@ -30733,7 +30733,7 @@ public class CustomerService_t {
         this.success = new CTokenAccessResponse_t(other.success);
       }
       if (other.isSetError()) {
-        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+        this.error = new com.talool.api.thrift.TServiceException_t(other.error);
       }
     }
 
@@ -30770,11 +30770,11 @@ public class CustomerService_t {
       }
     }
 
-    public com.talool.api.thrift.ServiceException_t getError() {
+    public com.talool.api.thrift.TServiceException_t getError() {
       return this.error;
     }
 
-    public loginFacebook_result setError(com.talool.api.thrift.ServiceException_t error) {
+    public loginFacebook_result setError(com.talool.api.thrift.TServiceException_t error) {
       this.error = error;
       return this;
     }
@@ -30808,7 +30808,7 @@ public class CustomerService_t {
         if (value == null) {
           unsetError();
         } else {
-          setError((com.talool.api.thrift.ServiceException_t)value);
+          setError((com.talool.api.thrift.TServiceException_t)value);
         }
         break;
 
@@ -31001,7 +31001,7 @@ public class CustomerService_t {
               break;
             case 1: // ERROR
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error = new com.talool.api.thrift.TServiceException_t();
                 struct.error.read(iprot);
                 struct.setErrorIsSet(true);
               } else { 
@@ -31076,7 +31076,7 @@ public class CustomerService_t {
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {
-          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error = new com.talool.api.thrift.TServiceException_t();
           struct.error.read(iprot);
           struct.setErrorIsSet(true);
         }

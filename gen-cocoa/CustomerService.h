@@ -107,7 +107,7 @@
 - (CTokenAccess_t *) resetPassword: (NSString *) customerId resetPasswordCode: (NSString *) resetPasswordCode newPassword: (NSString *) newPassword;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
 - (TransactionResult_t *) purchaseByCard: (NSString *) dealOfferId paymentDetail: (PaymentDetail_t *) paymentDetail;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
 - (TransactionResult_t *) purchaseByCode: (NSString *) dealOfferId paymentCode: (NSString *) paymentCode;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
-- (CTokenAccessResponse_t *) loginFacebook: (NSString *) facebookId facebookAccessToken: (NSString *) facebookAccessToken;  // throws ServiceException_t *, TException
+- (CTokenAccessResponse_t *) loginFacebook: (NSString *) facebookId facebookAccessToken: (NSString *) facebookAccessToken;  // throws TServiceException_t *, TException
 @end
 
 @interface CustomerService_tClient : NSObject <CustomerService_t> {
