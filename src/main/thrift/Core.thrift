@@ -17,6 +17,8 @@ enum AcquireStatus_t {PURCHASED, REDEEMED, REJECTED_CUSTOMER_SHARE, REJECTED_MER
 
 enum DealType_t { PAID_BOOK, FREE_BOOK, PAID_DEAL, FREE_DEAL }
 
+enum GiftStatus_t { PENDING, ACCEPTED, REJECTED, INVALIDATED }
+
 exception ServiceException_t {
   1: required i32 errorCode,
   2: required string errorDesc
@@ -142,6 +144,7 @@ struct Gift_t {
   2: required Deal_t deal;
   3: required Customer_t fromCustomer; 
   4: required Timestamp created;
+  5: optional GiftStatus_t giftStatus;
 }
 
 

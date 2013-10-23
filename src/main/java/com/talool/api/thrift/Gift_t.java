@@ -37,6 +37,7 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
   private static final org.apache.thrift.protocol.TField DEAL_FIELD_DESC = new org.apache.thrift.protocol.TField("deal", org.apache.thrift.protocol.TType.STRUCT, (short)2);
   private static final org.apache.thrift.protocol.TField FROM_CUSTOMER_FIELD_DESC = new org.apache.thrift.protocol.TField("fromCustomer", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField CREATED_FIELD_DESC = new org.apache.thrift.protocol.TField("created", org.apache.thrift.protocol.TType.I64, (short)4);
+  private static final org.apache.thrift.protocol.TField GIFT_STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("giftStatus", org.apache.thrift.protocol.TType.I32, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +49,23 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
   public Deal_t deal; // required
   public Customer_t fromCustomer; // required
   public long created; // required
+  /**
+   * 
+   * @see GiftStatus_t
+   */
+  public GiftStatus_t giftStatus; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     GIFT_ID((short)1, "giftId"),
     DEAL((short)2, "deal"),
     FROM_CUSTOMER((short)3, "fromCustomer"),
-    CREATED((short)4, "created");
+    CREATED((short)4, "created"),
+    /**
+     * 
+     * @see GiftStatus_t
+     */
+    GIFT_STATUS((short)5, "giftStatus");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +88,8 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
           return FROM_CUSTOMER;
         case 4: // CREATED
           return CREATED;
+        case 5: // GIFT_STATUS
+          return GIFT_STATUS;
         default:
           return null;
       }
@@ -119,6 +132,7 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
   // isset id assignments
   private static final int __CREATED_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
+  private _Fields optionals[] = {_Fields.GIFT_STATUS};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -130,6 +144,8 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Customer_t.class)));
     tmpMap.put(_Fields.CREATED, new org.apache.thrift.meta_data.FieldMetaData("created", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "Timestamp")));
+    tmpMap.put(_Fields.GIFT_STATUS, new org.apache.thrift.meta_data.FieldMetaData("giftStatus", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, GiftStatus_t.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Gift_t.class, metaDataMap);
   }
@@ -166,6 +182,9 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       this.fromCustomer = new Customer_t(other.fromCustomer);
     }
     this.created = other.created;
+    if (other.isSetGiftStatus()) {
+      this.giftStatus = other.giftStatus;
+    }
   }
 
   public Gift_t deepCopy() {
@@ -178,6 +197,7 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
     this.fromCustomer = null;
     setCreatedIsSet(false);
     this.created = 0;
+    this.giftStatus = null;
   }
 
   public String getGiftId() {
@@ -275,6 +295,38 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __CREATED_ISSET_ID, value);
   }
 
+  /**
+   * 
+   * @see GiftStatus_t
+   */
+  public GiftStatus_t getGiftStatus() {
+    return this.giftStatus;
+  }
+
+  /**
+   * 
+   * @see GiftStatus_t
+   */
+  public Gift_t setGiftStatus(GiftStatus_t giftStatus) {
+    this.giftStatus = giftStatus;
+    return this;
+  }
+
+  public void unsetGiftStatus() {
+    this.giftStatus = null;
+  }
+
+  /** Returns true if field giftStatus is set (has been assigned a value) and false otherwise */
+  public boolean isSetGiftStatus() {
+    return this.giftStatus != null;
+  }
+
+  public void setGiftStatusIsSet(boolean value) {
+    if (!value) {
+      this.giftStatus = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case GIFT_ID:
@@ -309,6 +361,14 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       }
       break;
 
+    case GIFT_STATUS:
+      if (value == null) {
+        unsetGiftStatus();
+      } else {
+        setGiftStatus((GiftStatus_t)value);
+      }
+      break;
+
     }
   }
 
@@ -325,6 +385,9 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
 
     case CREATED:
       return Long.valueOf(getCreated());
+
+    case GIFT_STATUS:
+      return getGiftStatus();
 
     }
     throw new IllegalStateException();
@@ -345,6 +408,8 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       return isSetFromCustomer();
     case CREATED:
       return isSetCreated();
+    case GIFT_STATUS:
+      return isSetGiftStatus();
     }
     throw new IllegalStateException();
   }
@@ -395,6 +460,15 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       if (!(this_present_created && that_present_created))
         return false;
       if (this.created != that.created)
+        return false;
+    }
+
+    boolean this_present_giftStatus = true && this.isSetGiftStatus();
+    boolean that_present_giftStatus = true && that.isSetGiftStatus();
+    if (this_present_giftStatus || that_present_giftStatus) {
+      if (!(this_present_giftStatus && that_present_giftStatus))
+        return false;
+      if (!this.giftStatus.equals(that.giftStatus))
         return false;
     }
 
@@ -454,6 +528,16 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetGiftStatus()).compareTo(typedOther.isSetGiftStatus());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGiftStatus()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.giftStatus, typedOther.giftStatus);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -501,6 +585,16 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
     sb.append("created:");
     sb.append(this.created);
     first = false;
+    if (isSetGiftStatus()) {
+      if (!first) sb.append(", ");
+      sb.append("giftStatus:");
+      if (this.giftStatus == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.giftStatus);
+      }
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -596,6 +690,14 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // GIFT_STATUS
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.giftStatus = GiftStatus_t.findByValue(iprot.readI32());
+              struct.setGiftStatusIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -632,6 +734,13 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       oprot.writeFieldBegin(CREATED_FIELD_DESC);
       oprot.writeI64(struct.created);
       oprot.writeFieldEnd();
+      if (struct.giftStatus != null) {
+        if (struct.isSetGiftStatus()) {
+          oprot.writeFieldBegin(GIFT_STATUS_FIELD_DESC);
+          oprot.writeI32(struct.giftStatus.getValue());
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -653,6 +762,14 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       struct.deal.write(oprot);
       struct.fromCustomer.write(oprot);
       oprot.writeI64(struct.created);
+      BitSet optionals = new BitSet();
+      if (struct.isSetGiftStatus()) {
+        optionals.set(0);
+      }
+      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetGiftStatus()) {
+        oprot.writeI32(struct.giftStatus.getValue());
+      }
     }
 
     @Override
@@ -668,6 +785,11 @@ public class Gift_t implements org.apache.thrift.TBase<Gift_t, Gift_t._Fields>, 
       struct.setFromCustomerIsSet(true);
       struct.created = iprot.readI64();
       struct.setCreatedIsSet(true);
+      BitSet incoming = iprot.readBitSet(1);
+      if (incoming.get(0)) {
+        struct.giftStatus = GiftStatus_t.findByValue(iprot.readI32());
+        struct.setGiftStatusIsSet(true);
+      }
     }
   }
 
