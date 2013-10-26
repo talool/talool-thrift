@@ -40,6 +40,7 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
   private static final org.apache.thrift.protocol.TField CREATED_FIELD_DESC = new org.apache.thrift.protocol.TField("created", org.apache.thrift.protocol.TType.I64, (short)6);
   private static final org.apache.thrift.protocol.TField UPDATED_FIELD_DESC = new org.apache.thrift.protocol.TField("updated", org.apache.thrift.protocol.TType.I64, (short)7);
   private static final org.apache.thrift.protocol.TField REDEMPTION_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("redemptionCode", org.apache.thrift.protocol.TType.STRING, (short)8);
+  private static final org.apache.thrift.protocol.TField GIFT_DETAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("giftDetail", org.apache.thrift.protocol.TType.STRUCT, (short)9);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -58,6 +59,7 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
   public long created; // optional
   public long updated; // optional
   public String redemptionCode; // optional
+  public GiftDetail_t giftDetail; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -71,7 +73,8 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     REDEEMED((short)5, "redeemed"),
     CREATED((short)6, "created"),
     UPDATED((short)7, "updated"),
-    REDEMPTION_CODE((short)8, "redemptionCode");
+    REDEMPTION_CODE((short)8, "redemptionCode"),
+    GIFT_DETAIL((short)9, "giftDetail");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -100,6 +103,8 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
           return UPDATED;
         case 8: // REDEMPTION_CODE
           return REDEMPTION_CODE;
+        case 9: // GIFT_DETAIL
+          return GIFT_DETAIL;
         default:
           return null;
       }
@@ -144,7 +149,7 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
   private static final int __CREATED_ISSET_ID = 1;
   private static final int __UPDATED_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.DEAL_ACQUIRE_ID,_Fields.STATUS,_Fields.REDEEMED,_Fields.CREATED,_Fields.UPDATED,_Fields.REDEMPTION_CODE};
+  private _Fields optionals[] = {_Fields.DEAL_ACQUIRE_ID,_Fields.STATUS,_Fields.REDEEMED,_Fields.CREATED,_Fields.UPDATED,_Fields.REDEMPTION_CODE,_Fields.GIFT_DETAIL};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -162,6 +167,8 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "Timestamp")));
     tmpMap.put(_Fields.REDEMPTION_CODE, new org.apache.thrift.meta_data.FieldMetaData("redemptionCode", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.GIFT_DETAIL, new org.apache.thrift.meta_data.FieldMetaData("giftDetail", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GiftDetail_t.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DealAcquire_t.class, metaDataMap);
   }
@@ -196,6 +203,9 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     if (other.isSetRedemptionCode()) {
       this.redemptionCode = other.redemptionCode;
     }
+    if (other.isSetGiftDetail()) {
+      this.giftDetail = new GiftDetail_t(other.giftDetail);
+    }
   }
 
   public DealAcquire_t deepCopy() {
@@ -213,6 +223,7 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     setUpdatedIsSet(false);
     this.updated = 0;
     this.redemptionCode = null;
+    this.giftDetail = null;
   }
 
   public String getDealAcquireId() {
@@ -388,6 +399,30 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     }
   }
 
+  public GiftDetail_t getGiftDetail() {
+    return this.giftDetail;
+  }
+
+  public DealAcquire_t setGiftDetail(GiftDetail_t giftDetail) {
+    this.giftDetail = giftDetail;
+    return this;
+  }
+
+  public void unsetGiftDetail() {
+    this.giftDetail = null;
+  }
+
+  /** Returns true if field giftDetail is set (has been assigned a value) and false otherwise */
+  public boolean isSetGiftDetail() {
+    return this.giftDetail != null;
+  }
+
+  public void setGiftDetailIsSet(boolean value) {
+    if (!value) {
+      this.giftDetail = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case DEAL_ACQUIRE_ID:
@@ -446,6 +481,14 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       }
       break;
 
+    case GIFT_DETAIL:
+      if (value == null) {
+        unsetGiftDetail();
+      } else {
+        setGiftDetail((GiftDetail_t)value);
+      }
+      break;
+
     }
   }
 
@@ -472,6 +515,9 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     case REDEMPTION_CODE:
       return getRedemptionCode();
 
+    case GIFT_DETAIL:
+      return getGiftDetail();
+
     }
     throw new IllegalStateException();
   }
@@ -497,6 +543,8 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       return isSetUpdated();
     case REDEMPTION_CODE:
       return isSetRedemptionCode();
+    case GIFT_DETAIL:
+      return isSetGiftDetail();
     }
     throw new IllegalStateException();
   }
@@ -574,6 +622,15 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       if (!(this_present_redemptionCode && that_present_redemptionCode))
         return false;
       if (!this.redemptionCode.equals(that.redemptionCode))
+        return false;
+    }
+
+    boolean this_present_giftDetail = true && this.isSetGiftDetail();
+    boolean that_present_giftDetail = true && that.isSetGiftDetail();
+    if (this_present_giftDetail || that_present_giftDetail) {
+      if (!(this_present_giftDetail && that_present_giftDetail))
+        return false;
+      if (!this.giftDetail.equals(that.giftDetail))
         return false;
     }
 
@@ -663,6 +720,16 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetGiftDetail()).compareTo(typedOther.isSetGiftDetail());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGiftDetail()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.giftDetail, typedOther.giftDetail);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -738,6 +805,16 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       }
       first = false;
     }
+    if (isSetGiftDetail()) {
+      if (!first) sb.append(", ");
+      sb.append("giftDetail:");
+      if (this.giftDetail == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.giftDetail);
+      }
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -750,6 +827,9 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
     // check for sub-struct validity
     if (deal != null) {
       deal.validate();
+    }
+    if (giftDetail != null) {
+      giftDetail.validate();
     }
   }
 
@@ -846,6 +926,15 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 9: // GIFT_DETAIL
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.giftDetail = new GiftDetail_t();
+              struct.giftDetail.read(iprot);
+              struct.setGiftDetailIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -902,6 +991,13 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
           oprot.writeFieldEnd();
         }
       }
+      if (struct.giftDetail != null) {
+        if (struct.isSetGiftDetail()) {
+          oprot.writeFieldBegin(GIFT_DETAIL_FIELD_DESC);
+          struct.giftDetail.write(oprot);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -939,7 +1035,10 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       if (struct.isSetRedemptionCode()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetGiftDetail()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetDealAcquireId()) {
         oprot.writeString(struct.dealAcquireId);
       }
@@ -958,6 +1057,9 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       if (struct.isSetRedemptionCode()) {
         oprot.writeString(struct.redemptionCode);
       }
+      if (struct.isSetGiftDetail()) {
+        struct.giftDetail.write(oprot);
+      }
     }
 
     @Override
@@ -966,7 +1068,7 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       struct.deal = new Deal_t();
       struct.deal.read(iprot);
       struct.setDealIsSet(true);
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.dealAcquireId = iprot.readString();
         struct.setDealAcquireIdIsSet(true);
@@ -990,6 +1092,11 @@ public class DealAcquire_t implements org.apache.thrift.TBase<DealAcquire_t, Dea
       if (incoming.get(5)) {
         struct.redemptionCode = iprot.readString();
         struct.setRedemptionCodeIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.giftDetail = new GiftDetail_t();
+        struct.giftDetail.read(iprot);
+        struct.setGiftDetailIsSet(true);
       }
     }
   }

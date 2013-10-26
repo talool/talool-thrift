@@ -1026,7 +1026,7 @@ public class Customer_t implements org.apache.thrift.TBase<Customer_t, Customer_
                 struct.socialAccounts = new HashMap<SocialNetwork_t,SocialAccount_t>(2*_map0.size);
                 for (int _i1 = 0; _i1 < _map0.size; ++_i1)
                 {
-                  SocialNetwork_t _key2; // optional
+                  SocialNetwork_t _key2; // required
                   SocialAccount_t _val3; // required
                   _key2 = SocialNetwork_t.findByValue(iprot.readI32());
                   _val3 = new SocialAccount_t();
@@ -1225,7 +1225,7 @@ public class Customer_t implements org.apache.thrift.TBase<Customer_t, Customer_
           struct.socialAccounts = new HashMap<SocialNetwork_t,SocialAccount_t>(2*_map6.size);
           for (int _i7 = 0; _i7 < _map6.size; ++_i7)
           {
-            SocialNetwork_t _key8; // optional
+            SocialNetwork_t _key8; // required
             SocialAccount_t _val9; // required
             _key8 = SocialNetwork_t.findByValue(iprot.readI32());
             _val9 = new SocialAccount_t();

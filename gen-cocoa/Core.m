@@ -4303,6 +4303,468 @@
 
 @end
 
+@implementation GiftDetail_t
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithGiftId: (NSString *) giftId giftedTime: (Timestamp) giftedTime fromFirstName: (NSString *) fromFirstName fromLastName: (NSString *) fromLastName fromEmail: (NSString *) fromEmail toFirstName: (NSString *) toFirstName toLastName: (NSString *) toLastName toEmail: (NSString *) toEmail
+{
+  self = [super init];
+  __giftId = [giftId retain_stub];
+  __giftId_isset = YES;
+  __giftedTime = giftedTime;
+  __giftedTime_isset = YES;
+  __fromFirstName = [fromFirstName retain_stub];
+  __fromFirstName_isset = YES;
+  __fromLastName = [fromLastName retain_stub];
+  __fromLastName_isset = YES;
+  __fromEmail = [fromEmail retain_stub];
+  __fromEmail_isset = YES;
+  __toFirstName = [toFirstName retain_stub];
+  __toFirstName_isset = YES;
+  __toLastName = [toLastName retain_stub];
+  __toLastName_isset = YES;
+  __toEmail = [toEmail retain_stub];
+  __toEmail_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"giftId"])
+  {
+    __giftId = [[decoder decodeObjectForKey: @"giftId"] retain_stub];
+    __giftId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"giftedTime"])
+  {
+    __giftedTime = [decoder decodeInt64ForKey: @"giftedTime"];
+    __giftedTime_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"fromFirstName"])
+  {
+    __fromFirstName = [[decoder decodeObjectForKey: @"fromFirstName"] retain_stub];
+    __fromFirstName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"fromLastName"])
+  {
+    __fromLastName = [[decoder decodeObjectForKey: @"fromLastName"] retain_stub];
+    __fromLastName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"fromEmail"])
+  {
+    __fromEmail = [[decoder decodeObjectForKey: @"fromEmail"] retain_stub];
+    __fromEmail_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"toFirstName"])
+  {
+    __toFirstName = [[decoder decodeObjectForKey: @"toFirstName"] retain_stub];
+    __toFirstName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"toLastName"])
+  {
+    __toLastName = [[decoder decodeObjectForKey: @"toLastName"] retain_stub];
+    __toLastName_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"toEmail"])
+  {
+    __toEmail = [[decoder decodeObjectForKey: @"toEmail"] retain_stub];
+    __toEmail_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__giftId_isset)
+  {
+    [encoder encodeObject: __giftId forKey: @"giftId"];
+  }
+  if (__giftedTime_isset)
+  {
+    [encoder encodeInt64: __giftedTime forKey: @"giftedTime"];
+  }
+  if (__fromFirstName_isset)
+  {
+    [encoder encodeObject: __fromFirstName forKey: @"fromFirstName"];
+  }
+  if (__fromLastName_isset)
+  {
+    [encoder encodeObject: __fromLastName forKey: @"fromLastName"];
+  }
+  if (__fromEmail_isset)
+  {
+    [encoder encodeObject: __fromEmail forKey: @"fromEmail"];
+  }
+  if (__toFirstName_isset)
+  {
+    [encoder encodeObject: __toFirstName forKey: @"toFirstName"];
+  }
+  if (__toLastName_isset)
+  {
+    [encoder encodeObject: __toLastName forKey: @"toLastName"];
+  }
+  if (__toEmail_isset)
+  {
+    [encoder encodeObject: __toEmail forKey: @"toEmail"];
+  }
+}
+
+- (void) dealloc
+{
+  [__giftId release_stub];
+  [__fromFirstName release_stub];
+  [__fromLastName release_stub];
+  [__fromEmail release_stub];
+  [__toFirstName release_stub];
+  [__toLastName release_stub];
+  [__toEmail release_stub];
+  [super dealloc_stub];
+}
+
+- (NSString *) giftId {
+  return [[__giftId retain_stub] autorelease_stub];
+}
+
+- (void) setGiftId: (NSString *) giftId {
+  [giftId retain_stub];
+  [__giftId release_stub];
+  __giftId = giftId;
+  __giftId_isset = YES;
+}
+
+- (BOOL) giftIdIsSet {
+  return __giftId_isset;
+}
+
+- (void) unsetGiftId {
+  [__giftId release_stub];
+  __giftId = nil;
+  __giftId_isset = NO;
+}
+
+- (int64_t) giftedTime {
+  return __giftedTime;
+}
+
+- (void) setGiftedTime: (int64_t) giftedTime {
+  __giftedTime = giftedTime;
+  __giftedTime_isset = YES;
+}
+
+- (BOOL) giftedTimeIsSet {
+  return __giftedTime_isset;
+}
+
+- (void) unsetGiftedTime {
+  __giftedTime_isset = NO;
+}
+
+- (NSString *) fromFirstName {
+  return [[__fromFirstName retain_stub] autorelease_stub];
+}
+
+- (void) setFromFirstName: (NSString *) fromFirstName {
+  [fromFirstName retain_stub];
+  [__fromFirstName release_stub];
+  __fromFirstName = fromFirstName;
+  __fromFirstName_isset = YES;
+}
+
+- (BOOL) fromFirstNameIsSet {
+  return __fromFirstName_isset;
+}
+
+- (void) unsetFromFirstName {
+  [__fromFirstName release_stub];
+  __fromFirstName = nil;
+  __fromFirstName_isset = NO;
+}
+
+- (NSString *) fromLastName {
+  return [[__fromLastName retain_stub] autorelease_stub];
+}
+
+- (void) setFromLastName: (NSString *) fromLastName {
+  [fromLastName retain_stub];
+  [__fromLastName release_stub];
+  __fromLastName = fromLastName;
+  __fromLastName_isset = YES;
+}
+
+- (BOOL) fromLastNameIsSet {
+  return __fromLastName_isset;
+}
+
+- (void) unsetFromLastName {
+  [__fromLastName release_stub];
+  __fromLastName = nil;
+  __fromLastName_isset = NO;
+}
+
+- (NSString *) fromEmail {
+  return [[__fromEmail retain_stub] autorelease_stub];
+}
+
+- (void) setFromEmail: (NSString *) fromEmail {
+  [fromEmail retain_stub];
+  [__fromEmail release_stub];
+  __fromEmail = fromEmail;
+  __fromEmail_isset = YES;
+}
+
+- (BOOL) fromEmailIsSet {
+  return __fromEmail_isset;
+}
+
+- (void) unsetFromEmail {
+  [__fromEmail release_stub];
+  __fromEmail = nil;
+  __fromEmail_isset = NO;
+}
+
+- (NSString *) toFirstName {
+  return [[__toFirstName retain_stub] autorelease_stub];
+}
+
+- (void) setToFirstName: (NSString *) toFirstName {
+  [toFirstName retain_stub];
+  [__toFirstName release_stub];
+  __toFirstName = toFirstName;
+  __toFirstName_isset = YES;
+}
+
+- (BOOL) toFirstNameIsSet {
+  return __toFirstName_isset;
+}
+
+- (void) unsetToFirstName {
+  [__toFirstName release_stub];
+  __toFirstName = nil;
+  __toFirstName_isset = NO;
+}
+
+- (NSString *) toLastName {
+  return [[__toLastName retain_stub] autorelease_stub];
+}
+
+- (void) setToLastName: (NSString *) toLastName {
+  [toLastName retain_stub];
+  [__toLastName release_stub];
+  __toLastName = toLastName;
+  __toLastName_isset = YES;
+}
+
+- (BOOL) toLastNameIsSet {
+  return __toLastName_isset;
+}
+
+- (void) unsetToLastName {
+  [__toLastName release_stub];
+  __toLastName = nil;
+  __toLastName_isset = NO;
+}
+
+- (NSString *) toEmail {
+  return [[__toEmail retain_stub] autorelease_stub];
+}
+
+- (void) setToEmail: (NSString *) toEmail {
+  [toEmail retain_stub];
+  [__toEmail release_stub];
+  __toEmail = toEmail;
+  __toEmail_isset = YES;
+}
+
+- (BOOL) toEmailIsSet {
+  return __toEmail_isset;
+}
+
+- (void) unsetToEmail {
+  [__toEmail release_stub];
+  __toEmail = nil;
+  __toEmail_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setGiftId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_I64) {
+          int64_t fieldValue = [inProtocol readI64];
+          [self setGiftedTime: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setFromFirstName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setFromLastName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setFromEmail: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setToFirstName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setToLastName: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 8:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setToEmail: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GiftDetail_t"];
+  if (__giftId_isset) {
+    if (__giftId != nil) {
+      [outProtocol writeFieldBeginWithName: @"giftId" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __giftId];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__giftedTime_isset) {
+    [outProtocol writeFieldBeginWithName: @"giftedTime" type: TType_I64 fieldID: 2];
+    [outProtocol writeI64: __giftedTime];
+    [outProtocol writeFieldEnd];
+  }
+  if (__fromFirstName_isset) {
+    if (__fromFirstName != nil) {
+      [outProtocol writeFieldBeginWithName: @"fromFirstName" type: TType_STRING fieldID: 3];
+      [outProtocol writeString: __fromFirstName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__fromLastName_isset) {
+    if (__fromLastName != nil) {
+      [outProtocol writeFieldBeginWithName: @"fromLastName" type: TType_STRING fieldID: 4];
+      [outProtocol writeString: __fromLastName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__fromEmail_isset) {
+    if (__fromEmail != nil) {
+      [outProtocol writeFieldBeginWithName: @"fromEmail" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __fromEmail];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__toFirstName_isset) {
+    if (__toFirstName != nil) {
+      [outProtocol writeFieldBeginWithName: @"toFirstName" type: TType_STRING fieldID: 6];
+      [outProtocol writeString: __toFirstName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__toLastName_isset) {
+    if (__toLastName != nil) {
+      [outProtocol writeFieldBeginWithName: @"toLastName" type: TType_STRING fieldID: 7];
+      [outProtocol writeString: __toLastName];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__toEmail_isset) {
+    if (__toEmail != nil) {
+      [outProtocol writeFieldBeginWithName: @"toEmail" type: TType_STRING fieldID: 8];
+      [outProtocol writeString: __toEmail];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GiftDetail_t("];
+  [ms appendString: @"giftId:"];
+  [ms appendFormat: @"\"%@\"", __giftId];
+  [ms appendString: @",giftedTime:"];
+  [ms appendFormat: @"%qi", __giftedTime];
+  [ms appendString: @",fromFirstName:"];
+  [ms appendFormat: @"\"%@\"", __fromFirstName];
+  [ms appendString: @",fromLastName:"];
+  [ms appendFormat: @"\"%@\"", __fromLastName];
+  [ms appendString: @",fromEmail:"];
+  [ms appendFormat: @"\"%@\"", __fromEmail];
+  [ms appendString: @",toFirstName:"];
+  [ms appendFormat: @"\"%@\"", __toFirstName];
+  [ms appendString: @",toLastName:"];
+  [ms appendFormat: @"\"%@\"", __toLastName];
+  [ms appendString: @",toEmail:"];
+  [ms appendFormat: @"\"%@\"", __toEmail];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation DealAcquire_t
 
 - (id) init
@@ -4313,7 +4775,7 @@
   return self;
 }
 
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode
+- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode giftDetail: (GiftDetail_t *) giftDetail
 {
   self = [super init];
   __dealAcquireId = [dealAcquireId retain_stub];
@@ -4330,6 +4792,8 @@
   __updated_isset = YES;
   __redemptionCode = [redemptionCode retain_stub];
   __redemptionCode_isset = YES;
+  __giftDetail = [giftDetail retain_stub];
+  __giftDetail_isset = YES;
   return self;
 }
 
@@ -4371,6 +4835,11 @@
     __redemptionCode = [[decoder decodeObjectForKey: @"redemptionCode"] retain_stub];
     __redemptionCode_isset = YES;
   }
+  if ([decoder containsValueForKey: @"giftDetail"])
+  {
+    __giftDetail = [[decoder decodeObjectForKey: @"giftDetail"] retain_stub];
+    __giftDetail_isset = YES;
+  }
   return self;
 }
 
@@ -4404,6 +4873,10 @@
   {
     [encoder encodeObject: __redemptionCode forKey: @"redemptionCode"];
   }
+  if (__giftDetail_isset)
+  {
+    [encoder encodeObject: __giftDetail forKey: @"giftDetail"];
+  }
 }
 
 - (void) dealloc
@@ -4411,6 +4884,7 @@
   [__dealAcquireId release_stub];
   [__deal release_stub];
   [__redemptionCode release_stub];
+  [__giftDetail release_stub];
   [super dealloc_stub];
 }
 
@@ -4545,6 +5019,27 @@
   __redemptionCode_isset = NO;
 }
 
+- (GiftDetail_t *) giftDetail {
+  return [[__giftDetail retain_stub] autorelease_stub];
+}
+
+- (void) setGiftDetail: (GiftDetail_t *) giftDetail {
+  [giftDetail retain_stub];
+  [__giftDetail release_stub];
+  __giftDetail = giftDetail;
+  __giftDetail_isset = YES;
+}
+
+- (BOOL) giftDetailIsSet {
+  return __giftDetail_isset;
+}
+
+- (void) unsetGiftDetail {
+  [__giftDetail release_stub];
+  __giftDetail = nil;
+  __giftDetail_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -4618,6 +5113,16 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 9:
+        if (fieldType == TType_STRUCT) {
+          GiftDetail_t *fieldValue = [[GiftDetail_t alloc] init];
+          [fieldValue read: inProtocol];
+          [self setGiftDetail: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -4670,6 +5175,13 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__giftDetail_isset) {
+    if (__giftDetail != nil) {
+      [outProtocol writeFieldBeginWithName: @"giftDetail" type: TType_STRUCT fieldID: 9];
+      [__giftDetail write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -4690,6 +5202,8 @@
   [ms appendFormat: @"%qi", __updated];
   [ms appendString: @",redemptionCode:"];
   [ms appendFormat: @"\"%@\"", __redemptionCode];
+  [ms appendString: @",giftDetail:"];
+  [ms appendFormat: @"%@", __giftDetail];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }

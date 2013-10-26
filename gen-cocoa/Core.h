@@ -878,6 +878,93 @@ typedef int64_t Timestamp;
 
 @end
 
+@interface GiftDetail_t : NSObject <NSCoding> {
+  NSString * __giftId;
+  Timestamp __giftedTime;
+  NSString * __fromFirstName;
+  NSString * __fromLastName;
+  NSString * __fromEmail;
+  NSString * __toFirstName;
+  NSString * __toLastName;
+  NSString * __toEmail;
+
+  BOOL __giftId_isset;
+  BOOL __giftedTime_isset;
+  BOOL __fromFirstName_isset;
+  BOOL __fromLastName_isset;
+  BOOL __fromEmail_isset;
+  BOOL __toFirstName_isset;
+  BOOL __toLastName_isset;
+  BOOL __toEmail_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=giftId, setter=setGiftId:) NSString * giftId;
+@property (nonatomic, getter=giftedTime, setter=setGiftedTime:) Timestamp giftedTime;
+@property (nonatomic, retain, getter=fromFirstName, setter=setFromFirstName:) NSString * fromFirstName;
+@property (nonatomic, retain, getter=fromLastName, setter=setFromLastName:) NSString * fromLastName;
+@property (nonatomic, retain, getter=fromEmail, setter=setFromEmail:) NSString * fromEmail;
+@property (nonatomic, retain, getter=toFirstName, setter=setToFirstName:) NSString * toFirstName;
+@property (nonatomic, retain, getter=toLastName, setter=setToLastName:) NSString * toLastName;
+@property (nonatomic, retain, getter=toEmail, setter=setToEmail:) NSString * toEmail;
+#endif
+
+- (id) init;
+- (id) initWithGiftId: (NSString *) giftId giftedTime: (Timestamp) giftedTime fromFirstName: (NSString *) fromFirstName fromLastName: (NSString *) fromLastName fromEmail: (NSString *) fromEmail toFirstName: (NSString *) toFirstName toLastName: (NSString *) toLastName toEmail: (NSString *) toEmail;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (NSString *) giftId;
+- (void) setGiftId: (NSString *) giftId;
+#endif
+- (BOOL) giftIdIsSet;
+
+#if !__has_feature(objc_arc)
+- (Timestamp) giftedTime;
+- (void) setGiftedTime: (Timestamp) giftedTime;
+#endif
+- (BOOL) giftedTimeIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) fromFirstName;
+- (void) setFromFirstName: (NSString *) fromFirstName;
+#endif
+- (BOOL) fromFirstNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) fromLastName;
+- (void) setFromLastName: (NSString *) fromLastName;
+#endif
+- (BOOL) fromLastNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) fromEmail;
+- (void) setFromEmail: (NSString *) fromEmail;
+#endif
+- (BOOL) fromEmailIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) toFirstName;
+- (void) setToFirstName: (NSString *) toFirstName;
+#endif
+- (BOOL) toFirstNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) toLastName;
+- (void) setToLastName: (NSString *) toLastName;
+#endif
+- (BOOL) toLastNameIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) toEmail;
+- (void) setToEmail: (NSString *) toEmail;
+#endif
+- (BOOL) toEmailIsSet;
+
+@end
+
 @interface DealAcquire_t : NSObject <NSCoding> {
   NSString * __dealAcquireId;
   Deal_t * __deal;
@@ -886,6 +973,7 @@ typedef int64_t Timestamp;
   Timestamp __created;
   Timestamp __updated;
   NSString * __redemptionCode;
+  GiftDetail_t * __giftDetail;
 
   BOOL __dealAcquireId_isset;
   BOOL __deal_isset;
@@ -894,6 +982,7 @@ typedef int64_t Timestamp;
   BOOL __created_isset;
   BOOL __updated_isset;
   BOOL __redemptionCode_isset;
+  BOOL __giftDetail_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -904,10 +993,11 @@ typedef int64_t Timestamp;
 @property (nonatomic, getter=created, setter=setCreated:) Timestamp created;
 @property (nonatomic, getter=updated, setter=setUpdated:) Timestamp updated;
 @property (nonatomic, retain, getter=redemptionCode, setter=setRedemptionCode:) NSString * redemptionCode;
+@property (nonatomic, retain, getter=giftDetail, setter=setGiftDetail:) GiftDetail_t * giftDetail;
 #endif
 
 - (id) init;
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode;
+- (id) initWithDealAcquireId: (NSString *) dealAcquireId deal: (Deal_t *) deal status: (int) status redeemed: (Timestamp) redeemed created: (Timestamp) created updated: (Timestamp) updated redemptionCode: (NSString *) redemptionCode giftDetail: (GiftDetail_t *) giftDetail;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -953,6 +1043,12 @@ typedef int64_t Timestamp;
 - (void) setRedemptionCode: (NSString *) redemptionCode;
 #endif
 - (BOOL) redemptionCodeIsSet;
+
+#if !__has_feature(objc_arc)
+- (GiftDetail_t *) giftDetail;
+- (void) setGiftDetail: (GiftDetail_t *) giftDetail;
+#endif
+- (BOOL) giftDetailIsSet;
 
 @end
 

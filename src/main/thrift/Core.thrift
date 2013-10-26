@@ -129,6 +129,17 @@ struct SearchOptions_t {
   4: required i32 page;
 }
 
+struct GiftDetail_t {
+  1: required string giftId;
+  2: required Timestamp giftedTime;
+  3: optional string fromFirstName;
+  4: optional string fromLastName;
+  5: optional string fromEmail;
+  6: optional string toFirstName;
+  7: optional string toLastName;
+  8: optional string toEmail;
+}
+
 struct DealAcquire_t {
   1: optional string dealAcquireId;
   2: required Deal_t deal;
@@ -137,6 +148,7 @@ struct DealAcquire_t {
   6: optional Timestamp created;
   7: optional Timestamp updated;
   8: optional string redemptionCode;
+  9: optional GiftDetail_t giftDetail;
 }
 
 struct Gift_t {
@@ -146,6 +158,7 @@ struct Gift_t {
   4: required Timestamp created;
   5: optional GiftStatus_t giftStatus;
 }
+
 
 
 
