@@ -35,12 +35,10 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
 
   private static final org.apache.thrift.protocol.TField GIFT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("giftId", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField GIFTED_TIME_FIELD_DESC = new org.apache.thrift.protocol.TField("giftedTime", org.apache.thrift.protocol.TType.I64, (short)2);
-  private static final org.apache.thrift.protocol.TField FROM_FIRST_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fromFirstName", org.apache.thrift.protocol.TType.STRING, (short)3);
-  private static final org.apache.thrift.protocol.TField FROM_LAST_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fromLastName", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField FROM_EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("fromEmail", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField TO_FIRST_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("toFirstName", org.apache.thrift.protocol.TType.STRING, (short)6);
-  private static final org.apache.thrift.protocol.TField TO_LAST_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("toLastName", org.apache.thrift.protocol.TType.STRING, (short)7);
-  private static final org.apache.thrift.protocol.TField TO_EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("toEmail", org.apache.thrift.protocol.TType.STRING, (short)8);
+  private static final org.apache.thrift.protocol.TField FROM_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fromName", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField FROM_EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("fromEmail", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField TO_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("toName", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField TO_EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("toEmail", org.apache.thrift.protocol.TType.STRING, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -50,23 +48,19 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
 
   public String giftId; // required
   public long giftedTime; // required
-  public String fromFirstName; // optional
-  public String fromLastName; // optional
+  public String fromName; // optional
   public String fromEmail; // optional
-  public String toFirstName; // optional
-  public String toLastName; // optional
+  public String toName; // optional
   public String toEmail; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     GIFT_ID((short)1, "giftId"),
     GIFTED_TIME((short)2, "giftedTime"),
-    FROM_FIRST_NAME((short)3, "fromFirstName"),
-    FROM_LAST_NAME((short)4, "fromLastName"),
-    FROM_EMAIL((short)5, "fromEmail"),
-    TO_FIRST_NAME((short)6, "toFirstName"),
-    TO_LAST_NAME((short)7, "toLastName"),
-    TO_EMAIL((short)8, "toEmail");
+    FROM_NAME((short)3, "fromName"),
+    FROM_EMAIL((short)4, "fromEmail"),
+    TO_NAME((short)5, "toName"),
+    TO_EMAIL((short)6, "toEmail");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -85,17 +79,13 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
           return GIFT_ID;
         case 2: // GIFTED_TIME
           return GIFTED_TIME;
-        case 3: // FROM_FIRST_NAME
-          return FROM_FIRST_NAME;
-        case 4: // FROM_LAST_NAME
-          return FROM_LAST_NAME;
-        case 5: // FROM_EMAIL
+        case 3: // FROM_NAME
+          return FROM_NAME;
+        case 4: // FROM_EMAIL
           return FROM_EMAIL;
-        case 6: // TO_FIRST_NAME
-          return TO_FIRST_NAME;
-        case 7: // TO_LAST_NAME
-          return TO_LAST_NAME;
-        case 8: // TO_EMAIL
+        case 5: // TO_NAME
+          return TO_NAME;
+        case 6: // TO_EMAIL
           return TO_EMAIL;
         default:
           return null;
@@ -139,7 +129,7 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
   // isset id assignments
   private static final int __GIFTEDTIME_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.FROM_FIRST_NAME,_Fields.FROM_LAST_NAME,_Fields.FROM_EMAIL,_Fields.TO_FIRST_NAME,_Fields.TO_LAST_NAME,_Fields.TO_EMAIL};
+  private _Fields optionals[] = {_Fields.FROM_NAME,_Fields.FROM_EMAIL,_Fields.TO_NAME,_Fields.TO_EMAIL};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -147,15 +137,11 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.GIFTED_TIME, new org.apache.thrift.meta_data.FieldMetaData("giftedTime", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "Timestamp")));
-    tmpMap.put(_Fields.FROM_FIRST_NAME, new org.apache.thrift.meta_data.FieldMetaData("fromFirstName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.FROM_LAST_NAME, new org.apache.thrift.meta_data.FieldMetaData("fromLastName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.FROM_NAME, new org.apache.thrift.meta_data.FieldMetaData("fromName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.FROM_EMAIL, new org.apache.thrift.meta_data.FieldMetaData("fromEmail", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.TO_FIRST_NAME, new org.apache.thrift.meta_data.FieldMetaData("toFirstName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.TO_LAST_NAME, new org.apache.thrift.meta_data.FieldMetaData("toLastName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.TO_NAME, new org.apache.thrift.meta_data.FieldMetaData("toName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.TO_EMAIL, new org.apache.thrift.meta_data.FieldMetaData("toEmail", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
@@ -185,20 +171,14 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       this.giftId = other.giftId;
     }
     this.giftedTime = other.giftedTime;
-    if (other.isSetFromFirstName()) {
-      this.fromFirstName = other.fromFirstName;
-    }
-    if (other.isSetFromLastName()) {
-      this.fromLastName = other.fromLastName;
+    if (other.isSetFromName()) {
+      this.fromName = other.fromName;
     }
     if (other.isSetFromEmail()) {
       this.fromEmail = other.fromEmail;
     }
-    if (other.isSetToFirstName()) {
-      this.toFirstName = other.toFirstName;
-    }
-    if (other.isSetToLastName()) {
-      this.toLastName = other.toLastName;
+    if (other.isSetToName()) {
+      this.toName = other.toName;
     }
     if (other.isSetToEmail()) {
       this.toEmail = other.toEmail;
@@ -213,11 +193,9 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
     this.giftId = null;
     setGiftedTimeIsSet(false);
     this.giftedTime = 0;
-    this.fromFirstName = null;
-    this.fromLastName = null;
+    this.fromName = null;
     this.fromEmail = null;
-    this.toFirstName = null;
-    this.toLastName = null;
+    this.toName = null;
     this.toEmail = null;
   }
 
@@ -268,51 +246,27 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __GIFTEDTIME_ISSET_ID, value);
   }
 
-  public String getFromFirstName() {
-    return this.fromFirstName;
+  public String getFromName() {
+    return this.fromName;
   }
 
-  public GiftDetail_t setFromFirstName(String fromFirstName) {
-    this.fromFirstName = fromFirstName;
+  public GiftDetail_t setFromName(String fromName) {
+    this.fromName = fromName;
     return this;
   }
 
-  public void unsetFromFirstName() {
-    this.fromFirstName = null;
+  public void unsetFromName() {
+    this.fromName = null;
   }
 
-  /** Returns true if field fromFirstName is set (has been assigned a value) and false otherwise */
-  public boolean isSetFromFirstName() {
-    return this.fromFirstName != null;
+  /** Returns true if field fromName is set (has been assigned a value) and false otherwise */
+  public boolean isSetFromName() {
+    return this.fromName != null;
   }
 
-  public void setFromFirstNameIsSet(boolean value) {
+  public void setFromNameIsSet(boolean value) {
     if (!value) {
-      this.fromFirstName = null;
-    }
-  }
-
-  public String getFromLastName() {
-    return this.fromLastName;
-  }
-
-  public GiftDetail_t setFromLastName(String fromLastName) {
-    this.fromLastName = fromLastName;
-    return this;
-  }
-
-  public void unsetFromLastName() {
-    this.fromLastName = null;
-  }
-
-  /** Returns true if field fromLastName is set (has been assigned a value) and false otherwise */
-  public boolean isSetFromLastName() {
-    return this.fromLastName != null;
-  }
-
-  public void setFromLastNameIsSet(boolean value) {
-    if (!value) {
-      this.fromLastName = null;
+      this.fromName = null;
     }
   }
 
@@ -340,51 +294,27 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
     }
   }
 
-  public String getToFirstName() {
-    return this.toFirstName;
+  public String getToName() {
+    return this.toName;
   }
 
-  public GiftDetail_t setToFirstName(String toFirstName) {
-    this.toFirstName = toFirstName;
+  public GiftDetail_t setToName(String toName) {
+    this.toName = toName;
     return this;
   }
 
-  public void unsetToFirstName() {
-    this.toFirstName = null;
+  public void unsetToName() {
+    this.toName = null;
   }
 
-  /** Returns true if field toFirstName is set (has been assigned a value) and false otherwise */
-  public boolean isSetToFirstName() {
-    return this.toFirstName != null;
+  /** Returns true if field toName is set (has been assigned a value) and false otherwise */
+  public boolean isSetToName() {
+    return this.toName != null;
   }
 
-  public void setToFirstNameIsSet(boolean value) {
+  public void setToNameIsSet(boolean value) {
     if (!value) {
-      this.toFirstName = null;
-    }
-  }
-
-  public String getToLastName() {
-    return this.toLastName;
-  }
-
-  public GiftDetail_t setToLastName(String toLastName) {
-    this.toLastName = toLastName;
-    return this;
-  }
-
-  public void unsetToLastName() {
-    this.toLastName = null;
-  }
-
-  /** Returns true if field toLastName is set (has been assigned a value) and false otherwise */
-  public boolean isSetToLastName() {
-    return this.toLastName != null;
-  }
-
-  public void setToLastNameIsSet(boolean value) {
-    if (!value) {
-      this.toLastName = null;
+      this.toName = null;
     }
   }
 
@@ -430,19 +360,11 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       }
       break;
 
-    case FROM_FIRST_NAME:
+    case FROM_NAME:
       if (value == null) {
-        unsetFromFirstName();
+        unsetFromName();
       } else {
-        setFromFirstName((String)value);
-      }
-      break;
-
-    case FROM_LAST_NAME:
-      if (value == null) {
-        unsetFromLastName();
-      } else {
-        setFromLastName((String)value);
+        setFromName((String)value);
       }
       break;
 
@@ -454,19 +376,11 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       }
       break;
 
-    case TO_FIRST_NAME:
+    case TO_NAME:
       if (value == null) {
-        unsetToFirstName();
+        unsetToName();
       } else {
-        setToFirstName((String)value);
-      }
-      break;
-
-    case TO_LAST_NAME:
-      if (value == null) {
-        unsetToLastName();
-      } else {
-        setToLastName((String)value);
+        setToName((String)value);
       }
       break;
 
@@ -489,20 +403,14 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
     case GIFTED_TIME:
       return Long.valueOf(getGiftedTime());
 
-    case FROM_FIRST_NAME:
-      return getFromFirstName();
-
-    case FROM_LAST_NAME:
-      return getFromLastName();
+    case FROM_NAME:
+      return getFromName();
 
     case FROM_EMAIL:
       return getFromEmail();
 
-    case TO_FIRST_NAME:
-      return getToFirstName();
-
-    case TO_LAST_NAME:
-      return getToLastName();
+    case TO_NAME:
+      return getToName();
 
     case TO_EMAIL:
       return getToEmail();
@@ -522,16 +430,12 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       return isSetGiftId();
     case GIFTED_TIME:
       return isSetGiftedTime();
-    case FROM_FIRST_NAME:
-      return isSetFromFirstName();
-    case FROM_LAST_NAME:
-      return isSetFromLastName();
+    case FROM_NAME:
+      return isSetFromName();
     case FROM_EMAIL:
       return isSetFromEmail();
-    case TO_FIRST_NAME:
-      return isSetToFirstName();
-    case TO_LAST_NAME:
-      return isSetToLastName();
+    case TO_NAME:
+      return isSetToName();
     case TO_EMAIL:
       return isSetToEmail();
     }
@@ -569,21 +473,12 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
         return false;
     }
 
-    boolean this_present_fromFirstName = true && this.isSetFromFirstName();
-    boolean that_present_fromFirstName = true && that.isSetFromFirstName();
-    if (this_present_fromFirstName || that_present_fromFirstName) {
-      if (!(this_present_fromFirstName && that_present_fromFirstName))
+    boolean this_present_fromName = true && this.isSetFromName();
+    boolean that_present_fromName = true && that.isSetFromName();
+    if (this_present_fromName || that_present_fromName) {
+      if (!(this_present_fromName && that_present_fromName))
         return false;
-      if (!this.fromFirstName.equals(that.fromFirstName))
-        return false;
-    }
-
-    boolean this_present_fromLastName = true && this.isSetFromLastName();
-    boolean that_present_fromLastName = true && that.isSetFromLastName();
-    if (this_present_fromLastName || that_present_fromLastName) {
-      if (!(this_present_fromLastName && that_present_fromLastName))
-        return false;
-      if (!this.fromLastName.equals(that.fromLastName))
+      if (!this.fromName.equals(that.fromName))
         return false;
     }
 
@@ -596,21 +491,12 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
         return false;
     }
 
-    boolean this_present_toFirstName = true && this.isSetToFirstName();
-    boolean that_present_toFirstName = true && that.isSetToFirstName();
-    if (this_present_toFirstName || that_present_toFirstName) {
-      if (!(this_present_toFirstName && that_present_toFirstName))
+    boolean this_present_toName = true && this.isSetToName();
+    boolean that_present_toName = true && that.isSetToName();
+    if (this_present_toName || that_present_toName) {
+      if (!(this_present_toName && that_present_toName))
         return false;
-      if (!this.toFirstName.equals(that.toFirstName))
-        return false;
-    }
-
-    boolean this_present_toLastName = true && this.isSetToLastName();
-    boolean that_present_toLastName = true && that.isSetToLastName();
-    if (this_present_toLastName || that_present_toLastName) {
-      if (!(this_present_toLastName && that_present_toLastName))
-        return false;
-      if (!this.toLastName.equals(that.toLastName))
+      if (!this.toName.equals(that.toName))
         return false;
     }
 
@@ -659,22 +545,12 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetFromFirstName()).compareTo(typedOther.isSetFromFirstName());
+    lastComparison = Boolean.valueOf(isSetFromName()).compareTo(typedOther.isSetFromName());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetFromFirstName()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fromFirstName, typedOther.fromFirstName);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetFromLastName()).compareTo(typedOther.isSetFromLastName());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetFromLastName()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fromLastName, typedOther.fromLastName);
+    if (isSetFromName()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fromName, typedOther.fromName);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -689,22 +565,12 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetToFirstName()).compareTo(typedOther.isSetToFirstName());
+    lastComparison = Boolean.valueOf(isSetToName()).compareTo(typedOther.isSetToName());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetToFirstName()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.toFirstName, typedOther.toFirstName);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetToLastName()).compareTo(typedOther.isSetToLastName());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetToLastName()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.toLastName, typedOther.toLastName);
+    if (isSetToName()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.toName, typedOther.toName);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -750,23 +616,13 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
     sb.append("giftedTime:");
     sb.append(this.giftedTime);
     first = false;
-    if (isSetFromFirstName()) {
+    if (isSetFromName()) {
       if (!first) sb.append(", ");
-      sb.append("fromFirstName:");
-      if (this.fromFirstName == null) {
+      sb.append("fromName:");
+      if (this.fromName == null) {
         sb.append("null");
       } else {
-        sb.append(this.fromFirstName);
-      }
-      first = false;
-    }
-    if (isSetFromLastName()) {
-      if (!first) sb.append(", ");
-      sb.append("fromLastName:");
-      if (this.fromLastName == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.fromLastName);
+        sb.append(this.fromName);
       }
       first = false;
     }
@@ -780,23 +636,13 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       }
       first = false;
     }
-    if (isSetToFirstName()) {
+    if (isSetToName()) {
       if (!first) sb.append(", ");
-      sb.append("toFirstName:");
-      if (this.toFirstName == null) {
+      sb.append("toName:");
+      if (this.toName == null) {
         sb.append("null");
       } else {
-        sb.append(this.toFirstName);
-      }
-      first = false;
-    }
-    if (isSetToLastName()) {
-      if (!first) sb.append(", ");
-      sb.append("toLastName:");
-      if (this.toLastName == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.toLastName);
+        sb.append(this.toName);
       }
       first = false;
     }
@@ -875,23 +721,15 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // FROM_FIRST_NAME
+          case 3: // FROM_NAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.fromFirstName = iprot.readString();
-              struct.setFromFirstNameIsSet(true);
+              struct.fromName = iprot.readString();
+              struct.setFromNameIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // FROM_LAST_NAME
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.fromLastName = iprot.readString();
-              struct.setFromLastNameIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 5: // FROM_EMAIL
+          case 4: // FROM_EMAIL
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.fromEmail = iprot.readString();
               struct.setFromEmailIsSet(true);
@@ -899,23 +737,15 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // TO_FIRST_NAME
+          case 5: // TO_NAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.toFirstName = iprot.readString();
-              struct.setToFirstNameIsSet(true);
+              struct.toName = iprot.readString();
+              struct.setToNameIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 7: // TO_LAST_NAME
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.toLastName = iprot.readString();
-              struct.setToLastNameIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 8: // TO_EMAIL
+          case 6: // TO_EMAIL
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.toEmail = iprot.readString();
               struct.setToEmailIsSet(true);
@@ -949,17 +779,10 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       oprot.writeFieldBegin(GIFTED_TIME_FIELD_DESC);
       oprot.writeI64(struct.giftedTime);
       oprot.writeFieldEnd();
-      if (struct.fromFirstName != null) {
-        if (struct.isSetFromFirstName()) {
-          oprot.writeFieldBegin(FROM_FIRST_NAME_FIELD_DESC);
-          oprot.writeString(struct.fromFirstName);
-          oprot.writeFieldEnd();
-        }
-      }
-      if (struct.fromLastName != null) {
-        if (struct.isSetFromLastName()) {
-          oprot.writeFieldBegin(FROM_LAST_NAME_FIELD_DESC);
-          oprot.writeString(struct.fromLastName);
+      if (struct.fromName != null) {
+        if (struct.isSetFromName()) {
+          oprot.writeFieldBegin(FROM_NAME_FIELD_DESC);
+          oprot.writeString(struct.fromName);
           oprot.writeFieldEnd();
         }
       }
@@ -970,17 +793,10 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
           oprot.writeFieldEnd();
         }
       }
-      if (struct.toFirstName != null) {
-        if (struct.isSetToFirstName()) {
-          oprot.writeFieldBegin(TO_FIRST_NAME_FIELD_DESC);
-          oprot.writeString(struct.toFirstName);
-          oprot.writeFieldEnd();
-        }
-      }
-      if (struct.toLastName != null) {
-        if (struct.isSetToLastName()) {
-          oprot.writeFieldBegin(TO_LAST_NAME_FIELD_DESC);
-          oprot.writeString(struct.toLastName);
+      if (struct.toName != null) {
+        if (struct.isSetToName()) {
+          oprot.writeFieldBegin(TO_NAME_FIELD_DESC);
+          oprot.writeString(struct.toName);
           oprot.writeFieldEnd();
         }
       }
@@ -1011,39 +827,27 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       oprot.writeString(struct.giftId);
       oprot.writeI64(struct.giftedTime);
       BitSet optionals = new BitSet();
-      if (struct.isSetFromFirstName()) {
+      if (struct.isSetFromName()) {
         optionals.set(0);
       }
-      if (struct.isSetFromLastName()) {
+      if (struct.isSetFromEmail()) {
         optionals.set(1);
       }
-      if (struct.isSetFromEmail()) {
+      if (struct.isSetToName()) {
         optionals.set(2);
       }
-      if (struct.isSetToFirstName()) {
+      if (struct.isSetToEmail()) {
         optionals.set(3);
       }
-      if (struct.isSetToLastName()) {
-        optionals.set(4);
-      }
-      if (struct.isSetToEmail()) {
-        optionals.set(5);
-      }
-      oprot.writeBitSet(optionals, 6);
-      if (struct.isSetFromFirstName()) {
-        oprot.writeString(struct.fromFirstName);
-      }
-      if (struct.isSetFromLastName()) {
-        oprot.writeString(struct.fromLastName);
+      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetFromName()) {
+        oprot.writeString(struct.fromName);
       }
       if (struct.isSetFromEmail()) {
         oprot.writeString(struct.fromEmail);
       }
-      if (struct.isSetToFirstName()) {
-        oprot.writeString(struct.toFirstName);
-      }
-      if (struct.isSetToLastName()) {
-        oprot.writeString(struct.toLastName);
+      if (struct.isSetToName()) {
+        oprot.writeString(struct.toName);
       }
       if (struct.isSetToEmail()) {
         oprot.writeString(struct.toEmail);
@@ -1057,28 +861,20 @@ public class GiftDetail_t implements org.apache.thrift.TBase<GiftDetail_t, GiftD
       struct.setGiftIdIsSet(true);
       struct.giftedTime = iprot.readI64();
       struct.setGiftedTimeIsSet(true);
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
-        struct.fromFirstName = iprot.readString();
-        struct.setFromFirstNameIsSet(true);
+        struct.fromName = iprot.readString();
+        struct.setFromNameIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.fromLastName = iprot.readString();
-        struct.setFromLastNameIsSet(true);
-      }
-      if (incoming.get(2)) {
         struct.fromEmail = iprot.readString();
         struct.setFromEmailIsSet(true);
       }
+      if (incoming.get(2)) {
+        struct.toName = iprot.readString();
+        struct.setToNameIsSet(true);
+      }
       if (incoming.get(3)) {
-        struct.toFirstName = iprot.readString();
-        struct.setToFirstNameIsSet(true);
-      }
-      if (incoming.get(4)) {
-        struct.toLastName = iprot.readString();
-        struct.setToLastNameIsSet(true);
-      }
-      if (incoming.get(5)) {
         struct.toEmail = iprot.readString();
         struct.setToEmailIsSet(true);
       }

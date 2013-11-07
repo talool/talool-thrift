@@ -881,36 +881,30 @@ typedef int64_t Timestamp;
 @interface GiftDetail_t : NSObject <NSCoding> {
   NSString * __giftId;
   Timestamp __giftedTime;
-  NSString * __fromFirstName;
-  NSString * __fromLastName;
+  NSString * __fromName;
   NSString * __fromEmail;
-  NSString * __toFirstName;
-  NSString * __toLastName;
+  NSString * __toName;
   NSString * __toEmail;
 
   BOOL __giftId_isset;
   BOOL __giftedTime_isset;
-  BOOL __fromFirstName_isset;
-  BOOL __fromLastName_isset;
+  BOOL __fromName_isset;
   BOOL __fromEmail_isset;
-  BOOL __toFirstName_isset;
-  BOOL __toLastName_isset;
+  BOOL __toName_isset;
   BOOL __toEmail_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, retain, getter=giftId, setter=setGiftId:) NSString * giftId;
 @property (nonatomic, getter=giftedTime, setter=setGiftedTime:) Timestamp giftedTime;
-@property (nonatomic, retain, getter=fromFirstName, setter=setFromFirstName:) NSString * fromFirstName;
-@property (nonatomic, retain, getter=fromLastName, setter=setFromLastName:) NSString * fromLastName;
+@property (nonatomic, retain, getter=fromName, setter=setFromName:) NSString * fromName;
 @property (nonatomic, retain, getter=fromEmail, setter=setFromEmail:) NSString * fromEmail;
-@property (nonatomic, retain, getter=toFirstName, setter=setToFirstName:) NSString * toFirstName;
-@property (nonatomic, retain, getter=toLastName, setter=setToLastName:) NSString * toLastName;
+@property (nonatomic, retain, getter=toName, setter=setToName:) NSString * toName;
 @property (nonatomic, retain, getter=toEmail, setter=setToEmail:) NSString * toEmail;
 #endif
 
 - (id) init;
-- (id) initWithGiftId: (NSString *) giftId giftedTime: (Timestamp) giftedTime fromFirstName: (NSString *) fromFirstName fromLastName: (NSString *) fromLastName fromEmail: (NSString *) fromEmail toFirstName: (NSString *) toFirstName toLastName: (NSString *) toLastName toEmail: (NSString *) toEmail;
+- (id) initWithGiftId: (NSString *) giftId giftedTime: (Timestamp) giftedTime fromName: (NSString *) fromName fromEmail: (NSString *) fromEmail toName: (NSString *) toName toEmail: (NSString *) toEmail;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -928,16 +922,10 @@ typedef int64_t Timestamp;
 - (BOOL) giftedTimeIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) fromFirstName;
-- (void) setFromFirstName: (NSString *) fromFirstName;
+- (NSString *) fromName;
+- (void) setFromName: (NSString *) fromName;
 #endif
-- (BOOL) fromFirstNameIsSet;
-
-#if !__has_feature(objc_arc)
-- (NSString *) fromLastName;
-- (void) setFromLastName: (NSString *) fromLastName;
-#endif
-- (BOOL) fromLastNameIsSet;
+- (BOOL) fromNameIsSet;
 
 #if !__has_feature(objc_arc)
 - (NSString *) fromEmail;
@@ -946,16 +934,10 @@ typedef int64_t Timestamp;
 - (BOOL) fromEmailIsSet;
 
 #if !__has_feature(objc_arc)
-- (NSString *) toFirstName;
-- (void) setToFirstName: (NSString *) toFirstName;
+- (NSString *) toName;
+- (void) setToName: (NSString *) toName;
 #endif
-- (BOOL) toFirstNameIsSet;
-
-#if !__has_feature(objc_arc)
-- (NSString *) toLastName;
-- (void) setToLastName: (NSString *) toLastName;
-#endif
-- (BOOL) toLastNameIsSet;
+- (BOOL) toNameIsSet;
 
 #if !__has_feature(objc_arc)
 - (NSString *) toEmail;

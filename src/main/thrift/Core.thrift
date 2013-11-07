@@ -132,12 +132,10 @@ struct SearchOptions_t {
 struct GiftDetail_t {
   1: required string giftId;
   2: required Timestamp giftedTime;
-  3: optional string fromFirstName;
-  4: optional string fromLastName;
-  5: optional string fromEmail;
-  6: optional string toFirstName;
-  7: optional string toLastName;
-  8: optional string toEmail;
+  3: optional string fromName;
+  4: optional string fromEmail;
+  5: optional string toName;
+  6: optional string toEmail;
 }
 
 struct DealAcquire_t {
