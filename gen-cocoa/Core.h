@@ -1094,6 +1094,70 @@ typedef int64_t Timestamp;
 
 @end
 
+@interface DealOfferGeoSummary_t : NSObject <NSCoding> {
+  DealOffer_t * __dealOffer;
+  double __distanceInMeters;
+  double __closestMerchantInMeters;
+  NSMutableDictionary * __doubleMetrics;
+  NSMutableDictionary * __longMetrics;
+
+  BOOL __dealOffer_isset;
+  BOOL __distanceInMeters_isset;
+  BOOL __closestMerchantInMeters_isset;
+  BOOL __doubleMetrics_isset;
+  BOOL __longMetrics_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=dealOffer, setter=setDealOffer:) DealOffer_t * dealOffer;
+@property (nonatomic, getter=distanceInMeters, setter=setDistanceInMeters:) double distanceInMeters;
+@property (nonatomic, getter=closestMerchantInMeters, setter=setClosestMerchantInMeters:) double closestMerchantInMeters;
+@property (nonatomic, retain, getter=doubleMetrics, setter=setDoubleMetrics:) NSMutableDictionary * doubleMetrics;
+@property (nonatomic, retain, getter=longMetrics, setter=setLongMetrics:) NSMutableDictionary * longMetrics;
+#endif
+
+- (id) init;
+- (id) initWithDealOffer: (DealOffer_t *) dealOffer distanceInMeters: (double) distanceInMeters closestMerchantInMeters: (double) closestMerchantInMeters doubleMetrics: (NSMutableDictionary *) doubleMetrics longMetrics: (NSMutableDictionary *) longMetrics;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+#if !__has_feature(objc_arc)
+- (DealOffer_t *) dealOffer;
+- (void) setDealOffer: (DealOffer_t *) dealOffer;
+#endif
+- (BOOL) dealOfferIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) distanceInMeters;
+- (void) setDistanceInMeters: (double) distanceInMeters;
+#endif
+- (BOOL) distanceInMetersIsSet;
+
+#if !__has_feature(objc_arc)
+- (double) closestMerchantInMeters;
+- (void) setClosestMerchantInMeters: (double) closestMerchantInMeters;
+#endif
+- (BOOL) closestMerchantInMetersIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableDictionary *) doubleMetrics;
+- (void) setDoubleMetrics: (NSMutableDictionary *) doubleMetrics;
+#endif
+- (BOOL) doubleMetricsIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSMutableDictionary *) longMetrics;
+- (void) setLongMetrics: (NSMutableDictionary *) longMetrics;
+#endif
+- (BOOL) longMetricsIsSet;
+
+@end
+
 @interface CoreConstants : NSObject {
 }
++ (NSString *) METRIC_TOTAL_MERCHANTS;
++ (NSString *) METRIC_TOTAL_REDEMPTIONS;
++ (NSString *) METRIC_TOTAL_DEALS;
++ (NSString *) METRIC_TOTAL_ACQUIRES;
 @end

@@ -5419,9 +5419,374 @@
 
 @end
 
+@implementation DealOfferGeoSummary_t
+
+- (id) init
+{
+  self = [super init];
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+#endif
+  return self;
+}
+
+- (id) initWithDealOffer: (DealOffer_t *) dealOffer distanceInMeters: (double) distanceInMeters closestMerchantInMeters: (double) closestMerchantInMeters doubleMetrics: (NSMutableDictionary *) doubleMetrics longMetrics: (NSMutableDictionary *) longMetrics
+{
+  self = [super init];
+  __dealOffer = [dealOffer retain_stub];
+  __dealOffer_isset = YES;
+  __distanceInMeters = distanceInMeters;
+  __distanceInMeters_isset = YES;
+  __closestMerchantInMeters = closestMerchantInMeters;
+  __closestMerchantInMeters_isset = YES;
+  __doubleMetrics = [doubleMetrics retain_stub];
+  __doubleMetrics_isset = YES;
+  __longMetrics = [longMetrics retain_stub];
+  __longMetrics_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"dealOffer"])
+  {
+    __dealOffer = [[decoder decodeObjectForKey: @"dealOffer"] retain_stub];
+    __dealOffer_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"distanceInMeters"])
+  {
+    __distanceInMeters = [decoder decodeDoubleForKey: @"distanceInMeters"];
+    __distanceInMeters_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"closestMerchantInMeters"])
+  {
+    __closestMerchantInMeters = [decoder decodeDoubleForKey: @"closestMerchantInMeters"];
+    __closestMerchantInMeters_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"doubleMetrics"])
+  {
+    __doubleMetrics = [[decoder decodeObjectForKey: @"doubleMetrics"] retain_stub];
+    __doubleMetrics_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"longMetrics"])
+  {
+    __longMetrics = [[decoder decodeObjectForKey: @"longMetrics"] retain_stub];
+    __longMetrics_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__dealOffer_isset)
+  {
+    [encoder encodeObject: __dealOffer forKey: @"dealOffer"];
+  }
+  if (__distanceInMeters_isset)
+  {
+    [encoder encodeDouble: __distanceInMeters forKey: @"distanceInMeters"];
+  }
+  if (__closestMerchantInMeters_isset)
+  {
+    [encoder encodeDouble: __closestMerchantInMeters forKey: @"closestMerchantInMeters"];
+  }
+  if (__doubleMetrics_isset)
+  {
+    [encoder encodeObject: __doubleMetrics forKey: @"doubleMetrics"];
+  }
+  if (__longMetrics_isset)
+  {
+    [encoder encodeObject: __longMetrics forKey: @"longMetrics"];
+  }
+}
+
+- (void) dealloc
+{
+  [__dealOffer release_stub];
+  [__doubleMetrics release_stub];
+  [__longMetrics release_stub];
+  [super dealloc_stub];
+}
+
+- (DealOffer_t *) dealOffer {
+  return [[__dealOffer retain_stub] autorelease_stub];
+}
+
+- (void) setDealOffer: (DealOffer_t *) dealOffer {
+  [dealOffer retain_stub];
+  [__dealOffer release_stub];
+  __dealOffer = dealOffer;
+  __dealOffer_isset = YES;
+}
+
+- (BOOL) dealOfferIsSet {
+  return __dealOffer_isset;
+}
+
+- (void) unsetDealOffer {
+  [__dealOffer release_stub];
+  __dealOffer = nil;
+  __dealOffer_isset = NO;
+}
+
+- (double) distanceInMeters {
+  return __distanceInMeters;
+}
+
+- (void) setDistanceInMeters: (double) distanceInMeters {
+  __distanceInMeters = distanceInMeters;
+  __distanceInMeters_isset = YES;
+}
+
+- (BOOL) distanceInMetersIsSet {
+  return __distanceInMeters_isset;
+}
+
+- (void) unsetDistanceInMeters {
+  __distanceInMeters_isset = NO;
+}
+
+- (double) closestMerchantInMeters {
+  return __closestMerchantInMeters;
+}
+
+- (void) setClosestMerchantInMeters: (double) closestMerchantInMeters {
+  __closestMerchantInMeters = closestMerchantInMeters;
+  __closestMerchantInMeters_isset = YES;
+}
+
+- (BOOL) closestMerchantInMetersIsSet {
+  return __closestMerchantInMeters_isset;
+}
+
+- (void) unsetClosestMerchantInMeters {
+  __closestMerchantInMeters_isset = NO;
+}
+
+- (NSMutableDictionary *) doubleMetrics {
+  return [[__doubleMetrics retain_stub] autorelease_stub];
+}
+
+- (void) setDoubleMetrics: (NSMutableDictionary *) doubleMetrics {
+  [doubleMetrics retain_stub];
+  [__doubleMetrics release_stub];
+  __doubleMetrics = doubleMetrics;
+  __doubleMetrics_isset = YES;
+}
+
+- (BOOL) doubleMetricsIsSet {
+  return __doubleMetrics_isset;
+}
+
+- (void) unsetDoubleMetrics {
+  [__doubleMetrics release_stub];
+  __doubleMetrics = nil;
+  __doubleMetrics_isset = NO;
+}
+
+- (NSMutableDictionary *) longMetrics {
+  return [[__longMetrics retain_stub] autorelease_stub];
+}
+
+- (void) setLongMetrics: (NSMutableDictionary *) longMetrics {
+  [longMetrics retain_stub];
+  [__longMetrics release_stub];
+  __longMetrics = longMetrics;
+  __longMetrics_isset = YES;
+}
+
+- (BOOL) longMetricsIsSet {
+  return __longMetrics_isset;
+}
+
+- (void) unsetLongMetrics {
+  [__longMetrics release_stub];
+  __longMetrics = nil;
+  __longMetrics_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          DealOffer_t *fieldValue = [[DealOffer_t alloc] init];
+          [fieldValue read: inProtocol];
+          [self setDealOffer: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setDistanceInMeters: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_DOUBLE) {
+          double fieldValue = [inProtocol readDouble];
+          [self setClosestMerchantInMeters: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_MAP) {
+          int _size11;
+          [inProtocol readMapBeginReturningKeyType: NULL valueType: NULL size: &_size11];
+          NSMutableDictionary * fieldValue = [[NSMutableDictionary alloc] initWithCapacity: _size11];
+          int _i12;
+          for (_i12 = 0; _i12 < _size11; ++_i12)
+          {
+            NSString * _key13 = [inProtocol readString];
+            double _val14 = [inProtocol readDouble];
+            [fieldValue setObject: [NSNumber numberWithDouble: _val14] forKey: _key13];
+          }
+          [inProtocol readMapEnd];
+          [self setDoubleMetrics: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_MAP) {
+          int _size15;
+          [inProtocol readMapBeginReturningKeyType: NULL valueType: NULL size: &_size15];
+          NSMutableDictionary * fieldValue = [[NSMutableDictionary alloc] initWithCapacity: _size15];
+          int _i16;
+          for (_i16 = 0; _i16 < _size15; ++_i16)
+          {
+            NSString * _key17 = [inProtocol readString];
+            int64_t _val18 = [inProtocol readI64];
+            [fieldValue setObject: [NSNumber numberWithLongLong: _val18] forKey: _key17];
+          }
+          [inProtocol readMapEnd];
+          [self setLongMetrics: fieldValue];
+          [fieldValue release_stub];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"DealOfferGeoSummary_t"];
+  if (__dealOffer_isset) {
+    if (__dealOffer != nil) {
+      [outProtocol writeFieldBeginWithName: @"dealOffer" type: TType_STRUCT fieldID: 1];
+      [__dealOffer write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__distanceInMeters_isset) {
+    [outProtocol writeFieldBeginWithName: @"distanceInMeters" type: TType_DOUBLE fieldID: 2];
+    [outProtocol writeDouble: __distanceInMeters];
+    [outProtocol writeFieldEnd];
+  }
+  if (__closestMerchantInMeters_isset) {
+    [outProtocol writeFieldBeginWithName: @"closestMerchantInMeters" type: TType_DOUBLE fieldID: 3];
+    [outProtocol writeDouble: __closestMerchantInMeters];
+    [outProtocol writeFieldEnd];
+  }
+  if (__doubleMetrics_isset) {
+    if (__doubleMetrics != nil) {
+      [outProtocol writeFieldBeginWithName: @"doubleMetrics" type: TType_MAP fieldID: 4];
+      {
+        [outProtocol writeMapBeginWithKeyType: TType_STRING valueType: TType_DOUBLE size: [__doubleMetrics count]];
+        NSEnumerator * _iter19 = [__doubleMetrics keyEnumerator];
+        id key20;
+        while ((key20 = [_iter19 nextObject]))
+        {
+          [outProtocol writeString: key20];
+          [outProtocol writeDouble: [[__doubleMetrics objectForKey: key20] doubleValue]];
+        }
+        [outProtocol writeMapEnd];
+      }
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__longMetrics_isset) {
+    if (__longMetrics != nil) {
+      [outProtocol writeFieldBeginWithName: @"longMetrics" type: TType_MAP fieldID: 5];
+      {
+        [outProtocol writeMapBeginWithKeyType: TType_STRING valueType: TType_I64 size: [__longMetrics count]];
+        NSEnumerator * _iter21 = [__longMetrics keyEnumerator];
+        id key22;
+        while ((key22 = [_iter21 nextObject]))
+        {
+          [outProtocol writeString: key22];
+          [outProtocol writeI64: [[__longMetrics objectForKey: key22] longLongValue]];
+        }
+        [outProtocol writeMapEnd];
+      }
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"DealOfferGeoSummary_t("];
+  [ms appendString: @"dealOffer:"];
+  [ms appendFormat: @"%@", __dealOffer];
+  [ms appendString: @",distanceInMeters:"];
+  [ms appendFormat: @"%f", __distanceInMeters];
+  [ms appendString: @",closestMerchantInMeters:"];
+  [ms appendFormat: @"%f", __closestMerchantInMeters];
+  [ms appendString: @",doubleMetrics:"];
+  [ms appendFormat: @"%@", __doubleMetrics];
+  [ms appendString: @",longMetrics:"];
+  [ms appendFormat: @"%@", __longMetrics];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+static NSString * METRIC_TOTAL_MERCHANTS = @"TotalMerchants";
+static NSString * METRIC_TOTAL_REDEMPTIONS = @"TotalRedemptions";
+static NSString * METRIC_TOTAL_DEALS = @"TotalDeals";
+static NSString * METRIC_TOTAL_ACQUIRES = @"TotalAcquires";
 
 @implementation CoreConstants
 + (void) initialize {
+}
++ (NSString *) METRIC_TOTAL_MERCHANTS{
+  return METRIC_TOTAL_MERCHANTS;
+}
++ (NSString *) METRIC_TOTAL_REDEMPTIONS{
+  return METRIC_TOTAL_REDEMPTIONS;
+}
++ (NSString *) METRIC_TOTAL_DEALS{
+  return METRIC_TOTAL_DEALS;
+}
++ (NSString *) METRIC_TOTAL_ACQUIRES{
+  return METRIC_TOTAL_ACQUIRES;
 }
 @end
 

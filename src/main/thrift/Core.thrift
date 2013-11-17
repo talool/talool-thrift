@@ -8,6 +8,11 @@ namespace java com.talool.api.thrift
 
 typedef i64 Timestamp
 
+const string METRIC_TOTAL_MERCHANTS = 'TotalMerchants'
+const string METRIC_TOTAL_REDEMPTIONS = 'TotalRedemptions'
+const string METRIC_TOTAL_DEALS = 'TotalDeals'
+const string METRIC_TOTAL_ACQUIRES = 'TotalAcquires'
+
 enum Sex_t { M,F,U }
 
 enum SocialNetwork_t { Facebook, Twitter, Pinterest }
@@ -156,6 +161,15 @@ struct Gift_t {
   4: required Timestamp created;
   5: optional GiftStatus_t giftStatus;
 }
+
+struct DealOfferGeoSummary_t {
+  1: required DealOffer_t dealOffer;
+  2: optional double distanceInMeters;
+  3: optional double closestMerchantInMeters;
+  4: optional map<string,double> doubleMetrics;
+  5: optional map<string,i64> longMetrics;
+}
+
 
 
 

@@ -21,6 +21,10 @@ struct CTokenAccessResponse_t {
   1: optional CTokenAccess_t tokenAccess;
 }
 
+struct DealOfferGeoSummariesResponse_t {
+  1: optional list<Core.DealOfferGeoSummary_t> dealOfferGeoSummaries;
+}
+
 service CustomerService_t {
 
    CTokenAccess_t createAccount(1:Core.Customer_t customer,2:string password) throws (1:Core.ServiceException_t error);
@@ -99,6 +103,10 @@ service CustomerService_t {
      throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
    CTokenAccessResponse_t loginFacebook(1:string facebookId,2:string facebookAccessToken) throws (1:Error.TServiceException_t error);
+   
+   DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(1:Core.Location_t location, 2:i32 maxMiles, 
+        3:Core.SearchOptions_t searchOptions) throws (1:Error.TServiceException_t error);
+   
     
 
 }
