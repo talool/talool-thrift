@@ -733,6 +733,8 @@ typedef int64_t Timestamp;
   NSString * __locationName;
   double __price;
   Timestamp __expires;
+  NSString * __dealOfferMerchantLogo;
+  NSString * __dealOfferBackgroundImage;
 
   BOOL __dealOfferId_isset;
   BOOL __merchant_isset;
@@ -744,6 +746,8 @@ typedef int64_t Timestamp;
   BOOL __locationName_isset;
   BOOL __price_isset;
   BOOL __expires_isset;
+  BOOL __dealOfferMerchantLogo_isset;
+  BOOL __dealOfferBackgroundImage_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -757,10 +761,12 @@ typedef int64_t Timestamp;
 @property (nonatomic, retain, getter=locationName, setter=setLocationName:) NSString * locationName;
 @property (nonatomic, getter=price, setter=setPrice:) double price;
 @property (nonatomic, getter=expires, setter=setExpires:) Timestamp expires;
+@property (nonatomic, retain, getter=dealOfferMerchantLogo, setter=setDealOfferMerchantLogo:) NSString * dealOfferMerchantLogo;
+@property (nonatomic, retain, getter=dealOfferBackgroundImage, setter=setDealOfferBackgroundImage:) NSString * dealOfferBackgroundImage;
 #endif
 
 - (id) init;
-- (id) initWithDealOfferId: (NSString *) dealOfferId merchant: (Merchant_t *) merchant dealType: (int) dealType title: (NSString *) title summary: (NSString *) summary code: (NSString *) code imageUrl: (NSString *) imageUrl locationName: (NSString *) locationName price: (double) price expires: (Timestamp) expires;
+- (id) initWithDealOfferId: (NSString *) dealOfferId merchant: (Merchant_t *) merchant dealType: (int) dealType title: (NSString *) title summary: (NSString *) summary code: (NSString *) code imageUrl: (NSString *) imageUrl locationName: (NSString *) locationName price: (double) price expires: (Timestamp) expires dealOfferMerchantLogo: (NSString *) dealOfferMerchantLogo dealOfferBackgroundImage: (NSString *) dealOfferBackgroundImage;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -824,6 +830,18 @@ typedef int64_t Timestamp;
 - (void) setExpires: (Timestamp) expires;
 #endif
 - (BOOL) expiresIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) dealOfferMerchantLogo;
+- (void) setDealOfferMerchantLogo: (NSString *) dealOfferMerchantLogo;
+#endif
+- (BOOL) dealOfferMerchantLogoIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) dealOfferBackgroundImage;
+- (void) setDealOfferBackgroundImage: (NSString *) dealOfferBackgroundImage;
+#endif
+- (BOOL) dealOfferBackgroundImageIsSet;
 
 @end
 

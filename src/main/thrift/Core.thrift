@@ -125,6 +125,8 @@ struct DealOffer_t {
   8: optional string locationName;
   9: optional double price;
   10: optional Timestamp expires;
+  11: optional string dealOfferMerchantLogo;
+  12: optional string dealOfferBackgroundImage;
 }
 
 struct SearchOptions_t {

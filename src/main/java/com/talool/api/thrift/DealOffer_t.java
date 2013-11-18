@@ -43,6 +43,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   private static final org.apache.thrift.protocol.TField LOCATION_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("locationName", org.apache.thrift.protocol.TType.STRING, (short)8);
   private static final org.apache.thrift.protocol.TField PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("price", org.apache.thrift.protocol.TType.DOUBLE, (short)9);
   private static final org.apache.thrift.protocol.TField EXPIRES_FIELD_DESC = new org.apache.thrift.protocol.TField("expires", org.apache.thrift.protocol.TType.I64, (short)10);
+  private static final org.apache.thrift.protocol.TField DEAL_OFFER_MERCHANT_LOGO_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferMerchantLogo", org.apache.thrift.protocol.TType.STRING, (short)11);
+  private static final org.apache.thrift.protocol.TField DEAL_OFFER_BACKGROUND_IMAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferBackgroundImage", org.apache.thrift.protocol.TType.STRING, (short)12);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -64,6 +66,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   public String locationName; // optional
   public double price; // optional
   public long expires; // optional
+  public String dealOfferMerchantLogo; // optional
+  public String dealOfferBackgroundImage; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -80,7 +84,9 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     IMAGE_URL((short)7, "imageUrl"),
     LOCATION_NAME((short)8, "locationName"),
     PRICE((short)9, "price"),
-    EXPIRES((short)10, "expires");
+    EXPIRES((short)10, "expires"),
+    DEAL_OFFER_MERCHANT_LOGO((short)11, "dealOfferMerchantLogo"),
+    DEAL_OFFER_BACKGROUND_IMAGE((short)12, "dealOfferBackgroundImage");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -115,6 +121,10 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
           return PRICE;
         case 10: // EXPIRES
           return EXPIRES;
+        case 11: // DEAL_OFFER_MERCHANT_LOGO
+          return DEAL_OFFER_MERCHANT_LOGO;
+        case 12: // DEAL_OFFER_BACKGROUND_IMAGE
+          return DEAL_OFFER_BACKGROUND_IMAGE;
         default:
           return null;
       }
@@ -158,7 +168,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   private static final int __PRICE_ISSET_ID = 0;
   private static final int __EXPIRES_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.SUMMARY,_Fields.CODE,_Fields.IMAGE_URL,_Fields.LOCATION_NAME,_Fields.PRICE,_Fields.EXPIRES};
+  private _Fields optionals[] = {_Fields.SUMMARY,_Fields.CODE,_Fields.IMAGE_URL,_Fields.LOCATION_NAME,_Fields.PRICE,_Fields.EXPIRES,_Fields.DEAL_OFFER_MERCHANT_LOGO,_Fields.DEAL_OFFER_BACKGROUND_IMAGE};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -182,6 +192,10 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.EXPIRES, new org.apache.thrift.meta_data.FieldMetaData("expires", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "Timestamp")));
+    tmpMap.put(_Fields.DEAL_OFFER_MERCHANT_LOGO, new org.apache.thrift.meta_data.FieldMetaData("dealOfferMerchantLogo", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.DEAL_OFFER_BACKGROUND_IMAGE, new org.apache.thrift.meta_data.FieldMetaData("dealOfferBackgroundImage", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DealOffer_t.class, metaDataMap);
   }
@@ -233,6 +247,12 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     }
     this.price = other.price;
     this.expires = other.expires;
+    if (other.isSetDealOfferMerchantLogo()) {
+      this.dealOfferMerchantLogo = other.dealOfferMerchantLogo;
+    }
+    if (other.isSetDealOfferBackgroundImage()) {
+      this.dealOfferBackgroundImage = other.dealOfferBackgroundImage;
+    }
   }
 
   public DealOffer_t deepCopy() {
@@ -252,6 +272,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     this.price = 0.0;
     setExpiresIsSet(false);
     this.expires = 0;
+    this.dealOfferMerchantLogo = null;
+    this.dealOfferBackgroundImage = null;
   }
 
   public String getDealOfferId() {
@@ -500,6 +522,54 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __EXPIRES_ISSET_ID, value);
   }
 
+  public String getDealOfferMerchantLogo() {
+    return this.dealOfferMerchantLogo;
+  }
+
+  public DealOffer_t setDealOfferMerchantLogo(String dealOfferMerchantLogo) {
+    this.dealOfferMerchantLogo = dealOfferMerchantLogo;
+    return this;
+  }
+
+  public void unsetDealOfferMerchantLogo() {
+    this.dealOfferMerchantLogo = null;
+  }
+
+  /** Returns true if field dealOfferMerchantLogo is set (has been assigned a value) and false otherwise */
+  public boolean isSetDealOfferMerchantLogo() {
+    return this.dealOfferMerchantLogo != null;
+  }
+
+  public void setDealOfferMerchantLogoIsSet(boolean value) {
+    if (!value) {
+      this.dealOfferMerchantLogo = null;
+    }
+  }
+
+  public String getDealOfferBackgroundImage() {
+    return this.dealOfferBackgroundImage;
+  }
+
+  public DealOffer_t setDealOfferBackgroundImage(String dealOfferBackgroundImage) {
+    this.dealOfferBackgroundImage = dealOfferBackgroundImage;
+    return this;
+  }
+
+  public void unsetDealOfferBackgroundImage() {
+    this.dealOfferBackgroundImage = null;
+  }
+
+  /** Returns true if field dealOfferBackgroundImage is set (has been assigned a value) and false otherwise */
+  public boolean isSetDealOfferBackgroundImage() {
+    return this.dealOfferBackgroundImage != null;
+  }
+
+  public void setDealOfferBackgroundImageIsSet(boolean value) {
+    if (!value) {
+      this.dealOfferBackgroundImage = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case DEAL_OFFER_ID:
@@ -582,6 +652,22 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       }
       break;
 
+    case DEAL_OFFER_MERCHANT_LOGO:
+      if (value == null) {
+        unsetDealOfferMerchantLogo();
+      } else {
+        setDealOfferMerchantLogo((String)value);
+      }
+      break;
+
+    case DEAL_OFFER_BACKGROUND_IMAGE:
+      if (value == null) {
+        unsetDealOfferBackgroundImage();
+      } else {
+        setDealOfferBackgroundImage((String)value);
+      }
+      break;
+
     }
   }
 
@@ -617,6 +703,12 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     case EXPIRES:
       return Long.valueOf(getExpires());
 
+    case DEAL_OFFER_MERCHANT_LOGO:
+      return getDealOfferMerchantLogo();
+
+    case DEAL_OFFER_BACKGROUND_IMAGE:
+      return getDealOfferBackgroundImage();
+
     }
     throw new IllegalStateException();
   }
@@ -648,6 +740,10 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       return isSetPrice();
     case EXPIRES:
       return isSetExpires();
+    case DEAL_OFFER_MERCHANT_LOGO:
+      return isSetDealOfferMerchantLogo();
+    case DEAL_OFFER_BACKGROUND_IMAGE:
+      return isSetDealOfferBackgroundImage();
     }
     throw new IllegalStateException();
   }
@@ -752,6 +848,24 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (!(this_present_expires && that_present_expires))
         return false;
       if (this.expires != that.expires)
+        return false;
+    }
+
+    boolean this_present_dealOfferMerchantLogo = true && this.isSetDealOfferMerchantLogo();
+    boolean that_present_dealOfferMerchantLogo = true && that.isSetDealOfferMerchantLogo();
+    if (this_present_dealOfferMerchantLogo || that_present_dealOfferMerchantLogo) {
+      if (!(this_present_dealOfferMerchantLogo && that_present_dealOfferMerchantLogo))
+        return false;
+      if (!this.dealOfferMerchantLogo.equals(that.dealOfferMerchantLogo))
+        return false;
+    }
+
+    boolean this_present_dealOfferBackgroundImage = true && this.isSetDealOfferBackgroundImage();
+    boolean that_present_dealOfferBackgroundImage = true && that.isSetDealOfferBackgroundImage();
+    if (this_present_dealOfferBackgroundImage || that_present_dealOfferBackgroundImage) {
+      if (!(this_present_dealOfferBackgroundImage && that_present_dealOfferBackgroundImage))
+        return false;
+      if (!this.dealOfferBackgroundImage.equals(that.dealOfferBackgroundImage))
         return false;
     }
 
@@ -871,6 +985,26 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetDealOfferMerchantLogo()).compareTo(typedOther.isSetDealOfferMerchantLogo());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDealOfferMerchantLogo()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealOfferMerchantLogo, typedOther.dealOfferMerchantLogo);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetDealOfferBackgroundImage()).compareTo(typedOther.isSetDealOfferBackgroundImage());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDealOfferBackgroundImage()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealOfferBackgroundImage, typedOther.dealOfferBackgroundImage);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -972,6 +1106,26 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (!first) sb.append(", ");
       sb.append("expires:");
       sb.append(this.expires);
+      first = false;
+    }
+    if (isSetDealOfferMerchantLogo()) {
+      if (!first) sb.append(", ");
+      sb.append("dealOfferMerchantLogo:");
+      if (this.dealOfferMerchantLogo == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.dealOfferMerchantLogo);
+      }
+      first = false;
+    }
+    if (isSetDealOfferBackgroundImage()) {
+      if (!first) sb.append(", ");
+      sb.append("dealOfferBackgroundImage:");
+      if (this.dealOfferBackgroundImage == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.dealOfferBackgroundImage);
+      }
       first = false;
     }
     sb.append(")");
@@ -1115,6 +1269,22 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 11: // DEAL_OFFER_MERCHANT_LOGO
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.dealOfferMerchantLogo = iprot.readString();
+              struct.setDealOfferMerchantLogoIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 12: // DEAL_OFFER_BACKGROUND_IMAGE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.dealOfferBackgroundImage = iprot.readString();
+              struct.setDealOfferBackgroundImageIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1188,6 +1358,20 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         oprot.writeI64(struct.expires);
         oprot.writeFieldEnd();
       }
+      if (struct.dealOfferMerchantLogo != null) {
+        if (struct.isSetDealOfferMerchantLogo()) {
+          oprot.writeFieldBegin(DEAL_OFFER_MERCHANT_LOGO_FIELD_DESC);
+          oprot.writeString(struct.dealOfferMerchantLogo);
+          oprot.writeFieldEnd();
+        }
+      }
+      if (struct.dealOfferBackgroundImage != null) {
+        if (struct.isSetDealOfferBackgroundImage()) {
+          oprot.writeFieldBegin(DEAL_OFFER_BACKGROUND_IMAGE_FIELD_DESC);
+          oprot.writeString(struct.dealOfferBackgroundImage);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1228,7 +1412,13 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (struct.isSetExpires()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetDealOfferMerchantLogo()) {
+        optionals.set(6);
+      }
+      if (struct.isSetDealOfferBackgroundImage()) {
+        optionals.set(7);
+      }
+      oprot.writeBitSet(optionals, 8);
       if (struct.isSetSummary()) {
         oprot.writeString(struct.summary);
       }
@@ -1247,6 +1437,12 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (struct.isSetExpires()) {
         oprot.writeI64(struct.expires);
       }
+      if (struct.isSetDealOfferMerchantLogo()) {
+        oprot.writeString(struct.dealOfferMerchantLogo);
+      }
+      if (struct.isSetDealOfferBackgroundImage()) {
+        oprot.writeString(struct.dealOfferBackgroundImage);
+      }
     }
 
     @Override
@@ -1261,7 +1457,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       struct.setDealTypeIsSet(true);
       struct.title = iprot.readString();
       struct.setTitleIsSet(true);
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
         struct.summary = iprot.readString();
         struct.setSummaryIsSet(true);
@@ -1285,6 +1481,14 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (incoming.get(5)) {
         struct.expires = iprot.readI64();
         struct.setExpiresIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.dealOfferMerchantLogo = iprot.readString();
+        struct.setDealOfferMerchantLogoIsSet(true);
+      }
+      if (incoming.get(7)) {
+        struct.dealOfferBackgroundImage = iprot.readString();
+        struct.setDealOfferBackgroundImageIsSet(true);
       }
     }
   }

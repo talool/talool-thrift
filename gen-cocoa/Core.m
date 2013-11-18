@@ -3515,7 +3515,7 @@
   return self;
 }
 
-- (id) initWithDealOfferId: (NSString *) dealOfferId merchant: (Merchant_t *) merchant dealType: (int) dealType title: (NSString *) title summary: (NSString *) summary code: (NSString *) code imageUrl: (NSString *) imageUrl locationName: (NSString *) locationName price: (double) price expires: (Timestamp) expires
+- (id) initWithDealOfferId: (NSString *) dealOfferId merchant: (Merchant_t *) merchant dealType: (int) dealType title: (NSString *) title summary: (NSString *) summary code: (NSString *) code imageUrl: (NSString *) imageUrl locationName: (NSString *) locationName price: (double) price expires: (Timestamp) expires dealOfferMerchantLogo: (NSString *) dealOfferMerchantLogo dealOfferBackgroundImage: (NSString *) dealOfferBackgroundImage
 {
   self = [super init];
   __dealOfferId = [dealOfferId retain_stub];
@@ -3538,6 +3538,10 @@
   __price_isset = YES;
   __expires = expires;
   __expires_isset = YES;
+  __dealOfferMerchantLogo = [dealOfferMerchantLogo retain_stub];
+  __dealOfferMerchantLogo_isset = YES;
+  __dealOfferBackgroundImage = [dealOfferBackgroundImage retain_stub];
+  __dealOfferBackgroundImage_isset = YES;
   return self;
 }
 
@@ -3594,6 +3598,16 @@
     __expires = [decoder decodeInt64ForKey: @"expires"];
     __expires_isset = YES;
   }
+  if ([decoder containsValueForKey: @"dealOfferMerchantLogo"])
+  {
+    __dealOfferMerchantLogo = [[decoder decodeObjectForKey: @"dealOfferMerchantLogo"] retain_stub];
+    __dealOfferMerchantLogo_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"dealOfferBackgroundImage"])
+  {
+    __dealOfferBackgroundImage = [[decoder decodeObjectForKey: @"dealOfferBackgroundImage"] retain_stub];
+    __dealOfferBackgroundImage_isset = YES;
+  }
   return self;
 }
 
@@ -3639,6 +3653,14 @@
   {
     [encoder encodeInt64: __expires forKey: @"expires"];
   }
+  if (__dealOfferMerchantLogo_isset)
+  {
+    [encoder encodeObject: __dealOfferMerchantLogo forKey: @"dealOfferMerchantLogo"];
+  }
+  if (__dealOfferBackgroundImage_isset)
+  {
+    [encoder encodeObject: __dealOfferBackgroundImage forKey: @"dealOfferBackgroundImage"];
+  }
 }
 
 - (void) dealloc
@@ -3650,6 +3672,8 @@
   [__code release_stub];
   [__imageUrl release_stub];
   [__locationName release_stub];
+  [__dealOfferMerchantLogo release_stub];
+  [__dealOfferBackgroundImage release_stub];
   [super dealloc_stub];
 }
 
@@ -3851,6 +3875,48 @@
   __expires_isset = NO;
 }
 
+- (NSString *) dealOfferMerchantLogo {
+  return [[__dealOfferMerchantLogo retain_stub] autorelease_stub];
+}
+
+- (void) setDealOfferMerchantLogo: (NSString *) dealOfferMerchantLogo {
+  [dealOfferMerchantLogo retain_stub];
+  [__dealOfferMerchantLogo release_stub];
+  __dealOfferMerchantLogo = dealOfferMerchantLogo;
+  __dealOfferMerchantLogo_isset = YES;
+}
+
+- (BOOL) dealOfferMerchantLogoIsSet {
+  return __dealOfferMerchantLogo_isset;
+}
+
+- (void) unsetDealOfferMerchantLogo {
+  [__dealOfferMerchantLogo release_stub];
+  __dealOfferMerchantLogo = nil;
+  __dealOfferMerchantLogo_isset = NO;
+}
+
+- (NSString *) dealOfferBackgroundImage {
+  return [[__dealOfferBackgroundImage retain_stub] autorelease_stub];
+}
+
+- (void) setDealOfferBackgroundImage: (NSString *) dealOfferBackgroundImage {
+  [dealOfferBackgroundImage retain_stub];
+  [__dealOfferBackgroundImage release_stub];
+  __dealOfferBackgroundImage = dealOfferBackgroundImage;
+  __dealOfferBackgroundImage_isset = YES;
+}
+
+- (BOOL) dealOfferBackgroundImageIsSet {
+  return __dealOfferBackgroundImage_isset;
+}
+
+- (void) unsetDealOfferBackgroundImage {
+  [__dealOfferBackgroundImage release_stub];
+  __dealOfferBackgroundImage = nil;
+  __dealOfferBackgroundImage_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -3948,6 +4014,22 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 11:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setDealOfferMerchantLogo: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 12:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setDealOfferBackgroundImage: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -4023,6 +4105,20 @@
     [outProtocol writeI64: __expires];
     [outProtocol writeFieldEnd];
   }
+  if (__dealOfferMerchantLogo_isset) {
+    if (__dealOfferMerchantLogo != nil) {
+      [outProtocol writeFieldBeginWithName: @"dealOfferMerchantLogo" type: TType_STRING fieldID: 11];
+      [outProtocol writeString: __dealOfferMerchantLogo];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__dealOfferBackgroundImage_isset) {
+    if (__dealOfferBackgroundImage != nil) {
+      [outProtocol writeFieldBeginWithName: @"dealOfferBackgroundImage" type: TType_STRING fieldID: 12];
+      [outProtocol writeString: __dealOfferBackgroundImage];
+      [outProtocol writeFieldEnd];
+    }
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -4049,6 +4145,10 @@
   [ms appendFormat: @"%f", __price];
   [ms appendString: @",expires:"];
   [ms appendFormat: @"%qi", __expires];
+  [ms appendString: @",dealOfferMerchantLogo:"];
+  [ms appendFormat: @"\"%@\"", __dealOfferMerchantLogo];
+  [ms appendString: @",dealOfferBackgroundImage:"];
+  [ms appendFormat: @"\"%@\"", __dealOfferBackgroundImage];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
