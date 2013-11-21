@@ -23,6 +23,7 @@ struct CTokenAccessResponse_t {
 
 struct DealOfferGeoSummariesResponse_t {
   1: optional list<Core.DealOfferGeoSummary_t> dealOfferGeoSummaries;
+  2: required bool fallbackResponse;
 }
 
 service CustomerService_t {
@@ -105,7 +106,7 @@ service CustomerService_t {
    CTokenAccessResponse_t loginFacebook(1:string facebookId,2:string facebookAccessToken) throws (1:Error.TServiceException_t error);
    
    DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(1:Core.Location_t location, 2:i32 maxMiles, 
-        3:Core.SearchOptions_t searchOptions) throws (1:Error.TServiceException_t error);
+        3:Core.SearchOptions_t searchOptions,4:Core.SearchOptions_t fallbackSearchOptions) throws (1:Error.TServiceException_t error);
    
     
 

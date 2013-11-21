@@ -98,7 +98,7 @@ public class CustomerService_t {
 
     public CTokenAccessResponse_t loginFacebook(String facebookId, String facebookAccessToken) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
-    public DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
+    public DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
   }
 
@@ -168,7 +168,7 @@ public class CustomerService_t {
 
     public void loginFacebook(String facebookId, String facebookAccessToken, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.loginFacebook_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getDealOfferGeoSummariesWithin_call> resultHandler) throws org.apache.thrift.TException;
+    public void getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getDealOfferGeoSummariesWithin_call> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -1038,18 +1038,19 @@ public class CustomerService_t {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "loginFacebook failed: unknown result");
     }
 
-    public DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
+    public DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
     {
-      send_getDealOfferGeoSummariesWithin(location, maxMiles, searchOptions);
+      send_getDealOfferGeoSummariesWithin(location, maxMiles, searchOptions, fallbackSearchOptions);
       return recv_getDealOfferGeoSummariesWithin();
     }
 
-    public void send_getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions) throws org.apache.thrift.TException
+    public void send_getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions) throws org.apache.thrift.TException
     {
       getDealOfferGeoSummariesWithin_args args = new getDealOfferGeoSummariesWithin_args();
       args.setLocation(location);
       args.setMaxMiles(maxMiles);
       args.setSearchOptions(searchOptions);
+      args.setFallbackSearchOptions(fallbackSearchOptions);
       sendBase("getDealOfferGeoSummariesWithin", args);
     }
 
@@ -2159,9 +2160,9 @@ public class CustomerService_t {
       }
     }
 
-    public void getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, org.apache.thrift.async.AsyncMethodCallback<getDealOfferGeoSummariesWithin_call> resultHandler) throws org.apache.thrift.TException {
+    public void getDealOfferGeoSummariesWithin(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions, org.apache.thrift.async.AsyncMethodCallback<getDealOfferGeoSummariesWithin_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getDealOfferGeoSummariesWithin_call method_call = new getDealOfferGeoSummariesWithin_call(location, maxMiles, searchOptions, resultHandler, this, ___protocolFactory, ___transport);
+      getDealOfferGeoSummariesWithin_call method_call = new getDealOfferGeoSummariesWithin_call(location, maxMiles, searchOptions, fallbackSearchOptions, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
@@ -2170,11 +2171,13 @@ public class CustomerService_t {
       private com.talool.api.thrift.Location_t location;
       private int maxMiles;
       private com.talool.api.thrift.SearchOptions_t searchOptions;
-      public getDealOfferGeoSummariesWithin_call(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, org.apache.thrift.async.AsyncMethodCallback<getDealOfferGeoSummariesWithin_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private com.talool.api.thrift.SearchOptions_t fallbackSearchOptions;
+      public getDealOfferGeoSummariesWithin_call(com.talool.api.thrift.Location_t location, int maxMiles, com.talool.api.thrift.SearchOptions_t searchOptions, com.talool.api.thrift.SearchOptions_t fallbackSearchOptions, org.apache.thrift.async.AsyncMethodCallback<getDealOfferGeoSummariesWithin_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.location = location;
         this.maxMiles = maxMiles;
         this.searchOptions = searchOptions;
+        this.fallbackSearchOptions = fallbackSearchOptions;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -2183,6 +2186,7 @@ public class CustomerService_t {
         args.setLocation(location);
         args.setMaxMiles(maxMiles);
         args.setSearchOptions(searchOptions);
+        args.setFallbackSearchOptions(fallbackSearchOptions);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -3047,7 +3051,7 @@ public class CustomerService_t {
       public getDealOfferGeoSummariesWithin_result getResult(I iface, getDealOfferGeoSummariesWithin_args args) throws org.apache.thrift.TException {
         getDealOfferGeoSummariesWithin_result result = new getDealOfferGeoSummariesWithin_result();
         try {
-          result.success = iface.getDealOfferGeoSummariesWithin(args.location, args.maxMiles, args.searchOptions);
+          result.success = iface.getDealOfferGeoSummariesWithin(args.location, args.maxMiles, args.searchOptions, args.fallbackSearchOptions);
         } catch (com.talool.api.thrift.TServiceException_t error) {
           result.error = error;
         }
@@ -31186,6 +31190,7 @@ public class CustomerService_t {
     private static final org.apache.thrift.protocol.TField LOCATION_FIELD_DESC = new org.apache.thrift.protocol.TField("location", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField MAX_MILES_FIELD_DESC = new org.apache.thrift.protocol.TField("maxMiles", org.apache.thrift.protocol.TType.I32, (short)2);
     private static final org.apache.thrift.protocol.TField SEARCH_OPTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("searchOptions", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+    private static final org.apache.thrift.protocol.TField FALLBACK_SEARCH_OPTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("fallbackSearchOptions", org.apache.thrift.protocol.TType.STRUCT, (short)4);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -31196,12 +31201,14 @@ public class CustomerService_t {
     public com.talool.api.thrift.Location_t location; // required
     public int maxMiles; // required
     public com.talool.api.thrift.SearchOptions_t searchOptions; // required
+    public com.talool.api.thrift.SearchOptions_t fallbackSearchOptions; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       LOCATION((short)1, "location"),
       MAX_MILES((short)2, "maxMiles"),
-      SEARCH_OPTIONS((short)3, "searchOptions");
+      SEARCH_OPTIONS((short)3, "searchOptions"),
+      FALLBACK_SEARCH_OPTIONS((short)4, "fallbackSearchOptions");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -31222,6 +31229,8 @@ public class CustomerService_t {
             return MAX_MILES;
           case 3: // SEARCH_OPTIONS
             return SEARCH_OPTIONS;
+          case 4: // FALLBACK_SEARCH_OPTIONS
+            return FALLBACK_SEARCH_OPTIONS;
           default:
             return null;
         }
@@ -31273,6 +31282,8 @@ public class CustomerService_t {
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       tmpMap.put(_Fields.SEARCH_OPTIONS, new org.apache.thrift.meta_data.FieldMetaData("searchOptions", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.SearchOptions_t.class)));
+      tmpMap.put(_Fields.FALLBACK_SEARCH_OPTIONS, new org.apache.thrift.meta_data.FieldMetaData("fallbackSearchOptions", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.SearchOptions_t.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getDealOfferGeoSummariesWithin_args.class, metaDataMap);
     }
@@ -31283,13 +31294,15 @@ public class CustomerService_t {
     public getDealOfferGeoSummariesWithin_args(
       com.talool.api.thrift.Location_t location,
       int maxMiles,
-      com.talool.api.thrift.SearchOptions_t searchOptions)
+      com.talool.api.thrift.SearchOptions_t searchOptions,
+      com.talool.api.thrift.SearchOptions_t fallbackSearchOptions)
     {
       this();
       this.location = location;
       this.maxMiles = maxMiles;
       setMaxMilesIsSet(true);
       this.searchOptions = searchOptions;
+      this.fallbackSearchOptions = fallbackSearchOptions;
     }
 
     /**
@@ -31304,6 +31317,9 @@ public class CustomerService_t {
       if (other.isSetSearchOptions()) {
         this.searchOptions = new com.talool.api.thrift.SearchOptions_t(other.searchOptions);
       }
+      if (other.isSetFallbackSearchOptions()) {
+        this.fallbackSearchOptions = new com.talool.api.thrift.SearchOptions_t(other.fallbackSearchOptions);
+      }
     }
 
     public getDealOfferGeoSummariesWithin_args deepCopy() {
@@ -31315,6 +31331,7 @@ public class CustomerService_t {
       setMaxMilesIsSet(false);
       this.maxMiles = 0;
       this.searchOptions = null;
+      this.fallbackSearchOptions = null;
     }
 
     public com.talool.api.thrift.Location_t getLocation() {
@@ -31388,6 +31405,30 @@ public class CustomerService_t {
       }
     }
 
+    public com.talool.api.thrift.SearchOptions_t getFallbackSearchOptions() {
+      return this.fallbackSearchOptions;
+    }
+
+    public getDealOfferGeoSummariesWithin_args setFallbackSearchOptions(com.talool.api.thrift.SearchOptions_t fallbackSearchOptions) {
+      this.fallbackSearchOptions = fallbackSearchOptions;
+      return this;
+    }
+
+    public void unsetFallbackSearchOptions() {
+      this.fallbackSearchOptions = null;
+    }
+
+    /** Returns true if field fallbackSearchOptions is set (has been assigned a value) and false otherwise */
+    public boolean isSetFallbackSearchOptions() {
+      return this.fallbackSearchOptions != null;
+    }
+
+    public void setFallbackSearchOptionsIsSet(boolean value) {
+      if (!value) {
+        this.fallbackSearchOptions = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case LOCATION:
@@ -31414,6 +31455,14 @@ public class CustomerService_t {
         }
         break;
 
+      case FALLBACK_SEARCH_OPTIONS:
+        if (value == null) {
+          unsetFallbackSearchOptions();
+        } else {
+          setFallbackSearchOptions((com.talool.api.thrift.SearchOptions_t)value);
+        }
+        break;
+
       }
     }
 
@@ -31427,6 +31476,9 @@ public class CustomerService_t {
 
       case SEARCH_OPTIONS:
         return getSearchOptions();
+
+      case FALLBACK_SEARCH_OPTIONS:
+        return getFallbackSearchOptions();
 
       }
       throw new IllegalStateException();
@@ -31445,6 +31497,8 @@ public class CustomerService_t {
         return isSetMaxMiles();
       case SEARCH_OPTIONS:
         return isSetSearchOptions();
+      case FALLBACK_SEARCH_OPTIONS:
+        return isSetFallbackSearchOptions();
       }
       throw new IllegalStateException();
     }
@@ -31486,6 +31540,15 @@ public class CustomerService_t {
         if (!(this_present_searchOptions && that_present_searchOptions))
           return false;
         if (!this.searchOptions.equals(that.searchOptions))
+          return false;
+      }
+
+      boolean this_present_fallbackSearchOptions = true && this.isSetFallbackSearchOptions();
+      boolean that_present_fallbackSearchOptions = true && that.isSetFallbackSearchOptions();
+      if (this_present_fallbackSearchOptions || that_present_fallbackSearchOptions) {
+        if (!(this_present_fallbackSearchOptions && that_present_fallbackSearchOptions))
+          return false;
+        if (!this.fallbackSearchOptions.equals(that.fallbackSearchOptions))
           return false;
       }
 
@@ -31535,6 +31598,16 @@ public class CustomerService_t {
           return lastComparison;
         }
       }
+      lastComparison = Boolean.valueOf(isSetFallbackSearchOptions()).compareTo(typedOther.isSetFallbackSearchOptions());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetFallbackSearchOptions()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fallbackSearchOptions, typedOther.fallbackSearchOptions);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -31574,6 +31647,14 @@ public class CustomerService_t {
         sb.append(this.searchOptions);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("fallbackSearchOptions:");
+      if (this.fallbackSearchOptions == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fallbackSearchOptions);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -31586,6 +31667,9 @@ public class CustomerService_t {
       }
       if (searchOptions != null) {
         searchOptions.validate();
+      }
+      if (fallbackSearchOptions != null) {
+        fallbackSearchOptions.validate();
       }
     }
 
@@ -31651,6 +31735,15 @@ public class CustomerService_t {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 4: // FALLBACK_SEARCH_OPTIONS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.fallbackSearchOptions = new com.talool.api.thrift.SearchOptions_t();
+                struct.fallbackSearchOptions.read(iprot);
+                struct.setFallbackSearchOptionsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -31677,6 +31770,11 @@ public class CustomerService_t {
         if (struct.searchOptions != null) {
           oprot.writeFieldBegin(SEARCH_OPTIONS_FIELD_DESC);
           struct.searchOptions.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.fallbackSearchOptions != null) {
+          oprot.writeFieldBegin(FALLBACK_SEARCH_OPTIONS_FIELD_DESC);
+          struct.fallbackSearchOptions.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -31706,7 +31804,10 @@ public class CustomerService_t {
         if (struct.isSetSearchOptions()) {
           optionals.set(2);
         }
-        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetFallbackSearchOptions()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
         if (struct.isSetLocation()) {
           struct.location.write(oprot);
         }
@@ -31716,12 +31817,15 @@ public class CustomerService_t {
         if (struct.isSetSearchOptions()) {
           struct.searchOptions.write(oprot);
         }
+        if (struct.isSetFallbackSearchOptions()) {
+          struct.fallbackSearchOptions.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, getDealOfferGeoSummariesWithin_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(3);
+        BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
           struct.location = new com.talool.api.thrift.Location_t();
           struct.location.read(iprot);
@@ -31735,6 +31839,11 @@ public class CustomerService_t {
           struct.searchOptions = new com.talool.api.thrift.SearchOptions_t();
           struct.searchOptions.read(iprot);
           struct.setSearchOptionsIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.fallbackSearchOptions = new com.talool.api.thrift.SearchOptions_t();
+          struct.fallbackSearchOptions.read(iprot);
+          struct.setFallbackSearchOptionsIsSet(true);
         }
       }
     }

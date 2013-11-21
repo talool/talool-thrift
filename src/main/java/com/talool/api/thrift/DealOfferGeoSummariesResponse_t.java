@@ -34,6 +34,7 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DealOfferGeoSummariesResponse_t");
 
   private static final org.apache.thrift.protocol.TField DEAL_OFFER_GEO_SUMMARIES_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferGeoSummaries", org.apache.thrift.protocol.TType.LIST, (short)1);
+  private static final org.apache.thrift.protocol.TField FALLBACK_RESPONSE_FIELD_DESC = new org.apache.thrift.protocol.TField("fallbackResponse", org.apache.thrift.protocol.TType.BOOL, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -42,10 +43,12 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
   }
 
   public List<com.talool.api.thrift.DealOfferGeoSummary_t> dealOfferGeoSummaries; // optional
+  public boolean fallbackResponse; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    DEAL_OFFER_GEO_SUMMARIES((short)1, "dealOfferGeoSummaries");
+    DEAL_OFFER_GEO_SUMMARIES((short)1, "dealOfferGeoSummaries"),
+    FALLBACK_RESPONSE((short)2, "fallbackResponse");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -62,6 +65,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
       switch(fieldId) {
         case 1: // DEAL_OFFER_GEO_SUMMARIES
           return DEAL_OFFER_GEO_SUMMARIES;
+        case 2: // FALLBACK_RESPONSE
+          return FALLBACK_RESPONSE;
         default:
           return null;
       }
@@ -102,6 +107,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
   }
 
   // isset id assignments
+  private static final int __FALLBACKRESPONSE_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
   private _Fields optionals[] = {_Fields.DEAL_OFFER_GEO_SUMMARIES};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -109,6 +116,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     tmpMap.put(_Fields.DEAL_OFFER_GEO_SUMMARIES, new org.apache.thrift.meta_data.FieldMetaData("dealOfferGeoSummaries", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.DealOfferGeoSummary_t.class))));
+    tmpMap.put(_Fields.FALLBACK_RESPONSE, new org.apache.thrift.meta_data.FieldMetaData("fallbackResponse", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DealOfferGeoSummariesResponse_t.class, metaDataMap);
   }
@@ -116,10 +125,19 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
   public DealOfferGeoSummariesResponse_t() {
   }
 
+  public DealOfferGeoSummariesResponse_t(
+    boolean fallbackResponse)
+  {
+    this();
+    this.fallbackResponse = fallbackResponse;
+    setFallbackResponseIsSet(true);
+  }
+
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public DealOfferGeoSummariesResponse_t(DealOfferGeoSummariesResponse_t other) {
+    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetDealOfferGeoSummaries()) {
       List<com.talool.api.thrift.DealOfferGeoSummary_t> __this__dealOfferGeoSummaries = new ArrayList<com.talool.api.thrift.DealOfferGeoSummary_t>();
       for (com.talool.api.thrift.DealOfferGeoSummary_t other_element : other.dealOfferGeoSummaries) {
@@ -127,6 +145,7 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
       }
       this.dealOfferGeoSummaries = __this__dealOfferGeoSummaries;
     }
+    this.fallbackResponse = other.fallbackResponse;
   }
 
   public DealOfferGeoSummariesResponse_t deepCopy() {
@@ -135,6 +154,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
 
   public void clear() {
     this.dealOfferGeoSummaries = null;
+    setFallbackResponseIsSet(false);
+    this.fallbackResponse = false;
   }
 
   public int getDealOfferGeoSummariesSize() {
@@ -176,6 +197,29 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     }
   }
 
+  public boolean isFallbackResponse() {
+    return this.fallbackResponse;
+  }
+
+  public DealOfferGeoSummariesResponse_t setFallbackResponse(boolean fallbackResponse) {
+    this.fallbackResponse = fallbackResponse;
+    setFallbackResponseIsSet(true);
+    return this;
+  }
+
+  public void unsetFallbackResponse() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __FALLBACKRESPONSE_ISSET_ID);
+  }
+
+  /** Returns true if field fallbackResponse is set (has been assigned a value) and false otherwise */
+  public boolean isSetFallbackResponse() {
+    return EncodingUtils.testBit(__isset_bitfield, __FALLBACKRESPONSE_ISSET_ID);
+  }
+
+  public void setFallbackResponseIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __FALLBACKRESPONSE_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case DEAL_OFFER_GEO_SUMMARIES:
@@ -186,6 +230,14 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
       }
       break;
 
+    case FALLBACK_RESPONSE:
+      if (value == null) {
+        unsetFallbackResponse();
+      } else {
+        setFallbackResponse((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -193,6 +245,9 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     switch (field) {
     case DEAL_OFFER_GEO_SUMMARIES:
       return getDealOfferGeoSummaries();
+
+    case FALLBACK_RESPONSE:
+      return Boolean.valueOf(isFallbackResponse());
 
     }
     throw new IllegalStateException();
@@ -207,6 +262,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     switch (field) {
     case DEAL_OFFER_GEO_SUMMARIES:
       return isSetDealOfferGeoSummaries();
+    case FALLBACK_RESPONSE:
+      return isSetFallbackResponse();
     }
     throw new IllegalStateException();
   }
@@ -233,6 +290,15 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
         return false;
     }
 
+    boolean this_present_fallbackResponse = true;
+    boolean that_present_fallbackResponse = true;
+    if (this_present_fallbackResponse || that_present_fallbackResponse) {
+      if (!(this_present_fallbackResponse && that_present_fallbackResponse))
+        return false;
+      if (this.fallbackResponse != that.fallbackResponse)
+        return false;
+    }
+
     return true;
   }
 
@@ -255,6 +321,16 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     }
     if (isSetDealOfferGeoSummaries()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealOfferGeoSummaries, typedOther.dealOfferGeoSummaries);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetFallbackResponse()).compareTo(typedOther.isSetFallbackResponse());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetFallbackResponse()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fallbackResponse, typedOther.fallbackResponse);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -288,12 +364,17 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
       }
       first = false;
     }
+    if (!first) sb.append(", ");
+    sb.append("fallbackResponse:");
+    sb.append(this.fallbackResponse);
+    first = false;
     sb.append(")");
     return sb.toString();
   }
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
+    // alas, we cannot check 'fallbackResponse' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
   }
 
@@ -307,6 +388,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te.getMessage());
@@ -350,6 +433,14 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 2: // FALLBACK_RESPONSE
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.fallbackResponse = iprot.readBool();
+              struct.setFallbackResponseIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -358,6 +449,9 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetFallbackResponse()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'fallbackResponse' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 
@@ -379,6 +473,9 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
           oprot.writeFieldEnd();
         }
       }
+      oprot.writeFieldBegin(FALLBACK_RESPONSE_FIELD_DESC);
+      oprot.writeBool(struct.fallbackResponse);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -396,6 +493,7 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, DealOfferGeoSummariesResponse_t struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
+      oprot.writeBool(struct.fallbackResponse);
       BitSet optionals = new BitSet();
       if (struct.isSetDealOfferGeoSummaries()) {
         optionals.set(0);
@@ -415,6 +513,8 @@ public class DealOfferGeoSummariesResponse_t implements org.apache.thrift.TBase<
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, DealOfferGeoSummariesResponse_t struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
+      struct.fallbackResponse = iprot.readBool();
+      struct.setFallbackResponseIsSet(true);
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         {
