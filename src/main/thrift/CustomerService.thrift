@@ -26,6 +26,10 @@ struct DealOfferGeoSummariesResponse_t {
   2: required bool fallbackResponse;
 }
 
+struct MerchantsResponse_t {
+  1: optional list<Core.Merchant_t> merchants;
+}
+
 service CustomerService_t {
 
    CTokenAccess_t createAccount(1:Core.Customer_t customer,2:string password) throws (1:Core.ServiceException_t error);
@@ -107,7 +111,8 @@ service CustomerService_t {
    
    DealOfferGeoSummariesResponse_t getDealOfferGeoSummariesWithin(1:Core.Location_t location, 2:i32 maxMiles, 
         3:Core.SearchOptions_t searchOptions,4:Core.SearchOptions_t fallbackSearchOptions) throws (1:Error.TServiceException_t error);
-   
-    
+        
+   MerchantsResponse_t getMerchantsByDealOfferId(1:string dealOfferId,2:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
+        
 
 }
