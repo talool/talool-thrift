@@ -7,14 +7,15 @@
 	</parent>
 	<groupId>com.talool</groupId>
 	<artifactId>talool-thrift</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<name>Talool Thrift</name>
 	<description>Thrift Stubs</description>
 	<scm>
 		<connection>scm:git:git@github.com:talool/talool-thrift.git</connection>
 		<url>scm:git:git@github.com:talool/talool-thrift.git</url>
 		<developerConnection>scm:git:git@github.com:talool/talool-thrift.git</developerConnection>
-	</scm>
+	  <tag>talool-thrift-1.0.4</tag>
+  </scm>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
