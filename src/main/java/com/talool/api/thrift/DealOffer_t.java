@@ -45,6 +45,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   private static final org.apache.thrift.protocol.TField EXPIRES_FIELD_DESC = new org.apache.thrift.protocol.TField("expires", org.apache.thrift.protocol.TType.I64, (short)10);
   private static final org.apache.thrift.protocol.TField DEAL_OFFER_MERCHANT_LOGO_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferMerchantLogo", org.apache.thrift.protocol.TType.STRING, (short)11);
   private static final org.apache.thrift.protocol.TField DEAL_OFFER_BACKGROUND_IMAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferBackgroundImage", org.apache.thrift.protocol.TType.STRING, (short)12);
+  private static final org.apache.thrift.protocol.TField PROPERTIES_FIELD_DESC = new org.apache.thrift.protocol.TField("properties", org.apache.thrift.protocol.TType.MAP, (short)13);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -68,6 +69,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   public long expires; // optional
   public String dealOfferMerchantLogo; // optional
   public String dealOfferBackgroundImage; // optional
+  public Map<String,String> properties; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -86,7 +88,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     PRICE((short)9, "price"),
     EXPIRES((short)10, "expires"),
     DEAL_OFFER_MERCHANT_LOGO((short)11, "dealOfferMerchantLogo"),
-    DEAL_OFFER_BACKGROUND_IMAGE((short)12, "dealOfferBackgroundImage");
+    DEAL_OFFER_BACKGROUND_IMAGE((short)12, "dealOfferBackgroundImage"),
+    PROPERTIES((short)13, "properties");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -125,6 +128,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
           return DEAL_OFFER_MERCHANT_LOGO;
         case 12: // DEAL_OFFER_BACKGROUND_IMAGE
           return DEAL_OFFER_BACKGROUND_IMAGE;
+        case 13: // PROPERTIES
+          return PROPERTIES;
         default:
           return null;
       }
@@ -168,7 +173,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
   private static final int __PRICE_ISSET_ID = 0;
   private static final int __EXPIRES_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
-  private _Fields optionals[] = {_Fields.SUMMARY,_Fields.CODE,_Fields.IMAGE_URL,_Fields.LOCATION_NAME,_Fields.PRICE,_Fields.EXPIRES,_Fields.DEAL_OFFER_MERCHANT_LOGO,_Fields.DEAL_OFFER_BACKGROUND_IMAGE};
+  private _Fields optionals[] = {_Fields.SUMMARY,_Fields.CODE,_Fields.IMAGE_URL,_Fields.LOCATION_NAME,_Fields.PRICE,_Fields.EXPIRES,_Fields.DEAL_OFFER_MERCHANT_LOGO,_Fields.DEAL_OFFER_BACKGROUND_IMAGE,_Fields.PROPERTIES};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -196,6 +201,10 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.DEAL_OFFER_BACKGROUND_IMAGE, new org.apache.thrift.meta_data.FieldMetaData("dealOfferBackgroundImage", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PROPERTIES, new org.apache.thrift.meta_data.FieldMetaData("properties", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DealOffer_t.class, metaDataMap);
   }
@@ -253,6 +262,21 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     if (other.isSetDealOfferBackgroundImage()) {
       this.dealOfferBackgroundImage = other.dealOfferBackgroundImage;
     }
+    if (other.isSetProperties()) {
+      Map<String,String> __this__properties = new HashMap<String,String>();
+      for (Map.Entry<String, String> other_element : other.properties.entrySet()) {
+
+        String other_element_key = other_element.getKey();
+        String other_element_value = other_element.getValue();
+
+        String __this__properties_copy_key = other_element_key;
+
+        String __this__properties_copy_value = other_element_value;
+
+        __this__properties.put(__this__properties_copy_key, __this__properties_copy_value);
+      }
+      this.properties = __this__properties;
+    }
   }
 
   public DealOffer_t deepCopy() {
@@ -274,6 +298,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     this.expires = 0;
     this.dealOfferMerchantLogo = null;
     this.dealOfferBackgroundImage = null;
+    this.properties = null;
   }
 
   public String getDealOfferId() {
@@ -570,6 +595,41 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     }
   }
 
+  public int getPropertiesSize() {
+    return (this.properties == null) ? 0 : this.properties.size();
+  }
+
+  public void putToProperties(String key, String val) {
+    if (this.properties == null) {
+      this.properties = new HashMap<String,String>();
+    }
+    this.properties.put(key, val);
+  }
+
+  public Map<String,String> getProperties() {
+    return this.properties;
+  }
+
+  public DealOffer_t setProperties(Map<String,String> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public void unsetProperties() {
+    this.properties = null;
+  }
+
+  /** Returns true if field properties is set (has been assigned a value) and false otherwise */
+  public boolean isSetProperties() {
+    return this.properties != null;
+  }
+
+  public void setPropertiesIsSet(boolean value) {
+    if (!value) {
+      this.properties = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case DEAL_OFFER_ID:
@@ -668,6 +728,14 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       }
       break;
 
+    case PROPERTIES:
+      if (value == null) {
+        unsetProperties();
+      } else {
+        setProperties((Map<String,String>)value);
+      }
+      break;
+
     }
   }
 
@@ -709,6 +777,9 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
     case DEAL_OFFER_BACKGROUND_IMAGE:
       return getDealOfferBackgroundImage();
 
+    case PROPERTIES:
+      return getProperties();
+
     }
     throw new IllegalStateException();
   }
@@ -744,6 +815,8 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       return isSetDealOfferMerchantLogo();
     case DEAL_OFFER_BACKGROUND_IMAGE:
       return isSetDealOfferBackgroundImage();
+    case PROPERTIES:
+      return isSetProperties();
     }
     throw new IllegalStateException();
   }
@@ -866,6 +939,15 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (!(this_present_dealOfferBackgroundImage && that_present_dealOfferBackgroundImage))
         return false;
       if (!this.dealOfferBackgroundImage.equals(that.dealOfferBackgroundImage))
+        return false;
+    }
+
+    boolean this_present_properties = true && this.isSetProperties();
+    boolean that_present_properties = true && that.isSetProperties();
+    if (this_present_properties || that_present_properties) {
+      if (!(this_present_properties && that_present_properties))
+        return false;
+      if (!this.properties.equals(that.properties))
         return false;
     }
 
@@ -1005,6 +1087,16 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetProperties()).compareTo(typedOther.isSetProperties());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetProperties()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.properties, typedOther.properties);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -1125,6 +1217,16 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
         sb.append("null");
       } else {
         sb.append(this.dealOfferBackgroundImage);
+      }
+      first = false;
+    }
+    if (isSetProperties()) {
+      if (!first) sb.append(", ");
+      sb.append("properties:");
+      if (this.properties == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.properties);
       }
       first = false;
     }
@@ -1285,6 +1387,26 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 13: // PROPERTIES
+            if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+              {
+                org.apache.thrift.protocol.TMap _map18 = iprot.readMapBegin();
+                struct.properties = new HashMap<String,String>(2*_map18.size);
+                for (int _i19 = 0; _i19 < _map18.size; ++_i19)
+                {
+                  String _key20; // required
+                  String _val21; // required
+                  _key20 = iprot.readString();
+                  _val21 = iprot.readString();
+                  struct.properties.put(_key20, _val21);
+                }
+                iprot.readMapEnd();
+              }
+              struct.setPropertiesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1372,6 +1494,21 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
           oprot.writeFieldEnd();
         }
       }
+      if (struct.properties != null) {
+        if (struct.isSetProperties()) {
+          oprot.writeFieldBegin(PROPERTIES_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.properties.size()));
+            for (Map.Entry<String, String> _iter22 : struct.properties.entrySet())
+            {
+              oprot.writeString(_iter22.getKey());
+              oprot.writeString(_iter22.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1418,7 +1555,10 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (struct.isSetDealOfferBackgroundImage()) {
         optionals.set(7);
       }
-      oprot.writeBitSet(optionals, 8);
+      if (struct.isSetProperties()) {
+        optionals.set(8);
+      }
+      oprot.writeBitSet(optionals, 9);
       if (struct.isSetSummary()) {
         oprot.writeString(struct.summary);
       }
@@ -1443,6 +1583,16 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (struct.isSetDealOfferBackgroundImage()) {
         oprot.writeString(struct.dealOfferBackgroundImage);
       }
+      if (struct.isSetProperties()) {
+        {
+          oprot.writeI32(struct.properties.size());
+          for (Map.Entry<String, String> _iter23 : struct.properties.entrySet())
+          {
+            oprot.writeString(_iter23.getKey());
+            oprot.writeString(_iter23.getValue());
+          }
+        }
+      }
     }
 
     @Override
@@ -1457,7 +1607,7 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       struct.setDealTypeIsSet(true);
       struct.title = iprot.readString();
       struct.setTitleIsSet(true);
-      BitSet incoming = iprot.readBitSet(8);
+      BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         struct.summary = iprot.readString();
         struct.setSummaryIsSet(true);
@@ -1489,6 +1639,21 @@ public class DealOffer_t implements org.apache.thrift.TBase<DealOffer_t, DealOff
       if (incoming.get(7)) {
         struct.dealOfferBackgroundImage = iprot.readString();
         struct.setDealOfferBackgroundImageIsSet(true);
+      }
+      if (incoming.get(8)) {
+        {
+          org.apache.thrift.protocol.TMap _map24 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.properties = new HashMap<String,String>(2*_map24.size);
+          for (int _i25 = 0; _i25 < _map24.size; ++_i25)
+          {
+            String _key26; // required
+            String _val27; // required
+            _key26 = iprot.readString();
+            _val27 = iprot.readString();
+            struct.properties.put(_key26, _val27);
+          }
+        }
+        struct.setPropertiesIsSet(true);
       }
     }
   }

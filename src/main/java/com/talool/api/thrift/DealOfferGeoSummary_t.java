@@ -702,15 +702,15 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
           case 4: // DOUBLE_METRICS
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
-                org.apache.thrift.protocol.TMap _map18 = iprot.readMapBegin();
-                struct.doubleMetrics = new HashMap<String,Double>(2*_map18.size);
-                for (int _i19 = 0; _i19 < _map18.size; ++_i19)
+                org.apache.thrift.protocol.TMap _map28 = iprot.readMapBegin();
+                struct.doubleMetrics = new HashMap<String,Double>(2*_map28.size);
+                for (int _i29 = 0; _i29 < _map28.size; ++_i29)
                 {
-                  String _key20; // required
-                  double _val21; // required
-                  _key20 = iprot.readString();
-                  _val21 = iprot.readDouble();
-                  struct.doubleMetrics.put(_key20, _val21);
+                  String _key30; // required
+                  double _val31; // required
+                  _key30 = iprot.readString();
+                  _val31 = iprot.readDouble();
+                  struct.doubleMetrics.put(_key30, _val31);
                 }
                 iprot.readMapEnd();
               }
@@ -722,15 +722,15 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
           case 5: // LONG_METRICS
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
-                org.apache.thrift.protocol.TMap _map22 = iprot.readMapBegin();
-                struct.longMetrics = new HashMap<String,Long>(2*_map22.size);
-                for (int _i23 = 0; _i23 < _map22.size; ++_i23)
+                org.apache.thrift.protocol.TMap _map32 = iprot.readMapBegin();
+                struct.longMetrics = new HashMap<String,Long>(2*_map32.size);
+                for (int _i33 = 0; _i33 < _map32.size; ++_i33)
                 {
-                  String _key24; // required
-                  long _val25; // required
-                  _key24 = iprot.readString();
-                  _val25 = iprot.readI64();
-                  struct.longMetrics.put(_key24, _val25);
+                  String _key34; // required
+                  long _val35; // required
+                  _key34 = iprot.readString();
+                  _val35 = iprot.readI64();
+                  struct.longMetrics.put(_key34, _val35);
                 }
                 iprot.readMapEnd();
               }
@@ -774,10 +774,10 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
           oprot.writeFieldBegin(DOUBLE_METRICS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.DOUBLE, struct.doubleMetrics.size()));
-            for (Map.Entry<String, Double> _iter26 : struct.doubleMetrics.entrySet())
+            for (Map.Entry<String, Double> _iter36 : struct.doubleMetrics.entrySet())
             {
-              oprot.writeString(_iter26.getKey());
-              oprot.writeDouble(_iter26.getValue());
+              oprot.writeString(_iter36.getKey());
+              oprot.writeDouble(_iter36.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -789,10 +789,10 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
           oprot.writeFieldBegin(LONG_METRICS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.I64, struct.longMetrics.size()));
-            for (Map.Entry<String, Long> _iter27 : struct.longMetrics.entrySet())
+            for (Map.Entry<String, Long> _iter37 : struct.longMetrics.entrySet())
             {
-              oprot.writeString(_iter27.getKey());
-              oprot.writeI64(_iter27.getValue());
+              oprot.writeString(_iter37.getKey());
+              oprot.writeI64(_iter37.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -840,20 +840,20 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
       if (struct.isSetDoubleMetrics()) {
         {
           oprot.writeI32(struct.doubleMetrics.size());
-          for (Map.Entry<String, Double> _iter28 : struct.doubleMetrics.entrySet())
+          for (Map.Entry<String, Double> _iter38 : struct.doubleMetrics.entrySet())
           {
-            oprot.writeString(_iter28.getKey());
-            oprot.writeDouble(_iter28.getValue());
+            oprot.writeString(_iter38.getKey());
+            oprot.writeDouble(_iter38.getValue());
           }
         }
       }
       if (struct.isSetLongMetrics()) {
         {
           oprot.writeI32(struct.longMetrics.size());
-          for (Map.Entry<String, Long> _iter29 : struct.longMetrics.entrySet())
+          for (Map.Entry<String, Long> _iter39 : struct.longMetrics.entrySet())
           {
-            oprot.writeString(_iter29.getKey());
-            oprot.writeI64(_iter29.getValue());
+            oprot.writeString(_iter39.getKey());
+            oprot.writeI64(_iter39.getValue());
           }
         }
       }
@@ -876,30 +876,30 @@ public class DealOfferGeoSummary_t implements org.apache.thrift.TBase<DealOfferG
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TMap _map30 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.DOUBLE, iprot.readI32());
-          struct.doubleMetrics = new HashMap<String,Double>(2*_map30.size);
-          for (int _i31 = 0; _i31 < _map30.size; ++_i31)
+          org.apache.thrift.protocol.TMap _map40 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.DOUBLE, iprot.readI32());
+          struct.doubleMetrics = new HashMap<String,Double>(2*_map40.size);
+          for (int _i41 = 0; _i41 < _map40.size; ++_i41)
           {
-            String _key32; // required
-            double _val33; // required
-            _key32 = iprot.readString();
-            _val33 = iprot.readDouble();
-            struct.doubleMetrics.put(_key32, _val33);
+            String _key42; // required
+            double _val43; // required
+            _key42 = iprot.readString();
+            _val43 = iprot.readDouble();
+            struct.doubleMetrics.put(_key42, _val43);
           }
         }
         struct.setDoubleMetricsIsSet(true);
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TMap _map34 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.I64, iprot.readI32());
-          struct.longMetrics = new HashMap<String,Long>(2*_map34.size);
-          for (int _i35 = 0; _i35 < _map34.size; ++_i35)
+          org.apache.thrift.protocol.TMap _map44 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.I64, iprot.readI32());
+          struct.longMetrics = new HashMap<String,Long>(2*_map44.size);
+          for (int _i45 = 0; _i45 < _map44.size; ++_i45)
           {
-            String _key36; // required
-            long _val37; // required
-            _key36 = iprot.readString();
-            _val37 = iprot.readI64();
-            struct.longMetrics.put(_key36, _val37);
+            String _key46; // required
+            long _val47; // required
+            _key46 = iprot.readString();
+            _val47 = iprot.readI64();
+            struct.longMetrics.put(_key46, _val47);
           }
         }
         struct.setLongMetricsIsSet(true);

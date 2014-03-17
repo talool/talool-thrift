@@ -30,18 +30,10 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CoreConstants {
+public class PropertyConstants {
 
-  public static final String METRIC_TOTAL_MERCHANTS = "TotalMerchants";
+  public static final String FUNDRAISING_BOOK = "fundraising_book";
 
-  public static final String METRIC_TOTAL_REDEMPTIONS = "TotalRedemptions";
-
-  public static final String METRIC_TOTAL_DEALS = "TotalDeals";
-
-  public static final String METRIC_TOTAL_ACQUIRES = "TotalAcquires";
-
-  public static final String MERCHANT_CODE = "MerchantCode";
-
-  public static final String ACTIVATION_CODE = "ActivationCode";
+  public static final String SUBSCRIPTION = "subscription";
 
 }

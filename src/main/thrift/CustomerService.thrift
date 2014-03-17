@@ -30,6 +30,11 @@ struct MerchantsResponse_t {
   1: optional list<Core.Merchant_t> merchants;
 }
 
+struct ValidateCodeResponse_t {
+  1: required bool valid;
+  2: optional string codeType;
+}
+
 service CustomerService_t {
 
    CTokenAccess_t createAccount(1:Core.Customer_t customer,2:string password) throws (1:Core.ServiceException_t error);
@@ -116,5 +121,6 @@ service CustomerService_t {
         
    MerchantsResponse_t getMerchantsByDealOfferId(1:string dealOfferId,2:Core.SearchOptions_t searchOptions) throws (1:Core.ServiceException_t error);
         
+   ValidateCodeResponse_t validateCode(1:string code,2:string dealOfferId) throws (1:Error.TServiceException_t error);
 
 }

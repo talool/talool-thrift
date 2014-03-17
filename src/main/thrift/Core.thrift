@@ -13,6 +13,9 @@ const string METRIC_TOTAL_REDEMPTIONS = 'TotalRedemptions'
 const string METRIC_TOTAL_DEALS = 'TotalDeals'
 const string METRIC_TOTAL_ACQUIRES = 'TotalAcquires'
 
+const string MERCHANT_CODE = 'MerchantCode'
+const string ACTIVATION_CODE = 'ActivationCode'
+
 enum Sex_t { M,F,U }
 
 enum SocialNetwork_t { Facebook, Twitter, Pinterest }
@@ -127,6 +130,7 @@ struct DealOffer_t {
   10: optional Timestamp expires;
   11: optional string dealOfferMerchantLogo;
   12: optional string dealOfferBackgroundImage;
+  13: optional map<string,string> properties;
 }
 
 struct SearchOptions_t {
