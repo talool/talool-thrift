@@ -44,4 +44,6 @@ public class CoreConstants {
 
   public static final String ACTIVATION_CODE = "ActivationCode";
 
+  public static final String CODE_TYPE = "CodeType";
+
 }

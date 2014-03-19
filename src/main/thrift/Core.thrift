@@ -15,6 +15,7 @@ const string METRIC_TOTAL_ACQUIRES = 'TotalAcquires'
 
 const string MERCHANT_CODE = 'MerchantCode'
 const string ACTIVATION_CODE = 'ActivationCode'
+const string CODE_TYPE = 'CodeType'
 
 enum Sex_t { M,F,U }
 
