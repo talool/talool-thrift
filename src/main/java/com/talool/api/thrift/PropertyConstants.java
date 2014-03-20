@@ -36,4 +36,8 @@ public class PropertyConstants {
 
   public static final String SUBSCRIPTION = "subscription";
 
+  public static final String MERCHANT_CODE = "merchant_code";
+
+  public static final String ACTIVATION_CODE = "activation_code";
+
 }
