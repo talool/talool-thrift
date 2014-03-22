@@ -13,10 +13,6 @@ const string METRIC_TOTAL_REDEMPTIONS = 'TotalRedemptions'
 const string METRIC_TOTAL_DEALS = 'TotalDeals'
 const string METRIC_TOTAL_ACQUIRES = 'TotalAcquires'
 
-const string MERCHANT_CODE = 'MerchantCode'
-const string ACTIVATION_CODE = 'ActivationCode'
-const string CODE_TYPE = 'CodeType'
-
 enum Sex_t { M,F,U }
 
 enum SocialNetwork_t { Facebook, Twitter, Pinterest }

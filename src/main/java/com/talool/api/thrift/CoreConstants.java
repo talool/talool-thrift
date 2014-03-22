@@ -40,10 +40,4 @@ public class CoreConstants {
 
   public static final String METRIC_TOTAL_ACQUIRES = "TotalAcquires";
 
-  public static final String MERCHANT_CODE = "MerchantCode";
-
-  public static final String ACTIVATION_CODE = "ActivationCode";
-
-  public static final String CODE_TYPE = "CodeType";
-
 }
