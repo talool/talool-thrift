@@ -24,14 +24,16 @@ FRIEND_GIFT_REDEEM,
 FRIEND_PURCHASE_DEAL_OFFER,
 MERCHANT_REACH,
 TALOOL_REACH,
-AD
+AD,
+FUNDRAISER_SUPPORT
 }
 
-enum LinkType { MERCHANT, DEAL, DEAL_OFFER, GIFT, CUSTOMER, DEAL_ACQUIRE, MERCHANT_LOCATION, EXTERNAL } 
+enum LinkType { MERCHANT, DEAL, DEAL_OFFER, GIFT, CUSTOMER, DEAL_ACQUIRE, MERCHANT_LOCATION, EXTERNAL, EMAIL } 
 
 struct ActivityLink_t {
    1: required LinkType linkType;
    2: required string linkElement;
+   3: optional map<string,string> properties;
 }
 
 struct Activity_t {

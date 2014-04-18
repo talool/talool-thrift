@@ -35,6 +35,7 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
 
   private static final org.apache.thrift.protocol.TField LINK_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("linkType", org.apache.thrift.protocol.TType.I32, (short)1);
   private static final org.apache.thrift.protocol.TField LINK_ELEMENT_FIELD_DESC = new org.apache.thrift.protocol.TField("linkElement", org.apache.thrift.protocol.TType.STRING, (short)2);
+  private static final org.apache.thrift.protocol.TField PROPERTIES_FIELD_DESC = new org.apache.thrift.protocol.TField("properties", org.apache.thrift.protocol.TType.MAP, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,6 +49,7 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
    */
   public LinkType linkType; // required
   public String linkElement; // required
+  public Map<String,String> properties; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -56,7 +58,8 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
      * @see LinkType
      */
     LINK_TYPE((short)1, "linkType"),
-    LINK_ELEMENT((short)2, "linkElement");
+    LINK_ELEMENT((short)2, "linkElement"),
+    PROPERTIES((short)3, "properties");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -75,6 +78,8 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
           return LINK_TYPE;
         case 2: // LINK_ELEMENT
           return LINK_ELEMENT;
+        case 3: // PROPERTIES
+          return PROPERTIES;
         default:
           return null;
       }
@@ -115,6 +120,7 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
   }
 
   // isset id assignments
+  private _Fields optionals[] = {_Fields.PROPERTIES};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -122,6 +128,10 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, LinkType.class)));
     tmpMap.put(_Fields.LINK_ELEMENT, new org.apache.thrift.meta_data.FieldMetaData("linkElement", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PROPERTIES, new org.apache.thrift.meta_data.FieldMetaData("properties", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ActivityLink_t.class, metaDataMap);
   }
@@ -148,6 +158,21 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
     if (other.isSetLinkElement()) {
       this.linkElement = other.linkElement;
     }
+    if (other.isSetProperties()) {
+      Map<String,String> __this__properties = new HashMap<String,String>();
+      for (Map.Entry<String, String> other_element : other.properties.entrySet()) {
+
+        String other_element_key = other_element.getKey();
+        String other_element_value = other_element.getValue();
+
+        String __this__properties_copy_key = other_element_key;
+
+        String __this__properties_copy_value = other_element_value;
+
+        __this__properties.put(__this__properties_copy_key, __this__properties_copy_value);
+      }
+      this.properties = __this__properties;
+    }
   }
 
   public ActivityLink_t deepCopy() {
@@ -157,6 +182,7 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
   public void clear() {
     this.linkType = null;
     this.linkElement = null;
+    this.properties = null;
   }
 
   /**
@@ -215,6 +241,41 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
     }
   }
 
+  public int getPropertiesSize() {
+    return (this.properties == null) ? 0 : this.properties.size();
+  }
+
+  public void putToProperties(String key, String val) {
+    if (this.properties == null) {
+      this.properties = new HashMap<String,String>();
+    }
+    this.properties.put(key, val);
+  }
+
+  public Map<String,String> getProperties() {
+    return this.properties;
+  }
+
+  public ActivityLink_t setProperties(Map<String,String> properties) {
+    this.properties = properties;
+    return this;
+  }
+
+  public void unsetProperties() {
+    this.properties = null;
+  }
+
+  /** Returns true if field properties is set (has been assigned a value) and false otherwise */
+  public boolean isSetProperties() {
+    return this.properties != null;
+  }
+
+  public void setPropertiesIsSet(boolean value) {
+    if (!value) {
+      this.properties = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case LINK_TYPE:
@@ -233,6 +294,14 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       }
       break;
 
+    case PROPERTIES:
+      if (value == null) {
+        unsetProperties();
+      } else {
+        setProperties((Map<String,String>)value);
+      }
+      break;
+
     }
   }
 
@@ -243,6 +312,9 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
 
     case LINK_ELEMENT:
       return getLinkElement();
+
+    case PROPERTIES:
+      return getProperties();
 
     }
     throw new IllegalStateException();
@@ -259,6 +331,8 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       return isSetLinkType();
     case LINK_ELEMENT:
       return isSetLinkElement();
+    case PROPERTIES:
+      return isSetProperties();
     }
     throw new IllegalStateException();
   }
@@ -291,6 +365,15 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       if (!(this_present_linkElement && that_present_linkElement))
         return false;
       if (!this.linkElement.equals(that.linkElement))
+        return false;
+    }
+
+    boolean this_present_properties = true && this.isSetProperties();
+    boolean that_present_properties = true && that.isSetProperties();
+    if (this_present_properties || that_present_properties) {
+      if (!(this_present_properties && that_present_properties))
+        return false;
+      if (!this.properties.equals(that.properties))
         return false;
     }
 
@@ -330,6 +413,16 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetProperties()).compareTo(typedOther.isSetProperties());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetProperties()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.properties, typedOther.properties);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -365,6 +458,16 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       sb.append(this.linkElement);
     }
     first = false;
+    if (isSetProperties()) {
+      if (!first) sb.append(", ");
+      sb.append("properties:");
+      if (this.properties == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.properties);
+      }
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -430,6 +533,26 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 3: // PROPERTIES
+            if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+              {
+                org.apache.thrift.protocol.TMap _map0 = iprot.readMapBegin();
+                struct.properties = new HashMap<String,String>(2*_map0.size);
+                for (int _i1 = 0; _i1 < _map0.size; ++_i1)
+                {
+                  String _key2; // required
+                  String _val3; // required
+                  _key2 = iprot.readString();
+                  _val3 = iprot.readString();
+                  struct.properties.put(_key2, _val3);
+                }
+                iprot.readMapEnd();
+              }
+              struct.setPropertiesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -455,6 +578,21 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
         oprot.writeString(struct.linkElement);
         oprot.writeFieldEnd();
       }
+      if (struct.properties != null) {
+        if (struct.isSetProperties()) {
+          oprot.writeFieldBegin(PROPERTIES_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.properties.size()));
+            for (Map.Entry<String, String> _iter4 : struct.properties.entrySet())
+            {
+              oprot.writeString(_iter4.getKey());
+              oprot.writeString(_iter4.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -474,6 +612,21 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI32(struct.linkType.getValue());
       oprot.writeString(struct.linkElement);
+      BitSet optionals = new BitSet();
+      if (struct.isSetProperties()) {
+        optionals.set(0);
+      }
+      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetProperties()) {
+        {
+          oprot.writeI32(struct.properties.size());
+          for (Map.Entry<String, String> _iter5 : struct.properties.entrySet())
+          {
+            oprot.writeString(_iter5.getKey());
+            oprot.writeString(_iter5.getValue());
+          }
+        }
+      }
     }
 
     @Override
@@ -483,6 +636,22 @@ public class ActivityLink_t implements org.apache.thrift.TBase<ActivityLink_t, A
       struct.setLinkTypeIsSet(true);
       struct.linkElement = iprot.readString();
       struct.setLinkElementIsSet(true);
+      BitSet incoming = iprot.readBitSet(1);
+      if (incoming.get(0)) {
+        {
+          org.apache.thrift.protocol.TMap _map6 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.properties = new HashMap<String,String>(2*_map6.size);
+          for (int _i7 = 0; _i7 < _map6.size; ++_i7)
+          {
+            String _key8; // required
+            String _val9; // required
+            _key8 = iprot.readString();
+            _val9 = iprot.readString();
+            struct.properties.put(_key8, _val9);
+          }
+        }
+        struct.setPropertiesIsSet(true);
+      }
     }
   }
 

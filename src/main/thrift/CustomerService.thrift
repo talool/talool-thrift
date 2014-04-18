@@ -35,6 +35,10 @@ struct ValidateCodeResponse_t {
   2: optional string codeType;
 }
 
+struct EmailBodyResponse_t {
+  1: optional string emailBody;
+}
+
 service CustomerService_t {
 
    CTokenAccess_t createAccount(1:Core.Customer_t customer,2:string password) throws (1:Core.ServiceException_t error);
@@ -132,5 +136,6 @@ service CustomerService_t {
    Payment.TransactionResult_t purchaseWithCode(1:string dealOfferId, 2:string paymentCode,3:map<string,string> paymentProperties) 
      throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
+   EmailBodyResponse_t getEmailBody(1:string templateId, 2:string entityId) throws (1:Error.TServiceException_t error);
 
 }

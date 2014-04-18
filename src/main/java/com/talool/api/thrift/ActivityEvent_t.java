@@ -27,7 +27,8 @@ public enum ActivityEvent_t implements org.apache.thrift.TEnum {
   FRIEND_PURCHASE_DEAL_OFFER(12),
   MERCHANT_REACH(13),
   TALOOL_REACH(14),
-  AD(15);
+  AD(15),
+  FUNDRAISER_SUPPORT(16);
 
   private final int value;
 
@@ -80,6 +81,8 @@ public enum ActivityEvent_t implements org.apache.thrift.TEnum {
         return TALOOL_REACH;
       case 15:
         return AD;
+      case 16:
+        return FUNDRAISER_SUPPORT;
       default:
         return null;
     }

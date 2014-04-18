@@ -110,6 +110,8 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseWithCode(String dealOfferId, String paymentCode, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
+    public EmailBodyResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -189,6 +191,8 @@ public class CustomerService_t {
     public void purchaseWithCard(String dealOfferId, com.talool.api.thrift.PaymentDetail_t paymentDetail, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithCard_call> resultHandler) throws org.apache.thrift.TException;
 
     public void purchaseWithCode(String dealOfferId, String paymentCode, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithCode_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void getEmailBody(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getEmailBody_call> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -1234,6 +1238,33 @@ public class CustomerService_t {
         throw result.notFoundException;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseWithCode failed: unknown result");
+    }
+
+    public EmailBodyResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
+    {
+      send_getEmailBody(templateId, entityId);
+      return recv_getEmailBody();
+    }
+
+    public void send_getEmailBody(String templateId, String entityId) throws org.apache.thrift.TException
+    {
+      getEmailBody_args args = new getEmailBody_args();
+      args.setTemplateId(templateId);
+      args.setEntityId(entityId);
+      sendBase("getEmailBody", args);
+    }
+
+    public EmailBodyResponse_t recv_getEmailBody() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
+    {
+      getEmailBody_result result = new getEmailBody_result();
+      receiveBase(result, "getEmailBody");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.error != null) {
+        throw result.error;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getEmailBody failed: unknown result");
     }
 
   }
@@ -2551,6 +2582,41 @@ public class CustomerService_t {
       }
     }
 
+    public void getEmailBody(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<getEmailBody_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      getEmailBody_call method_call = new getEmailBody_call(templateId, entityId, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class getEmailBody_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String templateId;
+      private String entityId;
+      public getEmailBody_call(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<getEmailBody_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.templateId = templateId;
+        this.entityId = entityId;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getEmailBody", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getEmailBody_args args = new getEmailBody_args();
+        args.setTemplateId(templateId);
+        args.setEntityId(entityId);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public EmailBodyResponse_t getResult() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_getEmailBody();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -2602,6 +2668,7 @@ public class CustomerService_t {
       processMap.put("validateCode", new validateCode());
       processMap.put("purchaseWithCard", new purchaseWithCard());
       processMap.put("purchaseWithCode", new purchaseWithCode());
+      processMap.put("getEmailBody", new getEmailBody());
       return processMap;
     }
 
@@ -3537,6 +3604,30 @@ public class CustomerService_t {
           result.userException = userException;
         } catch (com.talool.api.thrift.TNotFoundException_t notFoundException) {
           result.notFoundException = notFoundException;
+        }
+        return result;
+      }
+    }
+
+    public static class getEmailBody<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getEmailBody_args> {
+      public getEmailBody() {
+        super("getEmailBody");
+      }
+
+      public getEmailBody_args getEmptyArgsInstance() {
+        return new getEmailBody_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public getEmailBody_result getResult(I iface, getEmailBody_args args) throws org.apache.thrift.TException {
+        getEmailBody_result result = new getEmailBody_result();
+        try {
+          result.success = iface.getEmailBody(args.templateId, args.entityId);
+        } catch (com.talool.api.thrift.TServiceException_t error) {
+          result.error = error;
         }
         return result;
       }
@@ -38155,6 +38246,919 @@ public class CustomerService_t {
           struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
           struct.notFoundException.read(iprot);
           struct.setNotFoundExceptionIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class getEmailBody_args implements org.apache.thrift.TBase<getEmailBody_args, getEmailBody_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getEmailBody_args");
+
+    private static final org.apache.thrift.protocol.TField TEMPLATE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("templateId", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField ENTITY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("entityId", org.apache.thrift.protocol.TType.STRING, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new getEmailBody_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getEmailBody_argsTupleSchemeFactory());
+    }
+
+    public String templateId; // required
+    public String entityId; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      TEMPLATE_ID((short)1, "templateId"),
+      ENTITY_ID((short)2, "entityId");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // TEMPLATE_ID
+            return TEMPLATE_ID;
+          case 2: // ENTITY_ID
+            return ENTITY_ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.TEMPLATE_ID, new org.apache.thrift.meta_data.FieldMetaData("templateId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.ENTITY_ID, new org.apache.thrift.meta_data.FieldMetaData("entityId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getEmailBody_args.class, metaDataMap);
+    }
+
+    public getEmailBody_args() {
+    }
+
+    public getEmailBody_args(
+      String templateId,
+      String entityId)
+    {
+      this();
+      this.templateId = templateId;
+      this.entityId = entityId;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public getEmailBody_args(getEmailBody_args other) {
+      if (other.isSetTemplateId()) {
+        this.templateId = other.templateId;
+      }
+      if (other.isSetEntityId()) {
+        this.entityId = other.entityId;
+      }
+    }
+
+    public getEmailBody_args deepCopy() {
+      return new getEmailBody_args(this);
+    }
+
+    public void clear() {
+      this.templateId = null;
+      this.entityId = null;
+    }
+
+    public String getTemplateId() {
+      return this.templateId;
+    }
+
+    public getEmailBody_args setTemplateId(String templateId) {
+      this.templateId = templateId;
+      return this;
+    }
+
+    public void unsetTemplateId() {
+      this.templateId = null;
+    }
+
+    /** Returns true if field templateId is set (has been assigned a value) and false otherwise */
+    public boolean isSetTemplateId() {
+      return this.templateId != null;
+    }
+
+    public void setTemplateIdIsSet(boolean value) {
+      if (!value) {
+        this.templateId = null;
+      }
+    }
+
+    public String getEntityId() {
+      return this.entityId;
+    }
+
+    public getEmailBody_args setEntityId(String entityId) {
+      this.entityId = entityId;
+      return this;
+    }
+
+    public void unsetEntityId() {
+      this.entityId = null;
+    }
+
+    /** Returns true if field entityId is set (has been assigned a value) and false otherwise */
+    public boolean isSetEntityId() {
+      return this.entityId != null;
+    }
+
+    public void setEntityIdIsSet(boolean value) {
+      if (!value) {
+        this.entityId = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case TEMPLATE_ID:
+        if (value == null) {
+          unsetTemplateId();
+        } else {
+          setTemplateId((String)value);
+        }
+        break;
+
+      case ENTITY_ID:
+        if (value == null) {
+          unsetEntityId();
+        } else {
+          setEntityId((String)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case TEMPLATE_ID:
+        return getTemplateId();
+
+      case ENTITY_ID:
+        return getEntityId();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case TEMPLATE_ID:
+        return isSetTemplateId();
+      case ENTITY_ID:
+        return isSetEntityId();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof getEmailBody_args)
+        return this.equals((getEmailBody_args)that);
+      return false;
+    }
+
+    public boolean equals(getEmailBody_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_templateId = true && this.isSetTemplateId();
+      boolean that_present_templateId = true && that.isSetTemplateId();
+      if (this_present_templateId || that_present_templateId) {
+        if (!(this_present_templateId && that_present_templateId))
+          return false;
+        if (!this.templateId.equals(that.templateId))
+          return false;
+      }
+
+      boolean this_present_entityId = true && this.isSetEntityId();
+      boolean that_present_entityId = true && that.isSetEntityId();
+      if (this_present_entityId || that_present_entityId) {
+        if (!(this_present_entityId && that_present_entityId))
+          return false;
+        if (!this.entityId.equals(that.entityId))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(getEmailBody_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      getEmailBody_args typedOther = (getEmailBody_args)other;
+
+      lastComparison = Boolean.valueOf(isSetTemplateId()).compareTo(typedOther.isSetTemplateId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTemplateId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.templateId, typedOther.templateId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetEntityId()).compareTo(typedOther.isSetEntityId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetEntityId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.entityId, typedOther.entityId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("getEmailBody_args(");
+      boolean first = true;
+
+      sb.append("templateId:");
+      if (this.templateId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.templateId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("entityId:");
+      if (this.entityId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.entityId);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class getEmailBody_argsStandardSchemeFactory implements SchemeFactory {
+      public getEmailBody_argsStandardScheme getScheme() {
+        return new getEmailBody_argsStandardScheme();
+      }
+    }
+
+    private static class getEmailBody_argsStandardScheme extends StandardScheme<getEmailBody_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getEmailBody_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // TEMPLATE_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.templateId = iprot.readString();
+                struct.setTemplateIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // ENTITY_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.entityId = iprot.readString();
+                struct.setEntityIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getEmailBody_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.templateId != null) {
+          oprot.writeFieldBegin(TEMPLATE_ID_FIELD_DESC);
+          oprot.writeString(struct.templateId);
+          oprot.writeFieldEnd();
+        }
+        if (struct.entityId != null) {
+          oprot.writeFieldBegin(ENTITY_ID_FIELD_DESC);
+          oprot.writeString(struct.entityId);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class getEmailBody_argsTupleSchemeFactory implements SchemeFactory {
+      public getEmailBody_argsTupleScheme getScheme() {
+        return new getEmailBody_argsTupleScheme();
+      }
+    }
+
+    private static class getEmailBody_argsTupleScheme extends TupleScheme<getEmailBody_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, getEmailBody_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetTemplateId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetEntityId()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTemplateId()) {
+          oprot.writeString(struct.templateId);
+        }
+        if (struct.isSetEntityId()) {
+          oprot.writeString(struct.entityId);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, getEmailBody_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.templateId = iprot.readString();
+          struct.setTemplateIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.entityId = iprot.readString();
+          struct.setEntityIdIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class getEmailBody_result implements org.apache.thrift.TBase<getEmailBody_result, getEmailBody_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getEmailBody_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new getEmailBody_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getEmailBody_resultTupleSchemeFactory());
+    }
+
+    public EmailBodyResponse_t success; // required
+    public com.talool.api.thrift.TServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, EmailBodyResponse_t.class)));
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getEmailBody_result.class, metaDataMap);
+    }
+
+    public getEmailBody_result() {
+    }
+
+    public getEmailBody_result(
+      EmailBodyResponse_t success,
+      com.talool.api.thrift.TServiceException_t error)
+    {
+      this();
+      this.success = success;
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public getEmailBody_result(getEmailBody_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new EmailBodyResponse_t(other.success);
+      }
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.TServiceException_t(other.error);
+      }
+    }
+
+    public getEmailBody_result deepCopy() {
+      return new getEmailBody_result(this);
+    }
+
+    public void clear() {
+      this.success = null;
+      this.error = null;
+    }
+
+    public EmailBodyResponse_t getSuccess() {
+      return this.success;
+    }
+
+    public getEmailBody_result setSuccess(EmailBodyResponse_t success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.talool.api.thrift.TServiceException_t getError() {
+      return this.error;
+    }
+
+    public getEmailBody_result setError(com.talool.api.thrift.TServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((EmailBodyResponse_t)value);
+        }
+        break;
+
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.TServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof getEmailBody_result)
+        return this.equals((getEmailBody_result)that);
+      return false;
+    }
+
+    public boolean equals(getEmailBody_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(getEmailBody_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      getEmailBody_result typedOther = (getEmailBody_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("getEmailBody_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class getEmailBody_resultStandardSchemeFactory implements SchemeFactory {
+      public getEmailBody_resultStandardScheme getScheme() {
+        return new getEmailBody_resultStandardScheme();
+      }
+    }
+
+    private static class getEmailBody_resultStandardScheme extends StandardScheme<getEmailBody_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getEmailBody_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new EmailBodyResponse_t();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.TServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getEmailBody_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class getEmailBody_resultTupleSchemeFactory implements SchemeFactory {
+      public getEmailBody_resultTupleScheme getScheme() {
+        return new getEmailBody_resultTupleScheme();
+      }
+    }
+
+    private static class getEmailBody_resultTupleScheme extends TupleScheme<getEmailBody_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, getEmailBody_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetError()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, getEmailBody_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = new EmailBodyResponse_t();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.error = new com.talool.api.thrift.TServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
         }
       }
     }

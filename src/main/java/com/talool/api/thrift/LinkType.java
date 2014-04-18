@@ -19,7 +19,8 @@ public enum LinkType implements org.apache.thrift.TEnum {
   CUSTOMER(4),
   DEAL_ACQUIRE(5),
   MERCHANT_LOCATION(6),
-  EXTERNAL(7);
+  EXTERNAL(7),
+  EMAIL(8);
 
   private final int value;
 
@@ -56,6 +57,8 @@ public enum LinkType implements org.apache.thrift.TEnum {
         return MERCHANT_LOCATION;
       case 7:
         return EXTERNAL;
+      case 8:
+        return EMAIL;
       default:
         return null;
     }
