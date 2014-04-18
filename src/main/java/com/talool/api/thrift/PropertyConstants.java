@@ -40,4 +40,6 @@ public class PropertyConstants {
 
   public static final String ACTIVATION_CODE = "activation_code";
 
+  public static final String TEMPLATE_ID = "template_id";
+
 }
