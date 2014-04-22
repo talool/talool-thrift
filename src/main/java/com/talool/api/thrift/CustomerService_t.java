@@ -110,7 +110,7 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseWithCode(String dealOfferId, String paymentCode, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
-    public EmailBodyResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
+    public EmailResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
   }
 
@@ -1240,7 +1240,7 @@ public class CustomerService_t {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseWithCode failed: unknown result");
     }
 
-    public EmailBodyResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
+    public EmailResponse_t getEmailBody(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
     {
       send_getEmailBody(templateId, entityId);
       return recv_getEmailBody();
@@ -1254,7 +1254,7 @@ public class CustomerService_t {
       sendBase("getEmailBody", args);
     }
 
-    public EmailBodyResponse_t recv_getEmailBody() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
+    public EmailResponse_t recv_getEmailBody() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
     {
       getEmailBody_result result = new getEmailBody_result();
       receiveBase(result, "getEmailBody");
@@ -2607,7 +2607,7 @@ public class CustomerService_t {
         prot.writeMessageEnd();
       }
 
-      public EmailBodyResponse_t getResult() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException {
+      public EmailResponse_t getResult() throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -38717,7 +38717,7 @@ public class CustomerService_t {
       schemes.put(TupleScheme.class, new getEmailBody_resultTupleSchemeFactory());
     }
 
-    public EmailBodyResponse_t success; // required
+    public EmailResponse_t success; // required
     public com.talool.api.thrift.TServiceException_t error; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -38786,7 +38786,7 @@ public class CustomerService_t {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, EmailBodyResponse_t.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, EmailResponse_t.class)));
       tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -38797,7 +38797,7 @@ public class CustomerService_t {
     }
 
     public getEmailBody_result(
-      EmailBodyResponse_t success,
+      EmailResponse_t success,
       com.talool.api.thrift.TServiceException_t error)
     {
       this();
@@ -38810,7 +38810,7 @@ public class CustomerService_t {
      */
     public getEmailBody_result(getEmailBody_result other) {
       if (other.isSetSuccess()) {
-        this.success = new EmailBodyResponse_t(other.success);
+        this.success = new EmailResponse_t(other.success);
       }
       if (other.isSetError()) {
         this.error = new com.talool.api.thrift.TServiceException_t(other.error);
@@ -38826,11 +38826,11 @@ public class CustomerService_t {
       this.error = null;
     }
 
-    public EmailBodyResponse_t getSuccess() {
+    public EmailResponse_t getSuccess() {
       return this.success;
     }
 
-    public getEmailBody_result setSuccess(EmailBodyResponse_t success) {
+    public getEmailBody_result setSuccess(EmailResponse_t success) {
       this.success = success;
       return this;
     }
@@ -38880,7 +38880,7 @@ public class CustomerService_t {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((EmailBodyResponse_t)value);
+          setSuccess((EmailResponse_t)value);
         }
         break;
 
@@ -39072,7 +39072,7 @@ public class CustomerService_t {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new EmailBodyResponse_t();
+                struct.success = new EmailResponse_t();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -39151,7 +39151,7 @@ public class CustomerService_t {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.success = new EmailBodyResponse_t();
+          struct.success = new EmailResponse_t();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

@@ -795,7 +795,7 @@
 
 @end
 
-@implementation EmailBodyResponse_t
+@implementation EmailResponse_t
 
 - (id) init
 {
@@ -805,58 +805,91 @@
   return self;
 }
 
-- (id) initWithEmailBody: (NSString *) emailBody
+- (id) initWithSubject: (NSString *) subject body: (NSString *) body
 {
   self = [super init];
-  __emailBody = [emailBody retain_stub];
-  __emailBody_isset = YES;
+  __subject = [subject retain_stub];
+  __subject_isset = YES;
+  __body = [body retain_stub];
+  __body_isset = YES;
   return self;
 }
 
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
-  if ([decoder containsValueForKey: @"emailBody"])
+  if ([decoder containsValueForKey: @"subject"])
   {
-    __emailBody = [[decoder decodeObjectForKey: @"emailBody"] retain_stub];
-    __emailBody_isset = YES;
+    __subject = [[decoder decodeObjectForKey: @"subject"] retain_stub];
+    __subject_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"body"])
+  {
+    __body = [[decoder decodeObjectForKey: @"body"] retain_stub];
+    __body_isset = YES;
   }
   return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-  if (__emailBody_isset)
+  if (__subject_isset)
   {
-    [encoder encodeObject: __emailBody forKey: @"emailBody"];
+    [encoder encodeObject: __subject forKey: @"subject"];
+  }
+  if (__body_isset)
+  {
+    [encoder encodeObject: __body forKey: @"body"];
   }
 }
 
 - (void) dealloc
 {
-  [__emailBody release_stub];
+  [__subject release_stub];
+  [__body release_stub];
   [super dealloc_stub];
 }
 
-- (NSString *) emailBody {
-  return [[__emailBody retain_stub] autorelease_stub];
+- (NSString *) subject {
+  return [[__subject retain_stub] autorelease_stub];
 }
 
-- (void) setEmailBody: (NSString *) emailBody {
-  [emailBody retain_stub];
-  [__emailBody release_stub];
-  __emailBody = emailBody;
-  __emailBody_isset = YES;
+- (void) setSubject: (NSString *) subject {
+  [subject retain_stub];
+  [__subject release_stub];
+  __subject = subject;
+  __subject_isset = YES;
 }
 
-- (BOOL) emailBodyIsSet {
-  return __emailBody_isset;
+- (BOOL) subjectIsSet {
+  return __subject_isset;
 }
 
-- (void) unsetEmailBody {
-  [__emailBody release_stub];
-  __emailBody = nil;
-  __emailBody_isset = NO;
+- (void) unsetSubject {
+  [__subject release_stub];
+  __subject = nil;
+  __subject_isset = NO;
+}
+
+- (NSString *) body {
+  return [[__body retain_stub] autorelease_stub];
+}
+
+- (void) setBody: (NSString *) body {
+  [body retain_stub];
+  [__body release_stub];
+  __body = body;
+  __body_isset = YES;
+}
+
+- (BOOL) bodyIsSet {
+  return __body_isset;
+}
+
+- (void) unsetBody {
+  [__body release_stub];
+  __body = nil;
+  __body_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -877,7 +910,15 @@
       case 1:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
-          [self setEmailBody: fieldValue];
+          [self setSubject: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setBody: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -892,11 +933,18 @@
 }
 
 - (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"EmailBodyResponse_t"];
-  if (__emailBody_isset) {
-    if (__emailBody != nil) {
-      [outProtocol writeFieldBeginWithName: @"emailBody" type: TType_STRING fieldID: 1];
-      [outProtocol writeString: __emailBody];
+  [outProtocol writeStructBeginWithName: @"EmailResponse_t"];
+  if (__subject_isset) {
+    if (__subject != nil) {
+      [outProtocol writeFieldBeginWithName: @"subject" type: TType_STRING fieldID: 1];
+      [outProtocol writeString: __subject];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__body_isset) {
+    if (__body != nil) {
+      [outProtocol writeFieldBeginWithName: @"body" type: TType_STRING fieldID: 2];
+      [outProtocol writeString: __body];
       [outProtocol writeFieldEnd];
     }
   }
@@ -905,9 +953,11 @@
 }
 
 - (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"EmailBodyResponse_t("];
-  [ms appendString: @"emailBody:"];
-  [ms appendFormat: @"\"%@\"", __emailBody];
+  NSMutableString * ms = [NSMutableString stringWithString: @"EmailResponse_t("];
+  [ms appendString: @"subject:"];
+  [ms appendFormat: @"\"%@\"", __subject];
+  [ms appendString: @",body:"];
+  [ms appendFormat: @"\"%@\"", __body];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -16365,7 +16415,7 @@ static NSString * CTOKEN_NAME = @"ctok";
 @end
 
 @interface GetEmailBody_result : NSObject <NSCoding> {
-  EmailBodyResponse_t * __success;
+  EmailResponse_t * __success;
   TServiceException_t * __error;
 
   BOOL __success_isset;
@@ -16373,19 +16423,19 @@ static NSString * CTOKEN_NAME = @"ctok";
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=success, setter=setSuccess:) EmailBodyResponse_t * success;
+@property (nonatomic, retain, getter=success, setter=setSuccess:) EmailResponse_t * success;
 @property (nonatomic, retain, getter=error, setter=setError:) TServiceException_t * error;
 #endif
 
 - (id) init;
-- (id) initWithSuccess: (EmailBodyResponse_t *) success error: (TServiceException_t *) error;
+- (id) initWithSuccess: (EmailResponse_t *) success error: (TServiceException_t *) error;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
 
 #if !__has_feature(objc_arc)
-- (EmailBodyResponse_t *) success;
-- (void) setSuccess: (EmailBodyResponse_t *) success;
+- (EmailResponse_t *) success;
+- (void) setSuccess: (EmailResponse_t *) success;
 #endif
 - (BOOL) successIsSet;
 
@@ -16407,7 +16457,7 @@ static NSString * CTOKEN_NAME = @"ctok";
   return self;
 }
 
-- (id) initWithSuccess: (EmailBodyResponse_t *) success error: (TServiceException_t *) error
+- (id) initWithSuccess: (EmailResponse_t *) success error: (TServiceException_t *) error
 {
   self = [super init];
   __success = [success retain_stub];
@@ -16452,11 +16502,11 @@ static NSString * CTOKEN_NAME = @"ctok";
   [super dealloc_stub];
 }
 
-- (EmailBodyResponse_t *) success {
+- (EmailResponse_t *) success {
   return [[__success retain_stub] autorelease_stub];
 }
 
-- (void) setSuccess: (EmailBodyResponse_t *) success {
+- (void) setSuccess: (EmailResponse_t *) success {
   [success retain_stub];
   [__success release_stub];
   __success = success;
@@ -16511,7 +16561,7 @@ static NSString * CTOKEN_NAME = @"ctok";
     {
       case 0:
         if (fieldType == TType_STRUCT) {
-          EmailBodyResponse_t *fieldValue = [[EmailBodyResponse_t alloc] init];
+          EmailResponse_t *fieldValue = [[EmailResponse_t alloc] init];
           [fieldValue read: inProtocol];
           [self setSuccess: fieldValue];
           [fieldValue release_stub];
@@ -18392,7 +18442,7 @@ static NSString * CTOKEN_NAME = @"ctok";
   [[outProtocol transport] flush];
 }
 
-- (EmailBodyResponse_t *) recv_getEmailBody
+- (EmailResponse_t *) recv_getEmailBody
 {
   int msgType = 0;
   [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
@@ -18414,7 +18464,7 @@ static NSString * CTOKEN_NAME = @"ctok";
                                            reason: @"getEmailBody failed: unknown result"];
 }
 
-- (EmailBodyResponse_t *) getEmailBody: (NSString *) templateId entityId: (NSString *) entityId
+- (EmailResponse_t *) getEmailBody: (NSString *) templateId entityId: (NSString *) entityId
 {
   [self send_getEmailBody : templateId entityId: entityId];
   return [self recv_getEmailBody];

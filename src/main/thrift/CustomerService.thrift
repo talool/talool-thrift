@@ -35,8 +35,9 @@ struct ValidateCodeResponse_t {
   2: optional string codeType;
 }
 
-struct EmailBodyResponse_t {
-  1: optional string emailBody;
+struct EmailResponse_t {
+  1: optional string subject;
+  2: optional string body;
 }
 
 service CustomerService_t {
@@ -136,6 +137,6 @@ service CustomerService_t {
    Payment.TransactionResult_t purchaseWithCode(1:string dealOfferId, 2:string paymentCode,3:map<string,string> paymentProperties) 
      throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
    
-   EmailBodyResponse_t getEmailBody(1:string templateId, 2:string entityId) throws (1:Error.TServiceException_t error);
+   EmailResponse_t getEmailBody(1:string templateId, 2:string entityId) throws (1:Error.TServiceException_t error);
 
 }
