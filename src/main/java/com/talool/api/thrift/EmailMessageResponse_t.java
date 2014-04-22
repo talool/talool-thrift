@@ -30,16 +30,16 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t, EmailResponse_t._Fields>, java.io.Serializable, Cloneable {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("EmailResponse_t");
+public class EmailMessageResponse_t implements org.apache.thrift.TBase<EmailMessageResponse_t, EmailMessageResponse_t._Fields>, java.io.Serializable, Cloneable {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("EmailMessageResponse_t");
 
   private static final org.apache.thrift.protocol.TField SUBJECT_FIELD_DESC = new org.apache.thrift.protocol.TField("subject", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField BODY_FIELD_DESC = new org.apache.thrift.protocol.TField("body", org.apache.thrift.protocol.TType.STRING, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new EmailResponse_tStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new EmailResponse_tTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new EmailMessageResponse_tStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new EmailMessageResponse_tTupleSchemeFactory());
   }
 
   public String subject; // optional
@@ -116,16 +116,16 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     tmpMap.put(_Fields.BODY, new org.apache.thrift.meta_data.FieldMetaData("body", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(EmailResponse_t.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(EmailMessageResponse_t.class, metaDataMap);
   }
 
-  public EmailResponse_t() {
+  public EmailMessageResponse_t() {
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public EmailResponse_t(EmailResponse_t other) {
+  public EmailMessageResponse_t(EmailMessageResponse_t other) {
     if (other.isSetSubject()) {
       this.subject = other.subject;
     }
@@ -134,8 +134,8 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     }
   }
 
-  public EmailResponse_t deepCopy() {
-    return new EmailResponse_t(this);
+  public EmailMessageResponse_t deepCopy() {
+    return new EmailMessageResponse_t(this);
   }
 
   public void clear() {
@@ -147,7 +147,7 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     return this.subject;
   }
 
-  public EmailResponse_t setSubject(String subject) {
+  public EmailMessageResponse_t setSubject(String subject) {
     this.subject = subject;
     return this;
   }
@@ -171,7 +171,7 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     return this.body;
   }
 
-  public EmailResponse_t setBody(String body) {
+  public EmailMessageResponse_t setBody(String body) {
     this.body = body;
     return this;
   }
@@ -243,12 +243,12 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof EmailResponse_t)
-      return this.equals((EmailResponse_t)that);
+    if (that instanceof EmailMessageResponse_t)
+      return this.equals((EmailMessageResponse_t)that);
     return false;
   }
 
-  public boolean equals(EmailResponse_t that) {
+  public boolean equals(EmailMessageResponse_t that) {
     if (that == null)
       return false;
 
@@ -278,13 +278,13 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     return 0;
   }
 
-  public int compareTo(EmailResponse_t other) {
+  public int compareTo(EmailMessageResponse_t other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
 
     int lastComparison = 0;
-    EmailResponse_t typedOther = (EmailResponse_t)other;
+    EmailMessageResponse_t typedOther = (EmailMessageResponse_t)other;
 
     lastComparison = Boolean.valueOf(isSetSubject()).compareTo(typedOther.isSetSubject());
     if (lastComparison != 0) {
@@ -323,7 +323,7 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("EmailResponse_t(");
+    StringBuilder sb = new StringBuilder("EmailMessageResponse_t(");
     boolean first = true;
 
     if (isSetSubject()) {
@@ -370,15 +370,15 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     }
   }
 
-  private static class EmailResponse_tStandardSchemeFactory implements SchemeFactory {
-    public EmailResponse_tStandardScheme getScheme() {
-      return new EmailResponse_tStandardScheme();
+  private static class EmailMessageResponse_tStandardSchemeFactory implements SchemeFactory {
+    public EmailMessageResponse_tStandardScheme getScheme() {
+      return new EmailMessageResponse_tStandardScheme();
     }
   }
 
-  private static class EmailResponse_tStandardScheme extends StandardScheme<EmailResponse_t> {
+  private static class EmailMessageResponse_tStandardScheme extends StandardScheme<EmailMessageResponse_t> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, EmailResponse_t struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, EmailMessageResponse_t struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -415,7 +415,7 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, EmailResponse_t struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, EmailMessageResponse_t struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -439,16 +439,16 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
 
   }
 
-  private static class EmailResponse_tTupleSchemeFactory implements SchemeFactory {
-    public EmailResponse_tTupleScheme getScheme() {
-      return new EmailResponse_tTupleScheme();
+  private static class EmailMessageResponse_tTupleSchemeFactory implements SchemeFactory {
+    public EmailMessageResponse_tTupleScheme getScheme() {
+      return new EmailMessageResponse_tTupleScheme();
     }
   }
 
-  private static class EmailResponse_tTupleScheme extends TupleScheme<EmailResponse_t> {
+  private static class EmailMessageResponse_tTupleScheme extends TupleScheme<EmailMessageResponse_t> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, EmailResponse_t struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, EmailMessageResponse_t struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
       if (struct.isSetSubject()) {
@@ -467,7 +467,7 @@ public class EmailResponse_t implements org.apache.thrift.TBase<EmailResponse_t,
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, EmailResponse_t struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, EmailMessageResponse_t struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {

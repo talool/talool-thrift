@@ -165,7 +165,7 @@
 
 @end
 
-@interface EmailResponse_t : NSObject <NSCoding> {
+@interface EmailMessageResponse_t : NSObject <NSCoding> {
   NSString * __subject;
   NSString * __body;
 
@@ -237,7 +237,7 @@
 - (ValidateCodeResponse_t *) validateCode: (NSString *) code dealOfferId: (NSString *) dealOfferId;  // throws TServiceException_t *, TException
 - (TransactionResult_t *) purchaseWithCard: (NSString *) dealOfferId paymentDetail: (PaymentDetail_t *) paymentDetail paymentProperties: (NSMutableDictionary *) paymentProperties;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
 - (TransactionResult_t *) purchaseWithCode: (NSString *) dealOfferId paymentCode: (NSString *) paymentCode paymentProperties: (NSMutableDictionary *) paymentProperties;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
-- (EmailResponse_t *) getEmailBody: (NSString *) templateId entityId: (NSString *) entityId;  // throws TServiceException_t *, TException
+- (EmailMessageResponse_t *) getEmailMessage: (NSString *) templateId entityId: (NSString *) entityId;  // throws TServiceException_t *, TException
 @end
 
 @interface CustomerService_tClient : NSObject <CustomerService_t> {
