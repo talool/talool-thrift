@@ -112,7 +112,7 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
-    public String generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+    public String generateBraintreeClientToken() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
 
     public EmailMessageResponse_t getEmailMessage(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
@@ -198,7 +198,7 @@ public class CustomerService_t {
 
     public void purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithNonce_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException;
+    public void generateBraintreeClientToken(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException;
 
     public void getEmailMessage(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getEmailMessage_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -1282,17 +1282,15 @@ public class CustomerService_t {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseWithNonce failed: unknown result");
     }
 
-    public String generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    public String generateBraintreeClientToken() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
     {
-      send_generateBraintreeClientToken(dealAcquireId, location);
+      send_generateBraintreeClientToken();
       return recv_generateBraintreeClientToken();
     }
 
-    public void send_generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws org.apache.thrift.TException
+    public void send_generateBraintreeClientToken() throws org.apache.thrift.TException
     {
       generateBraintreeClientToken_args args = new generateBraintreeClientToken_args();
-      args.setDealAcquireId(dealAcquireId);
-      args.setLocation(location);
       sendBase("generateBraintreeClientToken", args);
     }
 
@@ -2689,27 +2687,21 @@ public class CustomerService_t {
       }
     }
 
-    public void generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException {
+    public void generateBraintreeClientToken(org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      generateBraintreeClientToken_call method_call = new generateBraintreeClientToken_call(dealAcquireId, location, resultHandler, this, ___protocolFactory, ___transport);
+      generateBraintreeClientToken_call method_call = new generateBraintreeClientToken_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class generateBraintreeClientToken_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private String dealAcquireId;
-      private com.talool.api.thrift.Location_t location;
-      public generateBraintreeClientToken_call(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public generateBraintreeClientToken_call(org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.dealAcquireId = dealAcquireId;
-        this.location = location;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("generateBraintreeClientToken", org.apache.thrift.protocol.TMessageType.CALL, 0));
         generateBraintreeClientToken_args args = new generateBraintreeClientToken_args();
-        args.setDealAcquireId(dealAcquireId);
-        args.setLocation(location);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -3797,7 +3789,7 @@ public class CustomerService_t {
       public generateBraintreeClientToken_result getResult(I iface, generateBraintreeClientToken_args args) throws org.apache.thrift.TException {
         generateBraintreeClientToken_result result = new generateBraintreeClientToken_result();
         try {
-          result.success = iface.generateBraintreeClientToken(args.dealAcquireId, args.location);
+          result.success = iface.generateBraintreeClientToken();
         } catch (com.talool.api.thrift.ServiceException_t error) {
           result.error = error;
         }
@@ -39731,8 +39723,6 @@ public class CustomerService_t {
   public static class generateBraintreeClientToken_args implements org.apache.thrift.TBase<generateBraintreeClientToken_args, generateBraintreeClientToken_args._Fields>, java.io.Serializable, Cloneable   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("generateBraintreeClientToken_args");
 
-    private static final org.apache.thrift.protocol.TField DEAL_ACQUIRE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("dealAcquireId", org.apache.thrift.protocol.TType.STRING, (short)1);
-    private static final org.apache.thrift.protocol.TField LOCATION_FIELD_DESC = new org.apache.thrift.protocol.TField("location", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -39740,13 +39730,10 @@ public class CustomerService_t {
       schemes.put(TupleScheme.class, new generateBraintreeClientToken_argsTupleSchemeFactory());
     }
 
-    public String dealAcquireId; // required
-    public com.talool.api.thrift.Location_t location; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      DEAL_ACQUIRE_ID((short)1, "dealAcquireId"),
-      LOCATION((short)2, "location");
+;
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -39761,10 +39748,6 @@ public class CustomerService_t {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // DEAL_ACQUIRE_ID
-            return DEAL_ACQUIRE_ID;
-          case 2: // LOCATION
-            return LOCATION;
           default:
             return null;
         }
@@ -39803,15 +39786,9 @@ public class CustomerService_t {
         return _fieldName;
       }
     }
-
-    // isset id assignments
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.DEAL_ACQUIRE_ID, new org.apache.thrift.meta_data.FieldMetaData("dealAcquireId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-      tmpMap.put(_Fields.LOCATION, new org.apache.thrift.meta_data.FieldMetaData("location", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.Location_t.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(generateBraintreeClientToken_args.class, metaDataMap);
     }
@@ -39819,25 +39796,10 @@ public class CustomerService_t {
     public generateBraintreeClientToken_args() {
     }
 
-    public generateBraintreeClientToken_args(
-      String dealAcquireId,
-      com.talool.api.thrift.Location_t location)
-    {
-      this();
-      this.dealAcquireId = dealAcquireId;
-      this.location = location;
-    }
-
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public generateBraintreeClientToken_args(generateBraintreeClientToken_args other) {
-      if (other.isSetDealAcquireId()) {
-        this.dealAcquireId = other.dealAcquireId;
-      }
-      if (other.isSetLocation()) {
-        this.location = new com.talool.api.thrift.Location_t(other.location);
-      }
     }
 
     public generateBraintreeClientToken_args deepCopy() {
@@ -39845,87 +39807,15 @@ public class CustomerService_t {
     }
 
     public void clear() {
-      this.dealAcquireId = null;
-      this.location = null;
-    }
-
-    public String getDealAcquireId() {
-      return this.dealAcquireId;
-    }
-
-    public generateBraintreeClientToken_args setDealAcquireId(String dealAcquireId) {
-      this.dealAcquireId = dealAcquireId;
-      return this;
-    }
-
-    public void unsetDealAcquireId() {
-      this.dealAcquireId = null;
-    }
-
-    /** Returns true if field dealAcquireId is set (has been assigned a value) and false otherwise */
-    public boolean isSetDealAcquireId() {
-      return this.dealAcquireId != null;
-    }
-
-    public void setDealAcquireIdIsSet(boolean value) {
-      if (!value) {
-        this.dealAcquireId = null;
-      }
-    }
-
-    public com.talool.api.thrift.Location_t getLocation() {
-      return this.location;
-    }
-
-    public generateBraintreeClientToken_args setLocation(com.talool.api.thrift.Location_t location) {
-      this.location = location;
-      return this;
-    }
-
-    public void unsetLocation() {
-      this.location = null;
-    }
-
-    /** Returns true if field location is set (has been assigned a value) and false otherwise */
-    public boolean isSetLocation() {
-      return this.location != null;
-    }
-
-    public void setLocationIsSet(boolean value) {
-      if (!value) {
-        this.location = null;
-      }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case DEAL_ACQUIRE_ID:
-        if (value == null) {
-          unsetDealAcquireId();
-        } else {
-          setDealAcquireId((String)value);
-        }
-        break;
-
-      case LOCATION:
-        if (value == null) {
-          unsetLocation();
-        } else {
-          setLocation((com.talool.api.thrift.Location_t)value);
-        }
-        break;
-
       }
     }
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case DEAL_ACQUIRE_ID:
-        return getDealAcquireId();
-
-      case LOCATION:
-        return getLocation();
-
       }
       throw new IllegalStateException();
     }
@@ -39937,10 +39827,6 @@ public class CustomerService_t {
       }
 
       switch (field) {
-      case DEAL_ACQUIRE_ID:
-        return isSetDealAcquireId();
-      case LOCATION:
-        return isSetLocation();
       }
       throw new IllegalStateException();
     }
@@ -39958,24 +39844,6 @@ public class CustomerService_t {
       if (that == null)
         return false;
 
-      boolean this_present_dealAcquireId = true && this.isSetDealAcquireId();
-      boolean that_present_dealAcquireId = true && that.isSetDealAcquireId();
-      if (this_present_dealAcquireId || that_present_dealAcquireId) {
-        if (!(this_present_dealAcquireId && that_present_dealAcquireId))
-          return false;
-        if (!this.dealAcquireId.equals(that.dealAcquireId))
-          return false;
-      }
-
-      boolean this_present_location = true && this.isSetLocation();
-      boolean that_present_location = true && that.isSetLocation();
-      if (this_present_location || that_present_location) {
-        if (!(this_present_location && that_present_location))
-          return false;
-        if (!this.location.equals(that.location))
-          return false;
-      }
-
       return true;
     }
 
@@ -39992,26 +39860,6 @@ public class CustomerService_t {
       int lastComparison = 0;
       generateBraintreeClientToken_args typedOther = (generateBraintreeClientToken_args)other;
 
-      lastComparison = Boolean.valueOf(isSetDealAcquireId()).compareTo(typedOther.isSetDealAcquireId());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetDealAcquireId()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealAcquireId, typedOther.dealAcquireId);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = Boolean.valueOf(isSetLocation()).compareTo(typedOther.isSetLocation());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetLocation()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.location, typedOther.location);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
       return 0;
     }
 
@@ -40032,21 +39880,6 @@ public class CustomerService_t {
       StringBuilder sb = new StringBuilder("generateBraintreeClientToken_args(");
       boolean first = true;
 
-      sb.append("dealAcquireId:");
-      if (this.dealAcquireId == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.dealAcquireId);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("location:");
-      if (this.location == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.location);
-      }
-      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -40054,9 +39887,6 @@ public class CustomerService_t {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (location != null) {
-        location.validate();
-      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -40093,23 +39923,6 @@ public class CustomerService_t {
             break;
           }
           switch (schemeField.id) {
-            case 1: // DEAL_ACQUIRE_ID
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.dealAcquireId = iprot.readString();
-                struct.setDealAcquireIdIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 2: // LOCATION
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.location = new com.talool.api.thrift.Location_t();
-                struct.location.read(iprot);
-                struct.setLocationIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -40125,16 +39938,6 @@ public class CustomerService_t {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.dealAcquireId != null) {
-          oprot.writeFieldBegin(DEAL_ACQUIRE_ID_FIELD_DESC);
-          oprot.writeString(struct.dealAcquireId);
-          oprot.writeFieldEnd();
-        }
-        if (struct.location != null) {
-          oprot.writeFieldBegin(LOCATION_FIELD_DESC);
-          struct.location.write(oprot);
-          oprot.writeFieldEnd();
-        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -40152,35 +39955,11 @@ public class CustomerService_t {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
-        BitSet optionals = new BitSet();
-        if (struct.isSetDealAcquireId()) {
-          optionals.set(0);
-        }
-        if (struct.isSetLocation()) {
-          optionals.set(1);
-        }
-        oprot.writeBitSet(optionals, 2);
-        if (struct.isSetDealAcquireId()) {
-          oprot.writeString(struct.dealAcquireId);
-        }
-        if (struct.isSetLocation()) {
-          struct.location.write(oprot);
-        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
-        if (incoming.get(0)) {
-          struct.dealAcquireId = iprot.readString();
-          struct.setDealAcquireIdIsSet(true);
-        }
-        if (incoming.get(1)) {
-          struct.location = new com.talool.api.thrift.Location_t();
-          struct.location.read(iprot);
-          struct.setLocationIsSet(true);
-        }
       }
     }
 

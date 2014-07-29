@@ -238,7 +238,7 @@
 - (TransactionResult_t *) purchaseWithCard: (NSString *) dealOfferId paymentDetail: (PaymentDetail_t *) paymentDetail paymentProperties: (NSMutableDictionary *) paymentProperties;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
 - (TransactionResult_t *) purchaseWithCode: (NSString *) dealOfferId paymentCode: (NSString *) paymentCode paymentProperties: (NSMutableDictionary *) paymentProperties;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
 - (TransactionResult_t *) purchaseWithNonce: (NSString *) dealOfferId nonce: (NSString *) nonce paymentProperties: (NSMutableDictionary *) paymentProperties;  // throws TServiceException_t *, TUserException_t *, TNotFoundException_t *, TException
-- (NSString *) generateBraintreeClientToken: (NSString *) dealAcquireId location: (Location_t *) location;  // throws ServiceException_t *, TException
+- (NSString *) generateBraintreeClientToken;  // throws ServiceException_t *, TException
 - (EmailMessageResponse_t *) getEmailMessage: (NSString *) templateId entityId: (NSString *) entityId;  // throws TServiceException_t *, TException
 @end
 

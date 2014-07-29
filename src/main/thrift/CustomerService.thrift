@@ -140,7 +140,7 @@ service CustomerService_t {
    Payment.TransactionResult_t purchaseWithNonce(1:string dealOfferId, 2:string nonce,3:map<string,string> paymentProperties) 
      throws (1:Error.TServiceException_t serviceException,2:Error.TUserException_t userException,3:Error.TNotFoundException_t notFoundException);
      
-   string generateBraintreeClientToken(1:string dealAcquireId,2:Core.Location_t location) throws (1:Core.ServiceException_t error);
+   string generateBraintreeClientToken() throws (1:Core.ServiceException_t error);
      
    EmailMessageResponse_t getEmailMessage(1:string templateId, 2:string entityId) throws (1:Error.TServiceException_t error);
 

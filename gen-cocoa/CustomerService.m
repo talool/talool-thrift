@@ -16821,35 +16821,12 @@ static NSString * CTOKEN_NAME = @"ctok";
 @end
 
 @interface generateBraintreeClientToken_args : NSObject <NSCoding> {
-  NSString * __dealAcquireId;
-  Location_t * __location;
-
-  BOOL __dealAcquireId_isset;
-  BOOL __location_isset;
 }
 
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, retain, getter=dealAcquireId, setter=setDealAcquireId:) NSString * dealAcquireId;
-@property (nonatomic, retain, getter=location, setter=setLocation:) Location_t * location;
-#endif
-
 - (id) init;
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId location: (Location_t *) location;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
-
-#if !__has_feature(objc_arc)
-- (NSString *) dealAcquireId;
-- (void) setDealAcquireId: (NSString *) dealAcquireId;
-#endif
-- (BOOL) dealAcquireIdIsSet;
-
-#if !__has_feature(objc_arc)
-- (Location_t *) location;
-- (void) setLocation: (Location_t *) location;
-#endif
-- (BOOL) locationIsSet;
 
 @end
 
@@ -16858,96 +16835,17 @@ static NSString * CTOKEN_NAME = @"ctok";
 - (id) init
 {
   self = [super init];
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-#endif
-  return self;
-}
-
-- (id) initWithDealAcquireId: (NSString *) dealAcquireId location: (Location_t *) location
-{
-  self = [super init];
-  __dealAcquireId = [dealAcquireId retain_stub];
-  __dealAcquireId_isset = YES;
-  __location = [location retain_stub];
-  __location_isset = YES;
   return self;
 }
 
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
-  if ([decoder containsValueForKey: @"dealAcquireId"])
-  {
-    __dealAcquireId = [[decoder decodeObjectForKey: @"dealAcquireId"] retain_stub];
-    __dealAcquireId_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"location"])
-  {
-    __location = [[decoder decodeObjectForKey: @"location"] retain_stub];
-    __location_isset = YES;
-  }
   return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-  if (__dealAcquireId_isset)
-  {
-    [encoder encodeObject: __dealAcquireId forKey: @"dealAcquireId"];
-  }
-  if (__location_isset)
-  {
-    [encoder encodeObject: __location forKey: @"location"];
-  }
-}
-
-- (void) dealloc
-{
-  [__dealAcquireId release_stub];
-  [__location release_stub];
-  [super dealloc_stub];
-}
-
-- (NSString *) dealAcquireId {
-  return [[__dealAcquireId retain_stub] autorelease_stub];
-}
-
-- (void) setDealAcquireId: (NSString *) dealAcquireId {
-  [dealAcquireId retain_stub];
-  [__dealAcquireId release_stub];
-  __dealAcquireId = dealAcquireId;
-  __dealAcquireId_isset = YES;
-}
-
-- (BOOL) dealAcquireIdIsSet {
-  return __dealAcquireId_isset;
-}
-
-- (void) unsetDealAcquireId {
-  [__dealAcquireId release_stub];
-  __dealAcquireId = nil;
-  __dealAcquireId_isset = NO;
-}
-
-- (Location_t *) location {
-  return [[__location retain_stub] autorelease_stub];
-}
-
-- (void) setLocation: (Location_t *) location {
-  [location retain_stub];
-  [__location release_stub];
-  __location = location;
-  __location_isset = YES;
-}
-
-- (BOOL) locationIsSet {
-  return __location_isset;
-}
-
-- (void) unsetLocation {
-  [__location release_stub];
-  __location = nil;
-  __location_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -16965,24 +16863,6 @@ static NSString * CTOKEN_NAME = @"ctok";
     }
     switch (fieldID)
     {
-      case 1:
-        if (fieldType == TType_STRING) {
-          NSString * fieldValue = [inProtocol readString];
-          [self setDealAcquireId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_STRUCT) {
-          Location_t *fieldValue = [[Location_t alloc] init];
-          [fieldValue read: inProtocol];
-          [self setLocation: fieldValue];
-          [fieldValue release_stub];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -16994,30 +16874,12 @@ static NSString * CTOKEN_NAME = @"ctok";
 
 - (void) write: (id <TProtocol>) outProtocol {
   [outProtocol writeStructBeginWithName: @"generateBraintreeClientToken_args"];
-  if (__dealAcquireId_isset) {
-    if (__dealAcquireId != nil) {
-      [outProtocol writeFieldBeginWithName: @"dealAcquireId" type: TType_STRING fieldID: 1];
-      [outProtocol writeString: __dealAcquireId];
-      [outProtocol writeFieldEnd];
-    }
-  }
-  if (__location_isset) {
-    if (__location != nil) {
-      [outProtocol writeFieldBeginWithName: @"location" type: TType_STRUCT fieldID: 2];
-      [__location write: outProtocol];
-      [outProtocol writeFieldEnd];
-    }
-  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"generateBraintreeClientToken_args("];
-  [ms appendString: @"dealAcquireId:"];
-  [ms appendFormat: @"\"%@\"", __dealAcquireId];
-  [ms appendString: @",location:"];
-  [ms appendFormat: @"%@", __location];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -19507,20 +19369,10 @@ static NSString * CTOKEN_NAME = @"ctok";
   return [self recv_purchaseWithNonce];
 }
 
-- (void) send_generateBraintreeClientToken: (NSString *) dealAcquireId location: (Location_t *) location
+- (void) send_generateBraintreeClientToken
 {
   [outProtocol writeMessageBeginWithName: @"generateBraintreeClientToken" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"generateBraintreeClientToken_args"];
-  if (dealAcquireId != nil)  {
-    [outProtocol writeFieldBeginWithName: @"dealAcquireId" type: TType_STRING fieldID: 1];
-    [outProtocol writeString: dealAcquireId];
-    [outProtocol writeFieldEnd];
-  }
-  if (location != nil)  {
-    [outProtocol writeFieldBeginWithName: @"location" type: TType_STRUCT fieldID: 2];
-    [location write: outProtocol];
-    [outProtocol writeFieldEnd];
-  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
   [outProtocol writeMessageEnd];
@@ -19549,9 +19401,9 @@ static NSString * CTOKEN_NAME = @"ctok";
                                            reason: @"generateBraintreeClientToken failed: unknown result"];
 }
 
-- (NSString *) generateBraintreeClientToken: (NSString *) dealAcquireId location: (Location_t *) location
+- (NSString *) generateBraintreeClientToken
 {
-  [self send_generateBraintreeClientToken : dealAcquireId location: location];
+  [self send_generateBraintreeClientToken];
   return [self recv_generateBraintreeClientToken];
 }
 
@@ -20653,7 +20505,7 @@ static NSString * CTOKEN_NAME = @"ctok";
   [args read: inProtocol];
   [inProtocol readMessageEnd];
   GenerateBraintreeClientToken_result * result = [[GenerateBraintreeClientToken_result alloc] init];
-  [result setSuccess: [mService generateBraintreeClientToken: [args dealAcquireId] location: [args location]]];
+  [result setSuccess: [mService generateBraintreeClientToken]];
   [outProtocol writeMessageBeginWithName: @"generateBraintreeClientToken"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
