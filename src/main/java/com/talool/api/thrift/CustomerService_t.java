@@ -110,6 +110,10 @@ public class CustomerService_t {
 
     public com.talool.api.thrift.TransactionResult_t purchaseWithCode(String dealOfferId, String paymentCode, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
 
+    public com.talool.api.thrift.TransactionResult_t purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException;
+
+    public String generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException;
+
     public EmailMessageResponse_t getEmailMessage(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException;
 
   }
@@ -191,6 +195,10 @@ public class CustomerService_t {
     public void purchaseWithCard(String dealOfferId, com.talool.api.thrift.PaymentDetail_t paymentDetail, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithCard_call> resultHandler) throws org.apache.thrift.TException;
 
     public void purchaseWithCode(String dealOfferId, String paymentCode, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithCode_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.purchaseWithNonce_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException;
 
     public void getEmailMessage(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getEmailMessage_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -1238,6 +1246,67 @@ public class CustomerService_t {
         throw result.notFoundException;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseWithCode failed: unknown result");
+    }
+
+    public com.talool.api.thrift.TransactionResult_t purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties) throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
+    {
+      send_purchaseWithNonce(dealOfferId, nonce, paymentProperties);
+      return recv_purchaseWithNonce();
+    }
+
+    public void send_purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties) throws org.apache.thrift.TException
+    {
+      purchaseWithNonce_args args = new purchaseWithNonce_args();
+      args.setDealOfferId(dealOfferId);
+      args.setNonce(nonce);
+      args.setPaymentProperties(paymentProperties);
+      sendBase("purchaseWithNonce", args);
+    }
+
+    public com.talool.api.thrift.TransactionResult_t recv_purchaseWithNonce() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException
+    {
+      purchaseWithNonce_result result = new purchaseWithNonce_result();
+      receiveBase(result, "purchaseWithNonce");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.serviceException != null) {
+        throw result.serviceException;
+      }
+      if (result.userException != null) {
+        throw result.userException;
+      }
+      if (result.notFoundException != null) {
+        throw result.notFoundException;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "purchaseWithNonce failed: unknown result");
+    }
+
+    public String generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      send_generateBraintreeClientToken(dealAcquireId, location);
+      return recv_generateBraintreeClientToken();
+    }
+
+    public void send_generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location) throws org.apache.thrift.TException
+    {
+      generateBraintreeClientToken_args args = new generateBraintreeClientToken_args();
+      args.setDealAcquireId(dealAcquireId);
+      args.setLocation(location);
+      sendBase("generateBraintreeClientToken", args);
+    }
+
+    public String recv_generateBraintreeClientToken() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException
+    {
+      generateBraintreeClientToken_result result = new generateBraintreeClientToken_result();
+      receiveBase(result, "generateBraintreeClientToken");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.error != null) {
+        throw result.error;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "generateBraintreeClientToken failed: unknown result");
     }
 
     public EmailMessageResponse_t getEmailMessage(String templateId, String entityId) throws com.talool.api.thrift.TServiceException_t, org.apache.thrift.TException
@@ -2582,6 +2651,79 @@ public class CustomerService_t {
       }
     }
 
+    public void purchaseWithNonce(String dealOfferId, String nonce, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<purchaseWithNonce_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      purchaseWithNonce_call method_call = new purchaseWithNonce_call(dealOfferId, nonce, paymentProperties, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class purchaseWithNonce_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String dealOfferId;
+      private String nonce;
+      private Map<String,String> paymentProperties;
+      public purchaseWithNonce_call(String dealOfferId, String nonce, Map<String,String> paymentProperties, org.apache.thrift.async.AsyncMethodCallback<purchaseWithNonce_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.dealOfferId = dealOfferId;
+        this.nonce = nonce;
+        this.paymentProperties = paymentProperties;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("purchaseWithNonce", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        purchaseWithNonce_args args = new purchaseWithNonce_args();
+        args.setDealOfferId(dealOfferId);
+        args.setNonce(nonce);
+        args.setPaymentProperties(paymentProperties);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public com.talool.api.thrift.TransactionResult_t getResult() throws com.talool.api.thrift.TServiceException_t, com.talool.api.thrift.TUserException_t, com.talool.api.thrift.TNotFoundException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_purchaseWithNonce();
+      }
+    }
+
+    public void generateBraintreeClientToken(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      generateBraintreeClientToken_call method_call = new generateBraintreeClientToken_call(dealAcquireId, location, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class generateBraintreeClientToken_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private String dealAcquireId;
+      private com.talool.api.thrift.Location_t location;
+      public generateBraintreeClientToken_call(String dealAcquireId, com.talool.api.thrift.Location_t location, org.apache.thrift.async.AsyncMethodCallback<generateBraintreeClientToken_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.dealAcquireId = dealAcquireId;
+        this.location = location;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("generateBraintreeClientToken", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        generateBraintreeClientToken_args args = new generateBraintreeClientToken_args();
+        args.setDealAcquireId(dealAcquireId);
+        args.setLocation(location);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public String getResult() throws com.talool.api.thrift.ServiceException_t, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_generateBraintreeClientToken();
+      }
+    }
+
     public void getEmailMessage(String templateId, String entityId, org.apache.thrift.async.AsyncMethodCallback<getEmailMessage_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       getEmailMessage_call method_call = new getEmailMessage_call(templateId, entityId, resultHandler, this, ___protocolFactory, ___transport);
@@ -2668,6 +2810,8 @@ public class CustomerService_t {
       processMap.put("validateCode", new validateCode());
       processMap.put("purchaseWithCard", new purchaseWithCard());
       processMap.put("purchaseWithCode", new purchaseWithCode());
+      processMap.put("purchaseWithNonce", new purchaseWithNonce());
+      processMap.put("generateBraintreeClientToken", new generateBraintreeClientToken());
       processMap.put("getEmailMessage", new getEmailMessage());
       return processMap;
     }
@@ -3604,6 +3748,58 @@ public class CustomerService_t {
           result.userException = userException;
         } catch (com.talool.api.thrift.TNotFoundException_t notFoundException) {
           result.notFoundException = notFoundException;
+        }
+        return result;
+      }
+    }
+
+    public static class purchaseWithNonce<I extends Iface> extends org.apache.thrift.ProcessFunction<I, purchaseWithNonce_args> {
+      public purchaseWithNonce() {
+        super("purchaseWithNonce");
+      }
+
+      public purchaseWithNonce_args getEmptyArgsInstance() {
+        return new purchaseWithNonce_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public purchaseWithNonce_result getResult(I iface, purchaseWithNonce_args args) throws org.apache.thrift.TException {
+        purchaseWithNonce_result result = new purchaseWithNonce_result();
+        try {
+          result.success = iface.purchaseWithNonce(args.dealOfferId, args.nonce, args.paymentProperties);
+        } catch (com.talool.api.thrift.TServiceException_t serviceException) {
+          result.serviceException = serviceException;
+        } catch (com.talool.api.thrift.TUserException_t userException) {
+          result.userException = userException;
+        } catch (com.talool.api.thrift.TNotFoundException_t notFoundException) {
+          result.notFoundException = notFoundException;
+        }
+        return result;
+      }
+    }
+
+    public static class generateBraintreeClientToken<I extends Iface> extends org.apache.thrift.ProcessFunction<I, generateBraintreeClientToken_args> {
+      public generateBraintreeClientToken() {
+        super("generateBraintreeClientToken");
+      }
+
+      public generateBraintreeClientToken_args getEmptyArgsInstance() {
+        return new generateBraintreeClientToken_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public generateBraintreeClientToken_result getResult(I iface, generateBraintreeClientToken_args args) throws org.apache.thrift.TException {
+        generateBraintreeClientToken_result result = new generateBraintreeClientToken_result();
+        try {
+          result.success = iface.generateBraintreeClientToken(args.dealAcquireId, args.location);
+        } catch (com.talool.api.thrift.ServiceException_t error) {
+          result.error = error;
         }
         return result;
       }
@@ -38246,6 +38442,2199 @@ public class CustomerService_t {
           struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
           struct.notFoundException.read(iprot);
           struct.setNotFoundExceptionIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class purchaseWithNonce_args implements org.apache.thrift.TBase<purchaseWithNonce_args, purchaseWithNonce_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("purchaseWithNonce_args");
+
+    private static final org.apache.thrift.protocol.TField DEAL_OFFER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("dealOfferId", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField NONCE_FIELD_DESC = new org.apache.thrift.protocol.TField("nonce", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField PAYMENT_PROPERTIES_FIELD_DESC = new org.apache.thrift.protocol.TField("paymentProperties", org.apache.thrift.protocol.TType.MAP, (short)3);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new purchaseWithNonce_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new purchaseWithNonce_argsTupleSchemeFactory());
+    }
+
+    public String dealOfferId; // required
+    public String nonce; // required
+    public Map<String,String> paymentProperties; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      DEAL_OFFER_ID((short)1, "dealOfferId"),
+      NONCE((short)2, "nonce"),
+      PAYMENT_PROPERTIES((short)3, "paymentProperties");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // DEAL_OFFER_ID
+            return DEAL_OFFER_ID;
+          case 2: // NONCE
+            return NONCE;
+          case 3: // PAYMENT_PROPERTIES
+            return PAYMENT_PROPERTIES;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.DEAL_OFFER_ID, new org.apache.thrift.meta_data.FieldMetaData("dealOfferId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.NONCE, new org.apache.thrift.meta_data.FieldMetaData("nonce", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.PAYMENT_PROPERTIES, new org.apache.thrift.meta_data.FieldMetaData("paymentProperties", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(purchaseWithNonce_args.class, metaDataMap);
+    }
+
+    public purchaseWithNonce_args() {
+    }
+
+    public purchaseWithNonce_args(
+      String dealOfferId,
+      String nonce,
+      Map<String,String> paymentProperties)
+    {
+      this();
+      this.dealOfferId = dealOfferId;
+      this.nonce = nonce;
+      this.paymentProperties = paymentProperties;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public purchaseWithNonce_args(purchaseWithNonce_args other) {
+      if (other.isSetDealOfferId()) {
+        this.dealOfferId = other.dealOfferId;
+      }
+      if (other.isSetNonce()) {
+        this.nonce = other.nonce;
+      }
+      if (other.isSetPaymentProperties()) {
+        Map<String,String> __this__paymentProperties = new HashMap<String,String>();
+        for (Map.Entry<String, String> other_element : other.paymentProperties.entrySet()) {
+
+          String other_element_key = other_element.getKey();
+          String other_element_value = other_element.getValue();
+
+          String __this__paymentProperties_copy_key = other_element_key;
+
+          String __this__paymentProperties_copy_value = other_element_value;
+
+          __this__paymentProperties.put(__this__paymentProperties_copy_key, __this__paymentProperties_copy_value);
+        }
+        this.paymentProperties = __this__paymentProperties;
+      }
+    }
+
+    public purchaseWithNonce_args deepCopy() {
+      return new purchaseWithNonce_args(this);
+    }
+
+    public void clear() {
+      this.dealOfferId = null;
+      this.nonce = null;
+      this.paymentProperties = null;
+    }
+
+    public String getDealOfferId() {
+      return this.dealOfferId;
+    }
+
+    public purchaseWithNonce_args setDealOfferId(String dealOfferId) {
+      this.dealOfferId = dealOfferId;
+      return this;
+    }
+
+    public void unsetDealOfferId() {
+      this.dealOfferId = null;
+    }
+
+    /** Returns true if field dealOfferId is set (has been assigned a value) and false otherwise */
+    public boolean isSetDealOfferId() {
+      return this.dealOfferId != null;
+    }
+
+    public void setDealOfferIdIsSet(boolean value) {
+      if (!value) {
+        this.dealOfferId = null;
+      }
+    }
+
+    public String getNonce() {
+      return this.nonce;
+    }
+
+    public purchaseWithNonce_args setNonce(String nonce) {
+      this.nonce = nonce;
+      return this;
+    }
+
+    public void unsetNonce() {
+      this.nonce = null;
+    }
+
+    /** Returns true if field nonce is set (has been assigned a value) and false otherwise */
+    public boolean isSetNonce() {
+      return this.nonce != null;
+    }
+
+    public void setNonceIsSet(boolean value) {
+      if (!value) {
+        this.nonce = null;
+      }
+    }
+
+    public int getPaymentPropertiesSize() {
+      return (this.paymentProperties == null) ? 0 : this.paymentProperties.size();
+    }
+
+    public void putToPaymentProperties(String key, String val) {
+      if (this.paymentProperties == null) {
+        this.paymentProperties = new HashMap<String,String>();
+      }
+      this.paymentProperties.put(key, val);
+    }
+
+    public Map<String,String> getPaymentProperties() {
+      return this.paymentProperties;
+    }
+
+    public purchaseWithNonce_args setPaymentProperties(Map<String,String> paymentProperties) {
+      this.paymentProperties = paymentProperties;
+      return this;
+    }
+
+    public void unsetPaymentProperties() {
+      this.paymentProperties = null;
+    }
+
+    /** Returns true if field paymentProperties is set (has been assigned a value) and false otherwise */
+    public boolean isSetPaymentProperties() {
+      return this.paymentProperties != null;
+    }
+
+    public void setPaymentPropertiesIsSet(boolean value) {
+      if (!value) {
+        this.paymentProperties = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case DEAL_OFFER_ID:
+        if (value == null) {
+          unsetDealOfferId();
+        } else {
+          setDealOfferId((String)value);
+        }
+        break;
+
+      case NONCE:
+        if (value == null) {
+          unsetNonce();
+        } else {
+          setNonce((String)value);
+        }
+        break;
+
+      case PAYMENT_PROPERTIES:
+        if (value == null) {
+          unsetPaymentProperties();
+        } else {
+          setPaymentProperties((Map<String,String>)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case DEAL_OFFER_ID:
+        return getDealOfferId();
+
+      case NONCE:
+        return getNonce();
+
+      case PAYMENT_PROPERTIES:
+        return getPaymentProperties();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case DEAL_OFFER_ID:
+        return isSetDealOfferId();
+      case NONCE:
+        return isSetNonce();
+      case PAYMENT_PROPERTIES:
+        return isSetPaymentProperties();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof purchaseWithNonce_args)
+        return this.equals((purchaseWithNonce_args)that);
+      return false;
+    }
+
+    public boolean equals(purchaseWithNonce_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_dealOfferId = true && this.isSetDealOfferId();
+      boolean that_present_dealOfferId = true && that.isSetDealOfferId();
+      if (this_present_dealOfferId || that_present_dealOfferId) {
+        if (!(this_present_dealOfferId && that_present_dealOfferId))
+          return false;
+        if (!this.dealOfferId.equals(that.dealOfferId))
+          return false;
+      }
+
+      boolean this_present_nonce = true && this.isSetNonce();
+      boolean that_present_nonce = true && that.isSetNonce();
+      if (this_present_nonce || that_present_nonce) {
+        if (!(this_present_nonce && that_present_nonce))
+          return false;
+        if (!this.nonce.equals(that.nonce))
+          return false;
+      }
+
+      boolean this_present_paymentProperties = true && this.isSetPaymentProperties();
+      boolean that_present_paymentProperties = true && that.isSetPaymentProperties();
+      if (this_present_paymentProperties || that_present_paymentProperties) {
+        if (!(this_present_paymentProperties && that_present_paymentProperties))
+          return false;
+        if (!this.paymentProperties.equals(that.paymentProperties))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(purchaseWithNonce_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      purchaseWithNonce_args typedOther = (purchaseWithNonce_args)other;
+
+      lastComparison = Boolean.valueOf(isSetDealOfferId()).compareTo(typedOther.isSetDealOfferId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetDealOfferId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealOfferId, typedOther.dealOfferId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetNonce()).compareTo(typedOther.isSetNonce());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetNonce()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.nonce, typedOther.nonce);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetPaymentProperties()).compareTo(typedOther.isSetPaymentProperties());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPaymentProperties()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.paymentProperties, typedOther.paymentProperties);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("purchaseWithNonce_args(");
+      boolean first = true;
+
+      sb.append("dealOfferId:");
+      if (this.dealOfferId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.dealOfferId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("nonce:");
+      if (this.nonce == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.nonce);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("paymentProperties:");
+      if (this.paymentProperties == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.paymentProperties);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class purchaseWithNonce_argsStandardSchemeFactory implements SchemeFactory {
+      public purchaseWithNonce_argsStandardScheme getScheme() {
+        return new purchaseWithNonce_argsStandardScheme();
+      }
+    }
+
+    private static class purchaseWithNonce_argsStandardScheme extends StandardScheme<purchaseWithNonce_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, purchaseWithNonce_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // DEAL_OFFER_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.dealOfferId = iprot.readString();
+                struct.setDealOfferIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // NONCE
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.nonce = iprot.readString();
+                struct.setNonceIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // PAYMENT_PROPERTIES
+              if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+                {
+                  org.apache.thrift.protocol.TMap _map124 = iprot.readMapBegin();
+                  struct.paymentProperties = new HashMap<String,String>(2*_map124.size);
+                  for (int _i125 = 0; _i125 < _map124.size; ++_i125)
+                  {
+                    String _key126; // required
+                    String _val127; // required
+                    _key126 = iprot.readString();
+                    _val127 = iprot.readString();
+                    struct.paymentProperties.put(_key126, _val127);
+                  }
+                  iprot.readMapEnd();
+                }
+                struct.setPaymentPropertiesIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, purchaseWithNonce_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.dealOfferId != null) {
+          oprot.writeFieldBegin(DEAL_OFFER_ID_FIELD_DESC);
+          oprot.writeString(struct.dealOfferId);
+          oprot.writeFieldEnd();
+        }
+        if (struct.nonce != null) {
+          oprot.writeFieldBegin(NONCE_FIELD_DESC);
+          oprot.writeString(struct.nonce);
+          oprot.writeFieldEnd();
+        }
+        if (struct.paymentProperties != null) {
+          oprot.writeFieldBegin(PAYMENT_PROPERTIES_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.paymentProperties.size()));
+            for (Map.Entry<String, String> _iter128 : struct.paymentProperties.entrySet())
+            {
+              oprot.writeString(_iter128.getKey());
+              oprot.writeString(_iter128.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class purchaseWithNonce_argsTupleSchemeFactory implements SchemeFactory {
+      public purchaseWithNonce_argsTupleScheme getScheme() {
+        return new purchaseWithNonce_argsTupleScheme();
+      }
+    }
+
+    private static class purchaseWithNonce_argsTupleScheme extends TupleScheme<purchaseWithNonce_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, purchaseWithNonce_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetDealOfferId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetNonce()) {
+          optionals.set(1);
+        }
+        if (struct.isSetPaymentProperties()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetDealOfferId()) {
+          oprot.writeString(struct.dealOfferId);
+        }
+        if (struct.isSetNonce()) {
+          oprot.writeString(struct.nonce);
+        }
+        if (struct.isSetPaymentProperties()) {
+          {
+            oprot.writeI32(struct.paymentProperties.size());
+            for (Map.Entry<String, String> _iter129 : struct.paymentProperties.entrySet())
+            {
+              oprot.writeString(_iter129.getKey());
+              oprot.writeString(_iter129.getValue());
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, purchaseWithNonce_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(3);
+        if (incoming.get(0)) {
+          struct.dealOfferId = iprot.readString();
+          struct.setDealOfferIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.nonce = iprot.readString();
+          struct.setNonceIsSet(true);
+        }
+        if (incoming.get(2)) {
+          {
+            org.apache.thrift.protocol.TMap _map130 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.paymentProperties = new HashMap<String,String>(2*_map130.size);
+            for (int _i131 = 0; _i131 < _map130.size; ++_i131)
+            {
+              String _key132; // required
+              String _val133; // required
+              _key132 = iprot.readString();
+              _val133 = iprot.readString();
+              struct.paymentProperties.put(_key132, _val133);
+            }
+          }
+          struct.setPaymentPropertiesIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class purchaseWithNonce_result implements org.apache.thrift.TBase<purchaseWithNonce_result, purchaseWithNonce_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("purchaseWithNonce_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+    private static final org.apache.thrift.protocol.TField SERVICE_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("serviceException", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField USER_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("userException", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField NOT_FOUND_EXCEPTION_FIELD_DESC = new org.apache.thrift.protocol.TField("notFoundException", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new purchaseWithNonce_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new purchaseWithNonce_resultTupleSchemeFactory());
+    }
+
+    public com.talool.api.thrift.TransactionResult_t success; // required
+    public com.talool.api.thrift.TServiceException_t serviceException; // required
+    public com.talool.api.thrift.TUserException_t userException; // required
+    public com.talool.api.thrift.TNotFoundException_t notFoundException; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      SERVICE_EXCEPTION((short)1, "serviceException"),
+      USER_EXCEPTION((short)2, "userException"),
+      NOT_FOUND_EXCEPTION((short)3, "notFoundException");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // SERVICE_EXCEPTION
+            return SERVICE_EXCEPTION;
+          case 2: // USER_EXCEPTION
+            return USER_EXCEPTION;
+          case 3: // NOT_FOUND_EXCEPTION
+            return NOT_FOUND_EXCEPTION;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.TransactionResult_t.class)));
+      tmpMap.put(_Fields.SERVICE_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("serviceException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      tmpMap.put(_Fields.USER_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("userException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      tmpMap.put(_Fields.NOT_FOUND_EXCEPTION, new org.apache.thrift.meta_data.FieldMetaData("notFoundException", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(purchaseWithNonce_result.class, metaDataMap);
+    }
+
+    public purchaseWithNonce_result() {
+    }
+
+    public purchaseWithNonce_result(
+      com.talool.api.thrift.TransactionResult_t success,
+      com.talool.api.thrift.TServiceException_t serviceException,
+      com.talool.api.thrift.TUserException_t userException,
+      com.talool.api.thrift.TNotFoundException_t notFoundException)
+    {
+      this();
+      this.success = success;
+      this.serviceException = serviceException;
+      this.userException = userException;
+      this.notFoundException = notFoundException;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public purchaseWithNonce_result(purchaseWithNonce_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new com.talool.api.thrift.TransactionResult_t(other.success);
+      }
+      if (other.isSetServiceException()) {
+        this.serviceException = new com.talool.api.thrift.TServiceException_t(other.serviceException);
+      }
+      if (other.isSetUserException()) {
+        this.userException = new com.talool.api.thrift.TUserException_t(other.userException);
+      }
+      if (other.isSetNotFoundException()) {
+        this.notFoundException = new com.talool.api.thrift.TNotFoundException_t(other.notFoundException);
+      }
+    }
+
+    public purchaseWithNonce_result deepCopy() {
+      return new purchaseWithNonce_result(this);
+    }
+
+    public void clear() {
+      this.success = null;
+      this.serviceException = null;
+      this.userException = null;
+      this.notFoundException = null;
+    }
+
+    public com.talool.api.thrift.TransactionResult_t getSuccess() {
+      return this.success;
+    }
+
+    public purchaseWithNonce_result setSuccess(com.talool.api.thrift.TransactionResult_t success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.talool.api.thrift.TServiceException_t getServiceException() {
+      return this.serviceException;
+    }
+
+    public purchaseWithNonce_result setServiceException(com.talool.api.thrift.TServiceException_t serviceException) {
+      this.serviceException = serviceException;
+      return this;
+    }
+
+    public void unsetServiceException() {
+      this.serviceException = null;
+    }
+
+    /** Returns true if field serviceException is set (has been assigned a value) and false otherwise */
+    public boolean isSetServiceException() {
+      return this.serviceException != null;
+    }
+
+    public void setServiceExceptionIsSet(boolean value) {
+      if (!value) {
+        this.serviceException = null;
+      }
+    }
+
+    public com.talool.api.thrift.TUserException_t getUserException() {
+      return this.userException;
+    }
+
+    public purchaseWithNonce_result setUserException(com.talool.api.thrift.TUserException_t userException) {
+      this.userException = userException;
+      return this;
+    }
+
+    public void unsetUserException() {
+      this.userException = null;
+    }
+
+    /** Returns true if field userException is set (has been assigned a value) and false otherwise */
+    public boolean isSetUserException() {
+      return this.userException != null;
+    }
+
+    public void setUserExceptionIsSet(boolean value) {
+      if (!value) {
+        this.userException = null;
+      }
+    }
+
+    public com.talool.api.thrift.TNotFoundException_t getNotFoundException() {
+      return this.notFoundException;
+    }
+
+    public purchaseWithNonce_result setNotFoundException(com.talool.api.thrift.TNotFoundException_t notFoundException) {
+      this.notFoundException = notFoundException;
+      return this;
+    }
+
+    public void unsetNotFoundException() {
+      this.notFoundException = null;
+    }
+
+    /** Returns true if field notFoundException is set (has been assigned a value) and false otherwise */
+    public boolean isSetNotFoundException() {
+      return this.notFoundException != null;
+    }
+
+    public void setNotFoundExceptionIsSet(boolean value) {
+      if (!value) {
+        this.notFoundException = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((com.talool.api.thrift.TransactionResult_t)value);
+        }
+        break;
+
+      case SERVICE_EXCEPTION:
+        if (value == null) {
+          unsetServiceException();
+        } else {
+          setServiceException((com.talool.api.thrift.TServiceException_t)value);
+        }
+        break;
+
+      case USER_EXCEPTION:
+        if (value == null) {
+          unsetUserException();
+        } else {
+          setUserException((com.talool.api.thrift.TUserException_t)value);
+        }
+        break;
+
+      case NOT_FOUND_EXCEPTION:
+        if (value == null) {
+          unsetNotFoundException();
+        } else {
+          setNotFoundException((com.talool.api.thrift.TNotFoundException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case SERVICE_EXCEPTION:
+        return getServiceException();
+
+      case USER_EXCEPTION:
+        return getUserException();
+
+      case NOT_FOUND_EXCEPTION:
+        return getNotFoundException();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case SERVICE_EXCEPTION:
+        return isSetServiceException();
+      case USER_EXCEPTION:
+        return isSetUserException();
+      case NOT_FOUND_EXCEPTION:
+        return isSetNotFoundException();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof purchaseWithNonce_result)
+        return this.equals((purchaseWithNonce_result)that);
+      return false;
+    }
+
+    public boolean equals(purchaseWithNonce_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_serviceException = true && this.isSetServiceException();
+      boolean that_present_serviceException = true && that.isSetServiceException();
+      if (this_present_serviceException || that_present_serviceException) {
+        if (!(this_present_serviceException && that_present_serviceException))
+          return false;
+        if (!this.serviceException.equals(that.serviceException))
+          return false;
+      }
+
+      boolean this_present_userException = true && this.isSetUserException();
+      boolean that_present_userException = true && that.isSetUserException();
+      if (this_present_userException || that_present_userException) {
+        if (!(this_present_userException && that_present_userException))
+          return false;
+        if (!this.userException.equals(that.userException))
+          return false;
+      }
+
+      boolean this_present_notFoundException = true && this.isSetNotFoundException();
+      boolean that_present_notFoundException = true && that.isSetNotFoundException();
+      if (this_present_notFoundException || that_present_notFoundException) {
+        if (!(this_present_notFoundException && that_present_notFoundException))
+          return false;
+        if (!this.notFoundException.equals(that.notFoundException))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(purchaseWithNonce_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      purchaseWithNonce_result typedOther = (purchaseWithNonce_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetServiceException()).compareTo(typedOther.isSetServiceException());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetServiceException()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.serviceException, typedOther.serviceException);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetUserException()).compareTo(typedOther.isSetUserException());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetUserException()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userException, typedOther.userException);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetNotFoundException()).compareTo(typedOther.isSetNotFoundException());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetNotFoundException()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.notFoundException, typedOther.notFoundException);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("purchaseWithNonce_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("serviceException:");
+      if (this.serviceException == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.serviceException);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("userException:");
+      if (this.userException == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userException);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("notFoundException:");
+      if (this.notFoundException == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.notFoundException);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class purchaseWithNonce_resultStandardSchemeFactory implements SchemeFactory {
+      public purchaseWithNonce_resultStandardScheme getScheme() {
+        return new purchaseWithNonce_resultStandardScheme();
+      }
+    }
+
+    private static class purchaseWithNonce_resultStandardScheme extends StandardScheme<purchaseWithNonce_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, purchaseWithNonce_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new com.talool.api.thrift.TransactionResult_t();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // SERVICE_EXCEPTION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.serviceException = new com.talool.api.thrift.TServiceException_t();
+                struct.serviceException.read(iprot);
+                struct.setServiceExceptionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // USER_EXCEPTION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.userException = new com.talool.api.thrift.TUserException_t();
+                struct.userException.read(iprot);
+                struct.setUserExceptionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // NOT_FOUND_EXCEPTION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
+                struct.notFoundException.read(iprot);
+                struct.setNotFoundExceptionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, purchaseWithNonce_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.serviceException != null) {
+          oprot.writeFieldBegin(SERVICE_EXCEPTION_FIELD_DESC);
+          struct.serviceException.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.userException != null) {
+          oprot.writeFieldBegin(USER_EXCEPTION_FIELD_DESC);
+          struct.userException.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.notFoundException != null) {
+          oprot.writeFieldBegin(NOT_FOUND_EXCEPTION_FIELD_DESC);
+          struct.notFoundException.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class purchaseWithNonce_resultTupleSchemeFactory implements SchemeFactory {
+      public purchaseWithNonce_resultTupleScheme getScheme() {
+        return new purchaseWithNonce_resultTupleScheme();
+      }
+    }
+
+    private static class purchaseWithNonce_resultTupleScheme extends TupleScheme<purchaseWithNonce_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, purchaseWithNonce_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetServiceException()) {
+          optionals.set(1);
+        }
+        if (struct.isSetUserException()) {
+          optionals.set(2);
+        }
+        if (struct.isSetNotFoundException()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+        if (struct.isSetServiceException()) {
+          struct.serviceException.write(oprot);
+        }
+        if (struct.isSetUserException()) {
+          struct.userException.write(oprot);
+        }
+        if (struct.isSetNotFoundException()) {
+          struct.notFoundException.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, purchaseWithNonce_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(4);
+        if (incoming.get(0)) {
+          struct.success = new com.talool.api.thrift.TransactionResult_t();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.serviceException = new com.talool.api.thrift.TServiceException_t();
+          struct.serviceException.read(iprot);
+          struct.setServiceExceptionIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.userException = new com.talool.api.thrift.TUserException_t();
+          struct.userException.read(iprot);
+          struct.setUserExceptionIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.notFoundException = new com.talool.api.thrift.TNotFoundException_t();
+          struct.notFoundException.read(iprot);
+          struct.setNotFoundExceptionIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class generateBraintreeClientToken_args implements org.apache.thrift.TBase<generateBraintreeClientToken_args, generateBraintreeClientToken_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("generateBraintreeClientToken_args");
+
+    private static final org.apache.thrift.protocol.TField DEAL_ACQUIRE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("dealAcquireId", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField LOCATION_FIELD_DESC = new org.apache.thrift.protocol.TField("location", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new generateBraintreeClientToken_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new generateBraintreeClientToken_argsTupleSchemeFactory());
+    }
+
+    public String dealAcquireId; // required
+    public com.talool.api.thrift.Location_t location; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      DEAL_ACQUIRE_ID((short)1, "dealAcquireId"),
+      LOCATION((short)2, "location");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // DEAL_ACQUIRE_ID
+            return DEAL_ACQUIRE_ID;
+          case 2: // LOCATION
+            return LOCATION;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.DEAL_ACQUIRE_ID, new org.apache.thrift.meta_data.FieldMetaData("dealAcquireId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.LOCATION, new org.apache.thrift.meta_data.FieldMetaData("location", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.talool.api.thrift.Location_t.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(generateBraintreeClientToken_args.class, metaDataMap);
+    }
+
+    public generateBraintreeClientToken_args() {
+    }
+
+    public generateBraintreeClientToken_args(
+      String dealAcquireId,
+      com.talool.api.thrift.Location_t location)
+    {
+      this();
+      this.dealAcquireId = dealAcquireId;
+      this.location = location;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public generateBraintreeClientToken_args(generateBraintreeClientToken_args other) {
+      if (other.isSetDealAcquireId()) {
+        this.dealAcquireId = other.dealAcquireId;
+      }
+      if (other.isSetLocation()) {
+        this.location = new com.talool.api.thrift.Location_t(other.location);
+      }
+    }
+
+    public generateBraintreeClientToken_args deepCopy() {
+      return new generateBraintreeClientToken_args(this);
+    }
+
+    public void clear() {
+      this.dealAcquireId = null;
+      this.location = null;
+    }
+
+    public String getDealAcquireId() {
+      return this.dealAcquireId;
+    }
+
+    public generateBraintreeClientToken_args setDealAcquireId(String dealAcquireId) {
+      this.dealAcquireId = dealAcquireId;
+      return this;
+    }
+
+    public void unsetDealAcquireId() {
+      this.dealAcquireId = null;
+    }
+
+    /** Returns true if field dealAcquireId is set (has been assigned a value) and false otherwise */
+    public boolean isSetDealAcquireId() {
+      return this.dealAcquireId != null;
+    }
+
+    public void setDealAcquireIdIsSet(boolean value) {
+      if (!value) {
+        this.dealAcquireId = null;
+      }
+    }
+
+    public com.talool.api.thrift.Location_t getLocation() {
+      return this.location;
+    }
+
+    public generateBraintreeClientToken_args setLocation(com.talool.api.thrift.Location_t location) {
+      this.location = location;
+      return this;
+    }
+
+    public void unsetLocation() {
+      this.location = null;
+    }
+
+    /** Returns true if field location is set (has been assigned a value) and false otherwise */
+    public boolean isSetLocation() {
+      return this.location != null;
+    }
+
+    public void setLocationIsSet(boolean value) {
+      if (!value) {
+        this.location = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case DEAL_ACQUIRE_ID:
+        if (value == null) {
+          unsetDealAcquireId();
+        } else {
+          setDealAcquireId((String)value);
+        }
+        break;
+
+      case LOCATION:
+        if (value == null) {
+          unsetLocation();
+        } else {
+          setLocation((com.talool.api.thrift.Location_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case DEAL_ACQUIRE_ID:
+        return getDealAcquireId();
+
+      case LOCATION:
+        return getLocation();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case DEAL_ACQUIRE_ID:
+        return isSetDealAcquireId();
+      case LOCATION:
+        return isSetLocation();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof generateBraintreeClientToken_args)
+        return this.equals((generateBraintreeClientToken_args)that);
+      return false;
+    }
+
+    public boolean equals(generateBraintreeClientToken_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_dealAcquireId = true && this.isSetDealAcquireId();
+      boolean that_present_dealAcquireId = true && that.isSetDealAcquireId();
+      if (this_present_dealAcquireId || that_present_dealAcquireId) {
+        if (!(this_present_dealAcquireId && that_present_dealAcquireId))
+          return false;
+        if (!this.dealAcquireId.equals(that.dealAcquireId))
+          return false;
+      }
+
+      boolean this_present_location = true && this.isSetLocation();
+      boolean that_present_location = true && that.isSetLocation();
+      if (this_present_location || that_present_location) {
+        if (!(this_present_location && that_present_location))
+          return false;
+        if (!this.location.equals(that.location))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(generateBraintreeClientToken_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      generateBraintreeClientToken_args typedOther = (generateBraintreeClientToken_args)other;
+
+      lastComparison = Boolean.valueOf(isSetDealAcquireId()).compareTo(typedOther.isSetDealAcquireId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetDealAcquireId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dealAcquireId, typedOther.dealAcquireId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetLocation()).compareTo(typedOther.isSetLocation());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLocation()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.location, typedOther.location);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("generateBraintreeClientToken_args(");
+      boolean first = true;
+
+      sb.append("dealAcquireId:");
+      if (this.dealAcquireId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.dealAcquireId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("location:");
+      if (this.location == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.location);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (location != null) {
+        location.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class generateBraintreeClientToken_argsStandardSchemeFactory implements SchemeFactory {
+      public generateBraintreeClientToken_argsStandardScheme getScheme() {
+        return new generateBraintreeClientToken_argsStandardScheme();
+      }
+    }
+
+    private static class generateBraintreeClientToken_argsStandardScheme extends StandardScheme<generateBraintreeClientToken_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // DEAL_ACQUIRE_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.dealAcquireId = iprot.readString();
+                struct.setDealAcquireIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // LOCATION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.location = new com.talool.api.thrift.Location_t();
+                struct.location.read(iprot);
+                struct.setLocationIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.dealAcquireId != null) {
+          oprot.writeFieldBegin(DEAL_ACQUIRE_ID_FIELD_DESC);
+          oprot.writeString(struct.dealAcquireId);
+          oprot.writeFieldEnd();
+        }
+        if (struct.location != null) {
+          oprot.writeFieldBegin(LOCATION_FIELD_DESC);
+          struct.location.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class generateBraintreeClientToken_argsTupleSchemeFactory implements SchemeFactory {
+      public generateBraintreeClientToken_argsTupleScheme getScheme() {
+        return new generateBraintreeClientToken_argsTupleScheme();
+      }
+    }
+
+    private static class generateBraintreeClientToken_argsTupleScheme extends TupleScheme<generateBraintreeClientToken_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetDealAcquireId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetLocation()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetDealAcquireId()) {
+          oprot.writeString(struct.dealAcquireId);
+        }
+        if (struct.isSetLocation()) {
+          struct.location.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.dealAcquireId = iprot.readString();
+          struct.setDealAcquireIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.location = new com.talool.api.thrift.Location_t();
+          struct.location.read(iprot);
+          struct.setLocationIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class generateBraintreeClientToken_result implements org.apache.thrift.TBase<generateBraintreeClientToken_result, generateBraintreeClientToken_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("generateBraintreeClientToken_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short)0);
+    private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new generateBraintreeClientToken_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new generateBraintreeClientToken_resultTupleSchemeFactory());
+    }
+
+    public String success; // required
+    public com.talool.api.thrift.ServiceException_t error; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      ERROR((short)1, "error");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // ERROR
+            return ERROR;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(generateBraintreeClientToken_result.class, metaDataMap);
+    }
+
+    public generateBraintreeClientToken_result() {
+    }
+
+    public generateBraintreeClientToken_result(
+      String success,
+      com.talool.api.thrift.ServiceException_t error)
+    {
+      this();
+      this.success = success;
+      this.error = error;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public generateBraintreeClientToken_result(generateBraintreeClientToken_result other) {
+      if (other.isSetSuccess()) {
+        this.success = other.success;
+      }
+      if (other.isSetError()) {
+        this.error = new com.talool.api.thrift.ServiceException_t(other.error);
+      }
+    }
+
+    public generateBraintreeClientToken_result deepCopy() {
+      return new generateBraintreeClientToken_result(this);
+    }
+
+    public void clear() {
+      this.success = null;
+      this.error = null;
+    }
+
+    public String getSuccess() {
+      return this.success;
+    }
+
+    public generateBraintreeClientToken_result setSuccess(String success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public com.talool.api.thrift.ServiceException_t getError() {
+      return this.error;
+    }
+
+    public generateBraintreeClientToken_result setError(com.talool.api.thrift.ServiceException_t error) {
+      this.error = error;
+      return this;
+    }
+
+    public void unsetError() {
+      this.error = null;
+    }
+
+    /** Returns true if field error is set (has been assigned a value) and false otherwise */
+    public boolean isSetError() {
+      return this.error != null;
+    }
+
+    public void setErrorIsSet(boolean value) {
+      if (!value) {
+        this.error = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((String)value);
+        }
+        break;
+
+      case ERROR:
+        if (value == null) {
+          unsetError();
+        } else {
+          setError((com.talool.api.thrift.ServiceException_t)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case ERROR:
+        return getError();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case ERROR:
+        return isSetError();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof generateBraintreeClientToken_result)
+        return this.equals((generateBraintreeClientToken_result)that);
+      return false;
+    }
+
+    public boolean equals(generateBraintreeClientToken_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_error = true && this.isSetError();
+      boolean that_present_error = true && that.isSetError();
+      if (this_present_error || that_present_error) {
+        if (!(this_present_error && that_present_error))
+          return false;
+        if (!this.error.equals(that.error))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(generateBraintreeClientToken_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      generateBraintreeClientToken_result typedOther = (generateBraintreeClientToken_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetError()).compareTo(typedOther.isSetError());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetError()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, typedOther.error);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("generateBraintreeClientToken_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("error:");
+      if (this.error == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.error);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te.getMessage());
+      }
+    }
+
+    private static class generateBraintreeClientToken_resultStandardSchemeFactory implements SchemeFactory {
+      public generateBraintreeClientToken_resultStandardScheme getScheme() {
+        return new generateBraintreeClientToken_resultStandardScheme();
+      }
+    }
+
+    private static class generateBraintreeClientToken_resultStandardScheme extends StandardScheme<generateBraintreeClientToken_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, generateBraintreeClientToken_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.success = iprot.readString();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // ERROR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.error = new com.talool.api.thrift.ServiceException_t();
+                struct.error.read(iprot);
+                struct.setErrorIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, generateBraintreeClientToken_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeString(struct.success);
+          oprot.writeFieldEnd();
+        }
+        if (struct.error != null) {
+          oprot.writeFieldBegin(ERROR_FIELD_DESC);
+          struct.error.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class generateBraintreeClientToken_resultTupleSchemeFactory implements SchemeFactory {
+      public generateBraintreeClientToken_resultTupleScheme getScheme() {
+        return new generateBraintreeClientToken_resultTupleScheme();
+      }
+    }
+
+    private static class generateBraintreeClientToken_resultTupleScheme extends TupleScheme<generateBraintreeClientToken_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetError()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          oprot.writeString(struct.success);
+        }
+        if (struct.isSetError()) {
+          struct.error.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, generateBraintreeClientToken_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = iprot.readString();
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.error = new com.talool.api.thrift.ServiceException_t();
+          struct.error.read(iprot);
+          struct.setErrorIsSet(true);
         }
       }
     }
